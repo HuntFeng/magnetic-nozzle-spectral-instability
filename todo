@@ -1,9 +1,5 @@
-[ ] Why some modes are unstable ? Are they numerical instabilities?
-[ ] Try to solve the eigenvalue problem specified by (9),(10) in stability-and-boundary-condition.pdf
-
-If things are done:
-[ ] Verify the results by solving it as eigenvalue problem by setting v as linear combination of orthorgonal functions
-
+[ ] Eigenfunctions are not even cosine and sine for constant velocity case?
+[ ] Boundary condition affects the eigenfunctions ?
 
 Expectation (Goal):
-[ ] All cases with Dirichlet boundary condition should be stable
+[x] All cases with Dirichlet boundary condition should be stable

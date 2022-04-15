@@ -30,26 +30,6 @@ class Spectral:
         if method == "CH":
             self.x, self.D1, self.D2 = self.matrix_CH()
 
-        # if not boundary_condition:
-        #     # default is periodic boundary condition
-        #     self.D1[0,-1] = -1
-        #     self.D1[-1,0] = 1
-        # else:
-        #     left = boundary_condition["left"]
-        #     right = boundary_condition["right"]
-
-        #     if left == "Dirichlet":
-        #         self.D1[0,:] = 0 
-        #         self.D1[0,0] = 1 # fixed on left
-        #     elif left == "Neumann":
-        #         self.D1[0,:] = 0 # open on left
-
-        #     if right == "Dirichlet":
-        #         self.D1[-1,:] = 0 
-        #         self.D1[-1,-1] = 1 # fixed on right
-        #     elif right == "Neumann":
-        #         self.D1[-1,:] = 0 # open on right
-
 
     def matrix_FD(self):
         """
@@ -74,8 +54,14 @@ class Spectral:
         else:
             raise NameError(f"Valid domain types are 'symmetric' and 'nonsymmetric'")
 
-        D2 = np.diag(-2/h**2*np.ones(N), k=0) + np.diag(1/h**2*np.ones(N-1), k=1) + np.diag(1/h**2*np.ones(N-1), k=-1)
         D = np.diag(0.5/h*np.ones(N-1), k=1) + np.diag(-0.5/h*np.ones(N-1), k=-1)
+        D2 = np.diag(-2/h**2*np.ones(N), k=0) + np.diag(1/h**2*np.ones(N-1), k=1) + np.diag(1/h**2*np.ones(N-1), k=-1)
+        D[0,0] = -3*0.5/h
+        D[0,1] = 4*0.5/h
+        D[0,2] = -0.5/h
+        D[-1,-1] = 3*0.5/h
+        D[-1,-2] = -4*0.5/h
+        D[-1,-3] = 0.5/h
 
         #D = (np.diag(-np.ones(N-2), k=2) + np.diag(8*np.ones(N-1), k=1) + np.diag(-8*np.ones(N-1), k=-1) + np.diag(np.ones(N-2), k=-2))/(12*h)
         #D2 = D@D
