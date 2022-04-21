@@ -1,5 +1,7 @@
-[ ] Eigenfunctions are not even cosine and sine for constant velocity case?
-[ ] Boundary condition affects the eigenfunctions ?
+[x] Eigenfunctions are not even cosine and sine for constant velocity case?
+The first order derivative affects the shape, so they don't look like pure sine or cosine.
+[x] Boundary condition affects the eigenfunctions ?
+Yes, even for the easy problem d^2 u/dx^2 = \lambda u, if we split this into a matrix, then y and the derivative of y have different boundary conditions, the differentiation matrix for them must be different. Therefore, Eq.(9) and (10) professor's note are not good.
 
 Expectation (Goal):
 [x] All cases with Dirichlet boundary condition should be stable

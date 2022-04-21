@@ -56,15 +56,17 @@ class Spectral:
 
         D = np.diag(0.5/h*np.ones(N-1), k=1) + np.diag(-0.5/h*np.ones(N-1), k=-1)
         D2 = np.diag(-2/h**2*np.ones(N), k=0) + np.diag(1/h**2*np.ones(N-1), k=1) + np.diag(1/h**2*np.ones(N-1), k=-1)
-        D[0,0] = -3*0.5/h
-        D[0,1] = 4*0.5/h
-        D[0,2] = -0.5/h
-        D[-1,-1] = 3*0.5/h
-        D[-1,-2] = -4*0.5/h
-        D[-1,-3] = 0.5/h
+        # D[0,0] = -3*0.5/h
+        # D[0,1] = 4*0.5/h
+        # D[0,2] = -0.5/h
+        # D[-1,-1] = 3*0.5/h
+        # D[-1,-2] = -4*0.5/h
+        # D[-1,-3] = 0.5/h
 
-        #D = (np.diag(-np.ones(N-2), k=2) + np.diag(8*np.ones(N-1), k=1) + np.diag(-8*np.ones(N-1), k=-1) + np.diag(np.ones(N-2), k=-2))/(12*h)
-        #D2 = D@D
+        # D[0,:] = 0
+        # D[0,0] = 1
+        # D[-1,:] = 0
+        # D[-1,-1] = 1
         return x, D, D2
 
 

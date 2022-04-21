@@ -123,7 +123,8 @@ and the nondimensionalized equilibrium condition is
     Using the equilibrium condition Eq.(\ref{eq:equilibrium-convervation-of-momentum}) on the RHS, we get the desired form.
 \end{proof}
 
-\subsection{Derivation of Polynomial Eigenvalue Problem}
+\section{Formulation of the problem}
+\subsection{Polynomial Eigenvalue Problem}
 \begin{proposition}
     \begin{equation}
         \pdv{z}\ln(\frac{n_0}{B}) = -\frac{1}{v_0}\pdv{v_0}{z}
@@ -201,6 +202,26 @@ and the nondimensionalized equilibrium condition is
     Let $\Omega \equiv i\omega$, we obtain Eq.(\ref{eq:polynomial-eigenvalue-problem}).
 \end{proof}
 
+\subsection{Eigenvalue problem}
+We can decouple the polynomial eigenvalue problem so that it becomes an eigenvalue problem.
+
+Let $a=\Omega\tilde{v}$, then Eq.(\ref{eq:polynomial-eigenvalue-problem}) becomes
+
+\begin{equation}
+    \mqty[ O & I\\A_{21} & A_{22} ]\mqty[ \tilde{v}\\ a] = \Omega\mqty[ \tilde{v}\\ a]
+    \label{eq:eigenvalue-problem}
+\end{equation}
+where $O$ is zero matrix, $I$ is identity matrix, and
+\begin{align*}
+    A_{21} &= 2\left(v_0\pdv{}{z} +\pdv{v_0}{z} \right) \\
+    A_{22} &= (1-v_0^2)\pdv[2]{}{z} 
+    -\left(3v_0 + \frac{1}{v_0}\right)\pdv{v_0}{z}\pdv{}{z} 
+    - \left(1-\frac{1}{v_0^2}\right)\left(\pdv{v_0}{z}\right)^2 
+    - \left(v_0+\frac{1}{v_0}\right)\pdv[2]{v_0}{z}
+\end{align*}
+
+
+\subsection{Variational Form}
 \begin{definition}
     P and Q functions defined below can be used as an indicator of instabilities.
     \begin{itemize}
@@ -218,9 +239,6 @@ and the nondimensionalized equilibrium condition is
     \end{itemize}
 \end{definition}
 
-
-
-\subsection{Instability condition from Variational Form}
 \begin{proposition}
     \begin{equation}
         (\omega_r^2-\gamma^2) \expval{\abs*{\tilde{v}}^2} 
@@ -324,6 +342,61 @@ We split the equation into real and imaginary part.
 
 \newpage
 \section{Numerical Experiments}
+\subsection{Constant velocity profile}
+If we set $v_0$ to Constant, then the eigenvalue 
+\begin{equation}
+    -\Omega^2 \tilde{v} 
+    + 2\Omega v_0\pdv{}{z} \tilde{v} 
+    + (1-v_0^2)\pdv[2]{}{z} \tilde{v}
+    = 0
+    \label{eq:constant-v-problem}
+\end{equation}
+where $\Omega\equiv i\omega$.
+
+Then we have non-zero analytical solution 
+\begin{equation}
+    \tilde{v} = \exp(-\frac{\Omega}{v_0+1})\left[ \exp(\Omega\frac{z+1}{v_0+1}) - \exp(\Omega\frac{z+1}{v_0-1}) \right] \text{ where } \Omega=\frac{in\pi(1-v_0^2)}{2}
+\end{equation}
+Therefore, $\omega = -i\Omega = n\pi(1-v_0^2)/2$ are real. All modes are stable.
+\begin{figure}[H]
+    \centering
+    \begin{subfigure}[b]{0.45\linewidth}
+        \includegraphics[width=\linewidth]{img/eigenfunctions-constant-v-exact.png}
+        \caption{First few exact eigenfunctions(ground mode not included).}
+    \end{subfigure}%
+    \begin{subfigure}[b]{0.45\linewidth}
+        \includegraphics[width=\linewidth]{img/eigenfunctions-constant-v.png}
+        \caption{First few numerical eigenfunctions by solving Eq.(\ref{eq:eigenvalue-problem}).}
+    \end{subfigure}
+    \caption{We see that the numerical eigenfunctions match the theoretical results. The numerical results are obtained by solving Eq.(\ref{eq:eigenvalue-problem}). Same conclusion can be drawn by solving Eq.(\ref{eq:polynomial-eigenvalue-problem}).}
+    \label{fig:eigenvectors-constant-v}
+\end{figure}
+
+\subsubsection{"Unstable modes" for $v_0>1$}
+
+\begin{figure}[H]
+    \centering
+    \begin{subfigure}[b]{0.5\linewidth}
+        \includegraphics[width=\linewidth]{img/phase-space-constant-v<1.png}
+        \caption{For $v_0<1$, all modes are stable.}
+    \end{subfigure}%
+    \begin{subfigure}[b]{0.5\linewidth}
+        \includegraphics[width=\linewidth]{img/phase-space-constant-v>1.png}
+        \caption{For $v_0>1$, it seems there are unstable modes.}
+    \end{subfigure}
+    \caption{It seems there are unstable modes for $v_0>1$.}
+    \label{fig:phase-space-constant-v}
+\end{figure}
+
+If we plot the eigenfunctions for the "unstable modes", we see that
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.5\linewidth]{img/eigenvectors-bad.png}
+    \caption{The eigenfunctions do not look right. For both equally-spaced finite difference differentiation matrix and Chebyshev differentiation matrix, these eigenfunctions will occur.}
+\end{figure}
+
+
+\subsection{Subsonic case}
 The stability condition Eq.(\ref{eq:stability-condition} is a quadratic equation about $\gamma$. Let 
 \begin{align*}
     &a = -\expval{\abs*{\tilde{v}}^2} \\
@@ -338,8 +411,8 @@ then the full instability condition becomes
 
 If the discriminant $D>0$, it is unstable. If $D<0$, it is stable. 
 
-\subsection{Subsonic case}
 Subsonic modes are stable. The stability condition $D<0$. Moreover, the eigenvalues are real.
+
 
 \begin{figure}[H]
     \centering
