@@ -178,7 +178,7 @@ and the nondimensionalized equilibrium condition is
     &-i\omega\frac{\tilde{n}}{n_0} 
     + i\omega v_0\tilde{v}
     + (1-v_0^2)\pdv{\tilde{v}}{z} 
-    + \left(v_0+\frac{1}{v_0}\right)\pdv{v_0}{z}\tilde{v} = 0
+     - \left(v_0+\frac{1}{v_0}\right)\pdv{v_0}{z}\tilde{v} = 0
     \end{align*}
 
     Now we take $\pdv*{t}$ on Eq.(\ref{eq:linearized-conservation-of-momentum}). Recall the fact that $\tilde{Y} = \pdv*{(\tilde{n}/n_0)}{z}$, we have
@@ -213,11 +213,11 @@ Let $a=\Omega\tilde{v}$, then Eq.(\ref{eq:polynomial-eigenvalue-problem}) become
 \end{equation}
 where $O$ is zero matrix, $I$ is identity matrix, and
 \begin{align*}
-    A_{21} &= 2\left(v_0\pdv{}{z} +\pdv{v_0}{z} \right) \\
-    A_{22} &= (1-v_0^2)\pdv[2]{}{z} 
+    A_{21} &= (1-v_0^2)\pdv[2]{}{z} 
     -\left(3v_0 + \frac{1}{v_0}\right)\pdv{v_0}{z}\pdv{}{z} 
     - \left(1-\frac{1}{v_0^2}\right)\left(\pdv{v_0}{z}\right)^2 
-    - \left(v_0+\frac{1}{v_0}\right)\pdv[2]{v_0}{z}
+    - \left(v_0+\frac{1}{v_0}\right)\pdv[2]{v_0}{z} \\
+    A_{22} &= 2\left(v_0\pdv{}{z} +\pdv{v_0}{z} \right) 
 \end{align*}
 
 

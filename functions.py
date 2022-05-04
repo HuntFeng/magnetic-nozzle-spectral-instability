@@ -16,7 +16,7 @@ plt.rcParams["legend.fontsize"] = 16
 
 
 class Spectral:
-    def __init__(self, N:int, domain:str, method:str, boundary_condition:dict=None) -> None:
+    def __init__(self, N:int, domain:str, method:str) -> None:
         """
         domain: either "symmetric" or "nonsymmetric"
         method: either "FD" (finite difference) or "CH" (chebyshev)
@@ -54,20 +54,23 @@ class Spectral:
         else:
             raise NameError(f"Valid domain types are 'symmetric' and 'nonsymmetric'")
 
-        D = np.diag(0.5/h*np.ones(N-1), k=1) + np.diag(-0.5/h*np.ones(N-1), k=-1)
+        # 2nd-order finite difference
+        D1 = np.diag(0.5/h*np.ones(N-1), k=1) + np.diag(-0.5/h*np.ones(N-1), k=-1)
         D2 = np.diag(-2/h**2*np.ones(N), k=0) + np.diag(1/h**2*np.ones(N-1), k=1) + np.diag(1/h**2*np.ones(N-1), k=-1)
-        # D[0,0] = -3*0.5/h
-        # D[0,1] = 4*0.5/h
-        # D[0,2] = -0.5/h
-        # D[-1,-1] = 3*0.5/h
-        # D[-1,-2] = -4*0.5/h
-        # D[-1,-3] = 0.5/h
-
-        # D[0,:] = 0
-        # D[0,0] = 1
-        # D[-1,:] = 0
-        # D[-1,-1] = 1
-        return x, D, D2
+        
+        # 6th-order finite difference
+        # coeff_D1 = [-1/60, 3/20, -3/4, 0, 3/4, -3/20, 1/60]
+        # coeff_D2 = [1/90, -3/20, 3/2, -49/18, 3/2, -3/20, 1/90]
+        # D1 = np.zeros((N,N))
+        # D2 = np.zeros((N,N))
+        # ones = np.ones(N)
+        # for k in range(-3,4):
+        #     deviate = np.abs(k)
+        #     ind = k+3
+        #     D1 += np.diag(coeff_D1[ind]*ones[:N-deviate], k=k)/h
+        #     D2 += np.diag(coeff_D2[ind]*ones[:N-deviate], k=k)/h**2
+        
+        return x, D1, D2
 
 
     def matrix_CH(self):
