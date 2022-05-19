@@ -13,7 +13,8 @@ plt.rcParams["axes.labelsize"] = 18
 plt.rcParams["xtick.labelsize"] = 18
 plt.rcParams["ytick.labelsize"] = 18
 plt.rcParams["legend.fontsize"] = 16
-
+plt.rcParams['axes.facecolor'] = 'white'
+plt.rcParams['savefig.facecolor'] = 'white'
 
 class Spectral:
     def __init__(self, N:int, domain:str, method:str) -> None:
@@ -55,20 +56,20 @@ class Spectral:
             raise NameError(f"Valid domain types are 'symmetric' and 'nonsymmetric'")
 
         # 2nd-order finite difference
-        D1 = np.diag(0.5/h*np.ones(N-1), k=1) + np.diag(-0.5/h*np.ones(N-1), k=-1)
-        D2 = np.diag(-2/h**2*np.ones(N), k=0) + np.diag(1/h**2*np.ones(N-1), k=1) + np.diag(1/h**2*np.ones(N-1), k=-1)
+        # D1 = np.diag(0.5/h*np.ones(N-1), k=1) + np.diag(-0.5/h*np.ones(N-1), k=-1)
+        # D2 = np.diag(-2/h**2*np.ones(N), k=0) + np.diag(1/h**2*np.ones(N-1), k=1) + np.diag(1/h**2*np.ones(N-1), k=-1)
         
         # 6th-order finite difference
-        # coeff_D1 = [-1/60, 3/20, -3/4, 0, 3/4, -3/20, 1/60]
-        # coeff_D2 = [1/90, -3/20, 3/2, -49/18, 3/2, -3/20, 1/90]
-        # D1 = np.zeros((N,N))
-        # D2 = np.zeros((N,N))
-        # ones = np.ones(N)
-        # for k in range(-3,4):
-        #     deviate = np.abs(k)
-        #     ind = k+3
-        #     D1 += np.diag(coeff_D1[ind]*ones[:N-deviate], k=k)/h
-        #     D2 += np.diag(coeff_D2[ind]*ones[:N-deviate], k=k)/h**2
+        coeff_D1 = [-1/60, 3/20, -3/4, 0, 3/4, -3/20, 1/60]
+        coeff_D2 = [1/90, -3/20, 3/2, -49/18, 3/2, -3/20, 1/90]
+        D1 = np.zeros((N,N))
+        D2 = np.zeros((N,N))
+        ones = np.ones(N)
+        for k in range(-3,4):
+            deviate = np.abs(k)
+            ind = k+3
+            D1 += np.diag(coeff_D1[ind]*ones[:N-deviate], k=k)/h
+            D2 += np.diag(coeff_D2[ind]*ones[:N-deviate], k=k)/h**2
         
         return x, D1, D2
 
@@ -183,141 +184,44 @@ def polyeig(*A):
     X /= np.tile(np.max(np.abs(X),axis=0), (n,1))
     return X, e 
 
-
-def compute(plasma:Plasma, spectral:Spectral, ky_range: ArrayLike):
-    # differentiation matrices
-    N = spectral.N
-    x = spectral.x
-    D1 = spectral.D1[1:,1:]
-    D2 = spectral.D2[1:,1:]
-    I = np.eye(*D1.shape)
-
-    # model parameters
-    #ky_range = np.linspace(1,151, 51) # unit: m^{-1}, wave number in y direction
-    L = 0.1 # unit: m, system length
-
-    # results arrays
-    gamma = np.nan*np.empty((int(np.ceil(N/2)+1), ky_range.size)) # corresponding growth rates, Im(\omega)
-    omega = np.nan*np.empty((int(np.ceil(N/2)+1), ky_range.size)) # corresponding frequency, Re(\omega)
-    #nodes = np.nan*np.empty((int(np.ceil(N/2)+1), ky_range.size)) #  number of nodeds for each eigenfunction corresponding to given ky
-
-    gamma_max = np.nan*np.empty((ky_range.size,)) # max Im(\omega) at each ky
-    omega_max = np.nan*np.empty((ky_range.size,)) # max Re(\omega) at each ky
-    eigvec = np.nan*np.empty((D1.shape[0], ky_range.size), dtype=complex) # phi
-
-    for i, ky in enumerate(tqdm(ky_range)):
-        # normalized quantities
-        v0 = plasma.v0/plasma.cs
-
-        # matrices for polynomial eigenvalue problem
-        A2 = I
-        A1 = 2*(np.diag(v0)@D1 + np.diag(D1@v0))
-        A0 = np.diag(1-v0**2)@D2 \
-            - np.diag((3*v0 + 1/v0)*(D1@v0))@D1 \
-            - np.diag((1-1/v0**2)*(D1@v0)**2) \
-            - np.diag((v0+1/v0)*(D2@v0))
-
-        V, e = polyeig(A0, A1, A2)
-        
-        # select only positive imaginary part
-        ind = np.imag(e)>5/plasma.w_LH
-        V = V[:, ind]
-        e = e[ind]
-
-        if e[np.abs(np.imag(e))>0].size > 0:
-            ind = np.argmax(np.imag(e))
-            gamma_max[i] = np.imag(e[ind])
-            omega_max[i] = np.real(e[ind])
-            eigvec[:,i] = V[:,ind]
-
-            nodes_temp = np.zeros(e.size, dtype=int)
-            for j in range(e.size):
-                v = np.pad(np.real(V[:,j]), 1, constant_values=[0])
-                peaks, _ = find_peaks(np.abs(v))
-                nodes_temp[j] = peaks.size + 1
-            
-            # sort by number of nodes in descending order
-            ind = nodes_temp.argsort()[::-1]
-            nodes_temp = nodes_temp[ind]
-            gamma[nodes_temp, i] = np.imag(e[ind])
-            omega[nodes_temp, i] = np.real(e[ind])
-            #nodes[nodes_temp, i] = nodes_temp
-        else:
-            eigvec[:,i] = 0
-
-    # group the results for convenience
-    result = {
-        "spectral": spectral,
-        "ky_range": ky_range,
-        "gamma":gamma,
-        "omega":omega,
-        #"nodes": nodes,
-        "gamma_max": gamma_max,
-        "omega_max": omega_max,
-        "eigvec": eigvec}
-    return result
-
-
-def linear_fill(a):
+def stability_condition(plasma, spectral, P,Q, omega_r, v_tilde):
     """
-    Fill NaNs between first and last finite values column by column
+    Full instability condition from real part
+
+    check stability condition for a specific omega and a specific v
     """
-    for j in range(a.shape[1]):
-        finite = np.argwhere(np.isfinite(a[:,j])).flatten()
-        if finite.size != 0: # if there are finite values
-            # between the first and last finite values in the row, we linearly fill the nan
-            interp_vals = np.interp(np.arange(finite[0],finite[-1]), finite, a[finite,j])
-            a[finite[0]:finite[-1],j] = interp_vals
+    mean = lambda y_vals: np.trapz(y_vals,spectral.x)/(spectral.x.max()-spectral.x.min())
 
-def plotting(result):
-    spectral = result["spectral"]
-    x = spectral.x
-    N = spectral.N
-    ky_range = result["ky_range"]
-    gamma = result["gamma"]
-    omega = result["omega"]
-    #nodes = result["nodes"]
-    gamma_max = result["gamma_max"]
-    omega_max = result["omega_max"]
-    eigvec = result["eigvec"]
+    x, D1 = spectral.x, spectral.D1
+    v0 = plasma.v
 
-    # omega-ky
-    plt.figure()
-    plt.plot(ky_range, omega_max, label="$\\Re(\\omega)$")
-    plt.plot(ky_range, gamma_max, label="$\\Im(\\omega)$")
-    plt.xlabel("$k_y, m^{-1}$")
-    plt.ylabel("$\\Re(\\omega), \\Im(\\omega)$")
-    plt.legend();
+    v_sqr = np.real(v_tilde*v_tilde.conj())
 
-    # phi-x
-    plt.figure()
-    for i in range(4):
-        real_part = np.pad(np.real(eigvec[:,i]), 1, constant_values=[0])
-        imag_part = np.pad(np.imag(eigvec[:,i]), 1, constant_values=[0])
-        lines = plt.plot(x, real_part, '-', label=f"$k_y={ky_range[i]}$")
-        plt.plot(x, imag_part, '--', color=lines[0]._color)
+    pdv_v = D1@v_tilde
+    pdv_v[[0,-1]] = 0
 
-    plt.xlabel("$x$")
-    plt.ylabel("$\\phi$")
-    plt.legend();
+    pdv_v0 = D1@v0
+    pdv_v0[[0,-1]] = 0
 
-    # phase-space
-    plt.figure()
-    for i in range(4):
-        plt.plot(omega[:,i], gamma[:,i], 'o', label=f"$k_y={ky_range[i]}$")
+    pdv_v_sqr = D1@v_sqr
+    pdv_v_sqr[[0,-1]] = 0
 
-    plt.xlabel("$\\Re(\\omega)$")
-    plt.ylabel("$\\Im(\\omega)$")
-    plt.legend();
+    pdv_P = D1@P
+    pdv_P[[0,-1]] = 0
 
-    # kx-ky
-    plt.figure()
-    gamma_ = gamma.copy()
-    linear_fill(gamma_) # fill the missing values with linear interpolation
-    plt.pcolormesh(gamma_, cmap='jet')
-    # change the tick density to 1/10 and the tick labels to their corresponding values
-    plt.yticks(range(1,gamma_.shape[0]+1,10), range(1,N+1,20))
-    plt.xticks(range(1,gamma_.shape[1]+1,10), ky_range[0::10].astype(int))
-    plt.colorbar(label="$\\Im(\\omega)$")
-    plt.xlabel("$k_y$")
-    plt.ylabel("$Nodes, k_x$");
+    # coefficients of quadratic equation about gamma
+    a = -mean(v_sqr)
+    b = -mean(pdv_v0*v_sqr)
+    c = omega_r**2*mean(v_sqr) \
+        - 2*omega_r*mean(v0*np.imag(v_tilde.conj()*pdv_v)) \
+        - mean((1-v0**2)*np.real(pdv_v.conj()*pdv_v)) \
+        + mean((Q-0.5*pdv_P)*v_sqr)
+
+    discriminant = b**2 - 4*a*c
+    # if discriminant > 0:
+    #     print(f"discriminant={discriminant:0.5f}>0, unstable")
+    # elif discriminant < 0:
+    #     print(f"discriminant={discriminant:0.5f}<0, stable")
+    return discriminant
+
+
