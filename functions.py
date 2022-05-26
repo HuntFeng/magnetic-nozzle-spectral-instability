@@ -21,8 +21,6 @@ class Spectral:
         """
         domain: either "symmetric" or "nonsymmetric"
         method: either "FD" (finite difference) or "CH" (chebyshev)
-        boundary_condition: {"left":left_type, "right":right_type} 
-        where type can be either Dirichlet or Neumann
         """
         self.N = N
         self.domain = domain
@@ -56,20 +54,20 @@ class Spectral:
             raise NameError(f"Valid domain types are 'symmetric' and 'nonsymmetric'")
 
         # 2nd-order finite difference
-        # D1 = np.diag(0.5/h*np.ones(N-1), k=1) + np.diag(-0.5/h*np.ones(N-1), k=-1)
-        # D2 = np.diag(-2/h**2*np.ones(N), k=0) + np.diag(1/h**2*np.ones(N-1), k=1) + np.diag(1/h**2*np.ones(N-1), k=-1)
+        D1 = np.diag(0.5/h*np.ones(N-1), k=1) + np.diag(-0.5/h*np.ones(N-1), k=-1)
+        D2 = np.diag(-2/h**2*np.ones(N), k=0) + np.diag(1/h**2*np.ones(N-1), k=1) + np.diag(1/h**2*np.ones(N-1), k=-1)
         
         # 6th-order finite difference
-        coeff_D1 = [-1/60, 3/20, -3/4, 0, 3/4, -3/20, 1/60]
-        coeff_D2 = [1/90, -3/20, 3/2, -49/18, 3/2, -3/20, 1/90]
-        D1 = np.zeros((N,N))
-        D2 = np.zeros((N,N))
-        ones = np.ones(N)
-        for k in range(-3,4):
-            deviate = np.abs(k)
-            ind = k+3
-            D1 += np.diag(coeff_D1[ind]*ones[:N-deviate], k=k)/h
-            D2 += np.diag(coeff_D2[ind]*ones[:N-deviate], k=k)/h**2
+        # coeff_D1 = [-1/60, 3/20, -3/4, 0, 3/4, -3/20, 1/60]
+        # coeff_D2 = [1/90, -3/20, 3/2, -49/18, 3/2, -3/20, 1/90]
+        # D1 = np.zeros((N,N))
+        # D2 = np.zeros((N,N))
+        # ones = np.ones(N)
+        # for k in range(-3,4):
+        #     deviate = np.abs(k)
+        #     ind = k+3
+        #     D1 += np.diag(coeff_D1[ind]*ones[:N-deviate], k=k)/h
+        #     D2 += np.diag(coeff_D2[ind]*ones[:N-deviate], k=k)/h**2
         
         return x, D1, D2
 
