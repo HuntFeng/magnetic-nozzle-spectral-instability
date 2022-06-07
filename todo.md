@@ -1,2 +1,3 @@
-[ ] Verify the finite difference works on Eq(7) Koshkarov et.al 
-[ ] Verify the vibration equation using polyeig
+[ ] Try VDR on `stability-and-boundary-condition` (9) and (10)
+[ ] Reduce the second order DE to normal form, so that the first derivative term vanishes.
+[ ] Reproduce the results in electromagnetic instability ...
