@@ -232,4 +232,29 @@ where $A_2 = I$, $A_1 = 2iv_0\pdv*{z}$, and $(1-v_0^2)\pdv*[2]{z}$. Lastly, $\ma
     \label{fig:results-fd-unstable}
 \end{figure}
 
+\subsection{Reduction to Normal Form}
+The equation 
+$$ \omega^2\tilde{v}(z) + 2i\omega\tilde{v}'(z) + (1-v_0^2)\tilde{v}''(z) = 0, \tilde{v}(-1) = \tilde{v}(1) = 0 $$
+can be reduced to normal form
+$$ u''(z) + r(z)u(z) = 0, u(-1) = u(1) = 0 $$
+by doing the following variable change
+$$
+u(z) = \exp\left(\frac{iv_0\omega}{1-v_0^2}\right)\tilde{v}(z); \;\;\;
+r(z) = \frac{\omega^2}{(1-v_0^2)^2}
+$$
+
+\begin{figure}[H]
+    \centering
+    \begin{subfigure}[b]{0.45\linewidth}
+        \includegraphics[width=\linewidth]{img/results-normal-v0=0.5.png}
+        \caption{}
+    \end{subfigure}%
+    \begin{subfigure}[b]{0.45\linewidth}
+        \includegraphics[width=\linewidth]{img/results-normal-v0=1.5.png}
+        \caption{}
+    \end{subfigure}
+    \caption{Finally, all modes are stable.}
+    \label{fig:results-normal}
+\end{figure}
+
 \end{document}

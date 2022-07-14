@@ -1,3 +1,4 @@
 {
-    "python.pythonPath": "/home/hunt/miniconda3/envs/plasma/bin/python"
+    "python.pythonPath": "/home/hunt/miniconda3/envs/plasma/bin/python",
+    "latex-workshop.latex.recipe.default":"pdflatex ➞ bibtex ➞ pdflatex × 2"
 }

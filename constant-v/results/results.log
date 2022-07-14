@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.23 (TeX Live 2021) (preloaded format=pdflatex 2022.1.14)  19 JUN 2022 17:59
+This is pdfTeX, Version 3.141592653-2.6-1.40.23 (TeX Live 2021) (preloaded format=pdflatex 2022.1.14)  21 JUN 2022 22:24
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -377,12 +377,12 @@ LaTeX Font Info:    Trying to load font information for U+msb on input line 18.
  (/home/hunt/texlive/2021/texmf-dist/tex/latex/amsfonts/umsb.fd
 File: umsb.fd 2013/01/14 v3.01 AMS symbols B
 )
-<img/eigenfunctions-exact-v0=0.5.png, id=40, 647.41875pt x 630.355pt>
+<img/eigenfunctions-exact-v0=0.5.png, id=44, 647.41875pt x 630.355pt>
 File: img/eigenfunctions-exact-v0=0.5.png Graphic file (type png)
 <use img/eigenfunctions-exact-v0=0.5.png>
 Package pdftex.def Info: img/eigenfunctions-exact-v0=0.5.png  used on input line 33.
 (pdftex.def)             Requested size: 211.38832pt x 205.81517pt.
-<img/eigenfunctions-exact-v0=1.5.png, id=42, 647.41875pt x 630.355pt>
+<img/eigenfunctions-exact-v0=1.5.png, id=46, 647.41875pt x 630.355pt>
 File: img/eigenfunctions-exact-v0=1.5.png Graphic file (type png)
 <use img/eigenfunctions-exact-v0=1.5.png>
 Package pdftex.def Info: img/eigenfunctions-exact-v0=1.5.png  used on input line 37.
@@ -390,127 +390,137 @@ Package pdftex.def Info: img/eigenfunctions-exact-v0=1.5.png  used on input line
  [1
 
 {/home/hunt/texlive/2021/texmf-var/fonts/map/pdftex/updmap/pdftex.map} <./img/eigenfunctions-exact-v0=0.5.png> <./img/eigenfunctions-exact-v0=1.5.png>]
-<img/results-sine-dvr-N=9,v0=0.5.png, id=63, 859.21pt x 570.13pt>
+<img/results-sine-dvr-N=9,v0=0.5.png, id=67, 859.21pt x 570.13pt>
 File: img/results-sine-dvr-N=9,v0=0.5.png Graphic file (type png)
 <use img/results-sine-dvr-N=9,v0=0.5.png>
 Package pdftex.def Info: img/results-sine-dvr-N=9,v0=0.5.png  used on input line 77.
 (pdftex.def)             Requested size: 211.38832pt x 140.26158pt.
-<img/results-sine-dvr-N=9,v0=1.5.png, id=64, 859.21pt x 570.13pt>
+<img/results-sine-dvr-N=9,v0=1.5.png, id=68, 859.21pt x 570.13pt>
 File: img/results-sine-dvr-N=9,v0=1.5.png Graphic file (type png)
 <use img/results-sine-dvr-N=9,v0=1.5.png>
 Package pdftex.def Info: img/results-sine-dvr-N=9,v0=1.5.png  used on input line 81.
 (pdftex.def)             Requested size: 211.38832pt x 140.26158pt.
-<img/results-sine-dvr-N=21,v0=1.5.png, id=65, 859.21pt x 570.13pt>
+<img/results-sine-dvr-N=21,v0=1.5.png, id=69, 859.21pt x 570.13pt>
 File: img/results-sine-dvr-N=21,v0=1.5.png Graphic file (type png)
 <use img/results-sine-dvr-N=21,v0=1.5.png>
 Package pdftex.def Info: img/results-sine-dvr-N=21,v0=1.5.png  used on input line 92.
 (pdftex.def)             Requested size: 211.38832pt x 140.26158pt.
-<img/results-sine-dvr-N=9,v0=5.png, id=66, 859.21pt x 570.13pt>
+<img/results-sine-dvr-N=9,v0=5.png, id=70, 859.21pt x 570.13pt>
 File: img/results-sine-dvr-N=9,v0=5.png Graphic file (type png)
 <use img/results-sine-dvr-N=9,v0=5.png>
 Package pdftex.def Info: img/results-sine-dvr-N=9,v0=5.png  used on input line 96.
 (pdftex.def)             Requested size: 211.38832pt x 140.26158pt.
  [2 <./img/results-sine-dvr-N=9,v0=0.5.png> <./img/results-sine-dvr-N=9,v0=1.5.png>]
-<img/results-sinc-dvr-dx=0.2,v0=0.5.png, id=77, 859.21pt x 570.13pt>
+<img/results-sinc-dvr-dx=0.2,v0=0.5.png, id=81, 859.21pt x 570.13pt>
 File: img/results-sinc-dvr-dx=0.2,v0=0.5.png Graphic file (type png)
 <use img/results-sinc-dvr-dx=0.2,v0=0.5.png>
 Package pdftex.def Info: img/results-sinc-dvr-dx=0.2,v0=0.5.png  used on input line 111.
 (pdftex.def)             Requested size: 211.38832pt x 140.26158pt.
-<img/results-sinc-dvr-dx=0.2,v0=1.5.png, id=78, 859.21pt x 570.13pt>
+<img/results-sinc-dvr-dx=0.2,v0=1.5.png, id=82, 859.21pt x 570.13pt>
 File: img/results-sinc-dvr-dx=0.2,v0=1.5.png Graphic file (type png)
 <use img/results-sinc-dvr-dx=0.2,v0=1.5.png>
 Package pdftex.def Info: img/results-sinc-dvr-dx=0.2,v0=1.5.png  used on input line 115.
 (pdftex.def)             Requested size: 211.38832pt x 140.26158pt.
-<img/results-sinc-dvr-dx=0.1,v0=1.5.png, id=79, 859.21pt x 570.13pt>
+<img/results-sinc-dvr-dx=0.1,v0=1.5.png, id=83, 859.21pt x 570.13pt>
 File: img/results-sinc-dvr-dx=0.1,v0=1.5.png Graphic file (type png)
 <use img/results-sinc-dvr-dx=0.1,v0=1.5.png>
 Package pdftex.def Info: img/results-sinc-dvr-dx=0.1,v0=1.5.png  used on input line 125.
 (pdftex.def)             Requested size: 211.38832pt x 140.26158pt.
-<img/results-sinc-dvr-dx=0.2,v0=5.png, id=80, 859.21pt x 570.13pt>
+<img/results-sinc-dvr-dx=0.2,v0=5.png, id=84, 859.21pt x 570.13pt>
 File: img/results-sinc-dvr-dx=0.2,v0=5.png Graphic file (type png)
 <use img/results-sinc-dvr-dx=0.2,v0=5.png>
 Package pdftex.def Info: img/results-sinc-dvr-dx=0.2,v0=5.png  used on input line 129.
 (pdftex.def)             Requested size: 211.38832pt x 140.26158pt.
  [3 <./img/results-sine-dvr-N=21,v0=1.5.png> <./img/results-sine-dvr-N=9,v0=5.png> <./img/results-sinc-dvr-dx=0.2,v0=0.5.png> <./img/results-sinc-dvr-dx=0.2,v0=1.5.png>]
-<img/results-linear-N=40,v0=0.5.png, id=92, 859.21pt x 570.13pt>
+<img/results-linear-N=40,v0=0.5.png, id=96, 859.21pt x 570.13pt>
 File: img/results-linear-N=40,v0=0.5.png Graphic file (type png)
 <use img/results-linear-N=40,v0=0.5.png>
 Package pdftex.def Info: img/results-linear-N=40,v0=0.5.png  used on input line 145.
 (pdftex.def)             Requested size: 211.38832pt x 140.26158pt.
-<img/results-linear-N=40,v0=1.5.png, id=93, 859.21pt x 570.13pt>
+<img/results-linear-N=40,v0=1.5.png, id=97, 859.21pt x 570.13pt>
 File: img/results-linear-N=40,v0=1.5.png Graphic file (type png)
 <use img/results-linear-N=40,v0=1.5.png>
 Package pdftex.def Info: img/results-linear-N=40,v0=1.5.png  used on input line 149.
 (pdftex.def)             Requested size: 211.38832pt x 140.26158pt.
-<img/results-linear-N=100,v0=0.5.png, id=94, 859.21pt x 570.13pt>
+<img/results-linear-N=100,v0=0.5.png, id=98, 859.21pt x 570.13pt>
 File: img/results-linear-N=100,v0=0.5.png Graphic file (type png)
 <use img/results-linear-N=100,v0=0.5.png>
 Package pdftex.def Info: img/results-linear-N=100,v0=0.5.png  used on input line 159.
 (pdftex.def)             Requested size: 211.38832pt x 140.26158pt.
-<img/results-linear-N=100,v0=1.5.png, id=95, 859.21pt x 570.13pt>
+<img/results-linear-N=100,v0=1.5.png, id=99, 859.21pt x 570.13pt>
 File: img/results-linear-N=100,v0=1.5.png Graphic file (type png)
 <use img/results-linear-N=100,v0=1.5.png>
 Package pdftex.def Info: img/results-linear-N=100,v0=1.5.png  used on input line 163.
 (pdftex.def)             Requested size: 211.38832pt x 140.26158pt.
  [4 <./img/results-sinc-dvr-dx=0.1,v0=1.5.png> <./img/results-sinc-dvr-dx=0.2,v0=5.png> <./img/results-linear-N=40,v0=0.5.png> <./img/results-linear-N=40,v0=1.5.png>]
-<img/results-sine-N=50,v0=0.5.png, id=106, 859.21pt x 570.13pt>
+<img/results-sine-N=50,v0=0.5.png, id=110, 859.21pt x 570.13pt>
 File: img/results-sine-N=50,v0=0.5.png Graphic file (type png)
 <use img/results-sine-N=50,v0=0.5.png>
 Package pdftex.def Info: img/results-sine-N=50,v0=0.5.png  used on input line 175.
 (pdftex.def)             Requested size: 211.38832pt x 140.26158pt.
-<img/results-sine-N=50,v0=1.5.png, id=107, 859.21pt x 570.13pt>
+<img/results-sine-N=50,v0=1.5.png, id=111, 859.21pt x 570.13pt>
 File: img/results-sine-N=50,v0=1.5.png Graphic file (type png)
 <use img/results-sine-N=50,v0=1.5.png>
 Package pdftex.def Info: img/results-sine-N=50,v0=1.5.png  used on input line 179.
 (pdftex.def)             Requested size: 211.38832pt x 140.26158pt.
-<img/results-sine-N=100,v0=1.5.png, id=108, 859.21pt x 570.13pt>
+<img/results-sine-N=100,v0=1.5.png, id=112, 859.21pt x 570.13pt>
 File: img/results-sine-N=100,v0=1.5.png Graphic file (type png)
 <use img/results-sine-N=100,v0=1.5.png>
 Package pdftex.def Info: img/results-sine-N=100,v0=1.5.png  used on input line 189.
 (pdftex.def)             Requested size: 211.38832pt x 140.26158pt.
-<img/results-sine-N=50,v0=5.png, id=109, 859.21pt x 570.13pt>
+<img/results-sine-N=50,v0=5.png, id=113, 859.21pt x 570.13pt>
 File: img/results-sine-N=50,v0=5.png Graphic file (type png)
 <use img/results-sine-N=50,v0=5.png>
 Package pdftex.def Info: img/results-sine-N=50,v0=5.png  used on input line 193.
 (pdftex.def)             Requested size: 211.38832pt x 140.26158pt.
  [5 <./img/results-linear-N=100,v0=0.5.png> <./img/results-linear-N=100,v0=1.5.png> <./img/results-sine-N=50,v0=0.5.png> <./img/results-sine-N=50,v0=1.5.png> <./img/results-sine-N=100,v0=1.5.png> <./img/results-sine-N=50,v0=5.png>]
-<img/results-fd-N=101,v0=0.5.png, id=123, 859.21pt x 570.13pt>
+<img/results-fd-N=101,v0=0.5.png, id=127, 859.21pt x 570.13pt>
 File: img/results-fd-N=101,v0=0.5.png Graphic file (type png)
 <use img/results-fd-N=101,v0=0.5.png>
 Package pdftex.def Info: img/results-fd-N=101,v0=0.5.png  used on input line 210.
 (pdftex.def)             Requested size: 211.38832pt x 140.26158pt.
-<img/results-fd-N=101,v0=1.5.png, id=124, 859.21pt x 570.13pt>
+<img/results-fd-N=101,v0=1.5.png, id=128, 859.21pt x 570.13pt>
 File: img/results-fd-N=101,v0=1.5.png Graphic file (type png)
 <use img/results-fd-N=101,v0=1.5.png>
 Package pdftex.def Info: img/results-fd-N=101,v0=1.5.png  used on input line 214.
 (pdftex.def)             Requested size: 211.38832pt x 140.26158pt.
-<img/results-fd-N=201,v0=1.5.png, id=125, 859.21pt x 570.13pt>
+<img/results-fd-N=201,v0=1.5.png, id=129, 859.21pt x 570.13pt>
 File: img/results-fd-N=201,v0=1.5.png Graphic file (type png)
 <use img/results-fd-N=201,v0=1.5.png>
 Package pdftex.def Info: img/results-fd-N=201,v0=1.5.png  used on input line 224.
 (pdftex.def)             Requested size: 211.38832pt x 140.26158pt.
-<img/results-fd-N=101,v0=5.png, id=126, 859.21pt x 570.13pt>
+<img/results-fd-N=101,v0=5.png, id=130, 859.21pt x 570.13pt>
 File: img/results-fd-N=101,v0=5.png Graphic file (type png)
 <use img/results-fd-N=101,v0=5.png>
 Package pdftex.def Info: img/results-fd-N=101,v0=5.png  used on input line 228.
 (pdftex.def)             Requested size: 211.38832pt x 140.26158pt.
- [6 <./img/results-fd-N=101,v0=0.5.png> <./img/results-fd-N=101,v0=1.5.png> <./img/results-fd-N=201,v0=1.5.png> <./img/results-fd-N=101,v0=5.png>] (./results.aux)
+<img/results-normal-v0=0.5.png, id=131, 859.21pt x 570.13pt>
+File: img/results-normal-v0=0.5.png Graphic file (type png)
+<use img/results-normal-v0=0.5.png>
+Package pdftex.def Info: img/results-normal-v0=0.5.png  used on input line 249.
+(pdftex.def)             Requested size: 211.38832pt x 140.26158pt.
+<img/results-normal-v0=1.5.png, id=132, 859.21pt x 570.13pt>
+File: img/results-normal-v0=1.5.png Graphic file (type png)
+<use img/results-normal-v0=1.5.png>
+Package pdftex.def Info: img/results-normal-v0=1.5.png  used on input line 253.
+(pdftex.def)             Requested size: 211.38832pt x 140.26158pt.
+ [6 <./img/results-fd-N=101,v0=0.5.png> <./img/results-fd-N=101,v0=1.5.png> <./img/results-fd-N=201,v0=1.5.png> <./img/results-fd-N=101,v0=5.png>] [7 <./img/results-normal-v0=0.5.png> <./img/results-normal-v0=1.5.png>] (./results.aux)
 Package rerunfilecheck Info: File `results.out' has not changed.
-(rerunfilecheck)             Checksum: 2AA2528EB989EBECFE58626C648C0AEE;1060.
+(rerunfilecheck)             Checksum: 3DA6FE41968BDEB5FA65AC175F998BA8;1247.
  ) 
 Here is how much of TeX's memory you used:
- 12143 strings out of 480193
- 194669 string characters out of 5893968
- 482059 words of memory out of 5000000
- 29894 multiletter control sequences out of 15000+600000
+ 12162 strings out of 480193
+ 195202 string characters out of 5893968
+ 482122 words of memory out of 5000000
+ 29908 multiletter control sequences out of 15000+600000
  479906 words of font info for 69 fonts, out of 8000000 for 9000
  36 hyphenation exceptions out of 8191
  68i,9n,77p,404b,526s stack positions out of 5000i,500n,10000p,200000b,80000s
 </home/hunt/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx10.pfb></home/hunt/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx12.pfb></home/hunt/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmex10.pfb></home/hunt/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi10.pfb></home/hunt/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi7.pfb></home/hunt/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi9.pfb></home/hunt/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb></home/hunt/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmr12.pfb></home/hunt/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmr17.pfb></home/hunt/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmr7.pfb></home/hunt/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmr9.pfb></home/hunt/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb></home/hunt/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy7.pfb></home/hunt/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/symbols/msbm10.pfb>
-Output written on results.pdf (6 pages, 1902256 bytes).
+Output written on results.pdf (7 pages, 2007210 bytes).
 PDF statistics:
- 204 PDF objects out of 1000 (max. 8388607)
- 122 compressed objects within 2 object streams
- 29 named destinations out of 1000 (max. 500000)
- 183 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 220 PDF objects out of 1000 (max. 8388607)
+ 133 compressed objects within 2 object streams
+ 32 named destinations out of 1000 (max. 500000)
+ 201 words of extra memory for PDF output out of 10000 (max. 10000000)
 
