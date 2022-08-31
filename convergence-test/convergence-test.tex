@@ -1,0 +1,119 @@
+\documentclass{article}
+\usepackage[margin=1in]{geometry}
+\usepackage{amsmath, amssymb, amsthm}
+\usepackage{physics}
+\usepackage{float, subcaption, graphicx}
+
+\title{Magnetic Nozzle - Filtering Spurious Modes Ny Convergen Test}
+\author{Hunt Feng}
+\date{\today}
+\begin{document}
+    \maketitle
+    
+    \section*{Problem}
+    The polynomial eigenvalue problem is given by
+    \begin{multline} \label{eq:polynomial-eigenvalue-problem}
+        \omega^2 v 
+        + 2i\omega\left(v_0\pdv{}{z} + \pdv{v_0}{z}\right) v \\
+        + \left[ (1-v_0^2)\pdv[2]{}{z}
+        -\left(3v_0 + \frac{1}{v_0}\right)\pdv{v_0}{z}\pdv{}{z} 
+        - \left(1-\frac{1}{v_0^2}\right)\left(\pdv{v_0}{z}\right)^2 
+        - \left(v_0+\frac{1}{v_0}\right)\pdv[2]{v_0}{z} \right]v
+        = 0
+    \end{multline}
+
+    This problem can be transformed to an eigenvalue problem
+    \begin{equation}
+        \mqty[ O & I\\A_{21} & A_{22} ]\mqty[ v\\ \omega v] = \omega\mqty[ v\\ \omega v]
+        \label{eq:eigenvalue-problem}
+    \end{equation}
+    where 
+    \begin{align*}
+        A_{21} &= -\left[ (1-v_0^2)\pdv[2]{}{z}
+        -\left(3v_0 + \frac{1}{v_0}\right)\pdv{v_0}{z}\pdv{}{z} 
+        - \left(1-\frac{1}{v_0^2}\right)\left(\pdv{v_0}{z}\right)^2 
+        - \left(v_0+\frac{1}{v_0}\right)\pdv[2]{v_0}{z} \right] \\
+        A_{22} &= -2i\left(v_0\pdv{}{z} + \pdv{v_0}{z}\right)
+    \end{align*}
+
+    If we try to investigate the eigenvalues of the problem, the spectral pollution will generate spurious modes.
+
+    \newpage
+    \section*{Convergence Test}
+    To filter the eigenvalues, we compute the eigenvalues in different resolutions, and only trust those that are converging.
+
+    \subsection*{Subsonic case}
+    \begin{figure}[H]
+        \begin{subfigure}[b]{0.5\textwidth}
+            \includegraphics*[width=0.9\textwidth]{img/eigvals-Mm=0.5.png}
+            \caption{No spurious modes in subsonic case.}
+        \end{subfigure}%
+        \begin{subfigure}[b]{0.5\textwidth}
+            \includegraphics*[width=0.9\textwidth]{img/eigfuncs-Mm=0.5.png}
+            \caption{First three eigenfunctions.}
+        \end{subfigure}
+    \end{figure}
+
+    \subsection*{Supersonic case}
+    \begin{figure}[H]
+        \centering
+        \begin{subfigure}[b]{0.5\textwidth}
+            \includegraphics*[width=0.9\textwidth]{img/eigvals-Mm=1.5.png}
+            \caption{Eigenvalues before filtering.}
+        \end{subfigure}%
+        \begin{subfigure}[b]{0.5\textwidth}
+            \includegraphics*[width=0.9\textwidth]{img/eigfuncs-Mm=1.5.png}
+            \caption{Spurious eigenfunctions has weird shape.}
+        \end{subfigure}
+        \begin{subfigure}[b]{0.5\textwidth}
+            \includegraphics*[width=0.9\textwidth]{img/eigvals-Mm=1.5-filtered.png}
+            \caption{Only these eigenvalues are converging.}
+        \end{subfigure}%
+        \begin{subfigure}[b]{0.5\textwidth}
+            \includegraphics*[width=0.9\textwidth]{img/eigfuncs-Mm=1.5-filtered.png}
+            \caption{Filtered eigenfunctions.}
+        \end{subfigure}
+    \end{figure}
+
+    \subsection*{Accelerating case}
+    \begin{figure}[H]
+        \centering
+        \begin{subfigure}[b]{0.5\textwidth}
+            \includegraphics*[width=0.9\textwidth]{img/eigvals-accelerating.png}
+            \caption{Eigenvalues before filtering.}
+        \end{subfigure}%
+        \begin{subfigure}[b]{0.5\textwidth}
+            \includegraphics*[width=0.9\textwidth]{img/eigfuncs-accelerating.png}
+            \caption{Spurious eigenfunctions has weird shape.}
+        \end{subfigure}
+        \begin{subfigure}[b]{0.5\textwidth}
+            \includegraphics*[width=0.9\textwidth]{img/eigvals-accelerating-filtered.png}
+            \caption{Only these eigenvalues are converging.}
+        \end{subfigure}%
+        \begin{subfigure}[b]{0.5\textwidth}
+            \includegraphics*[width=0.9\textwidth]{img/eigfuncs-accelerating-filtered.png}
+            \caption{Filtered eigenfunctions.}
+        \end{subfigure}
+    \end{figure}
+    
+    \subsection*{Decelerating case}
+    \begin{figure}[H]
+        \centering
+        \begin{subfigure}[b]{0.5\textwidth}
+            \includegraphics*[width=0.9\textwidth]{img/eigvals-decelerating.png}
+            \caption{Eigenvalues before filtering.}
+        \end{subfigure}%
+        \begin{subfigure}[b]{0.5\textwidth}
+            \includegraphics*[width=0.9\textwidth]{img/eigfuncs-decelerating.png}
+            \caption{Spurious eigenfunctions has weird shape.}
+        \end{subfigure}
+        \begin{subfigure}[b]{0.5\textwidth}
+            \includegraphics*[width=0.9\textwidth]{img/eigvals-decelerating-filtered.png}
+            \caption{Only these eigenvalues are converging.}
+        \end{subfigure}%
+        \begin{subfigure}[b]{0.5\textwidth}
+            \includegraphics*[width=0.9\textwidth]{img/eigfuncs-decelerating-filtered.png}
+            \caption{Filtered eigenfunctions.}
+        \end{subfigure}
+    \end{figure}
+\end{document}
