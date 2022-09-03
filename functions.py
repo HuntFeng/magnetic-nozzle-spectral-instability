@@ -1,20 +1,17 @@
-from turtle import right
-import constants as const
 import numpy as np
-from numpy.typing import ArrayLike
 import scipy.linalg as sl
-from scipy.signal import find_peaks
-from tqdm import tqdm
+from scipy.special import lambertw
+from dataclasses import dataclass
 import matplotlib.pyplot as plt
 
-plt.rcParams["figure.figsize"] = (10,10)
+plt.rcParams["figure.figsize"] = (10,7)
 plt.rcParams["axes.titlesize"] = 20
 plt.rcParams["axes.labelsize"] = 18
 plt.rcParams["xtick.labelsize"] = 18
 plt.rcParams["ytick.labelsize"] = 18
 plt.rcParams["legend.fontsize"] = 16
-plt.rcParams['axes.facecolor'] = 'white'
-plt.rcParams['savefig.facecolor'] = 'white'
+# NOTE: have set face color in plt.figure command not in rcParams,
+# otherwise the ticks background is transparent in vscode
 
 class Spectral:
     def __init__(self, N:int, domain:str, method:str) -> None:
@@ -57,18 +54,6 @@ class Spectral:
         D1 = np.diag(0.5/h*np.ones(N-1), k=1) + np.diag(-0.5/h*np.ones(N-1), k=-1)
         D2 = np.diag(-2/h**2*np.ones(N), k=0) + np.diag(1/h**2*np.ones(N-1), k=1) + np.diag(1/h**2*np.ones(N-1), k=-1)
         
-        # 6th-order finite difference
-        # coeff_D1 = [-1/60, 3/20, -3/4, 0, 3/4, -3/20, 1/60]
-        # coeff_D2 = [1/90, -3/20, 3/2, -49/18, 3/2, -3/20, 1/90]
-        # D1 = np.zeros((N,N))
-        # D2 = np.zeros((N,N))
-        # ones = np.ones(N)
-        # for k in range(-3,4):
-        #     deviate = np.abs(k)
-        #     ind = k+3
-        #     D1 += np.diag(coeff_D1[ind]*ones[:N-deviate], k=k)/h
-        #     D2 += np.diag(coeff_D2[ind]*ones[:N-deviate], k=k)/h**2
-        
         return x, D1, D2
 
 
@@ -104,122 +89,171 @@ class Spectral:
         
         return x.flatten(), D, D2
 
-class Plasma:
-    def __init__(self, n:float,Te:float,Ti:float,Ln:float,Lb:float,E,B,fluid:str):
-        """
-        E and B fields can be float or function profile
-        """
-        # parameters
-        self.n = n
-        self.Te = Te
-        self.Ti = Ti
-        self.Ln = Ln
-        self.Lb = Lb
-        self.E = E
-        B = B*1e-4 # convert Gauss to Tesla
-        self.B = B
-        self.fluid = fluid
-        if fluid == "Ar":
-            mi = 6.6335e-26
-        elif fluid == "Xe":
-            mi = 2.1801e-25
-        self.mi = mi
+
+@dataclass
+class Params:
+    """
+    Problem config
+    constant_v: is this problem constant v ?
+    accelerating: is this accelerating case ?
+    Mm: mid velocity
+
+    Magnetic field 
+    B0: amplitude of B
+    R: mirror ratio
+    Bm: mid point B
+    Delta: width of B peak
+    """
+    Mm: float
+    constant_v: bool = None
+    accelerating: bool = None
+
+    B0: float = 1
+    R: float = 1.5
+    Bm: float = 1+R
+    Delta: float = 0.1/0.3
+
+    def __post_init__(self):
+        if (self.constant_v is None) and (self.accelerating is None):
+            raise RuntimeError("Must initialize at least one of `constant_v` and `accelerating` ")
         
-        # velocities, m/s
-        # self.v # the velocity profile is defined by user
-        self.v0 = np.abs(E/B) # electric drift velocity
-        self.cs = np.sqrt(const.kb*Te/mi) # ion sound velocity
-        self.vTe = np.sqrt(const.kb*Te/const.me); # electron thermal velocity
-        self.vTem = np.sqrt(8*const.kb*Te/(np.pi*const.me)); # mean electron thermal velocity
-        self.vTi= np.sqrt(const.kb*Ti/mi); # ion thermal velocity
-        self.vD= -2*((const.kb*Te)/(const.q*B))*Lb; # magnetic drift velocity
-        self.vs= -((const.kb*Te)/(const.q*B))*Ln; # electron drift velocity
-        self.vA = (B**2)/(const.mu0*n*mi); # Alfven velocity
-        # frequencies, 1/s
-        self.w_ce= (const.q*B)/(const.me);# electron gyrofrequency
-        self.w_ci= (const.q*B)/(mi);# ion cyclotron
-        self.w_pe = np.sqrt((const.q**2)*n/(const.me*const.eps0)); #plasma frequency
-        self.w_pi = np.sqrt((const.q**2)*n/(mi*const.eps0)); #ion plasma frequency
-        self.w_LH = (self.w_ce*self.w_pi)/np.sqrt(self.w_ce**2 +self.w_pe**2); # Low-hybrid frequency
-        # lengthes, m
-        self.re = self.vTe/self.w_ce; # electron gyroradius
-        self.ri = self.vTi/self.w_ci; # ion gyroradius
-        self.rs = self.cs/self.w_ci; # ion-sound Larmor radius   
+
+class Nozzle:
+    """ Investigate the instability of magnetic nozzle using finite difference discretization """
+    def __init__(self, params: Params, x: np.array) -> None:
+        # params
+        Mm = params.Mm
+        constant_v = params.constant_v
+        accelerating = params.accelerating
+
+        B0 = params.B0
+        R = params.R
+        Bm = params.Bm
+        Delta = params.Delta
+        
+        # mesh
+        self.x = x 
+
+        # velocity normalized to sound speed
+        # k=-1: supersonic branch
+        # k=0: subsonic branch
+        B = lambda x: B0*(1+R*np.exp(-(x/Delta)**2))
+        W = lambda x,k: np.real(lambertw(x,k=k)) # I only need the real parts
+        M = lambda x, Mm, k: np.sqrt( -W(-Mm**2 * (B(x)/Bm)**2 * np.exp(-Mm**2), k=k) )
+
+        if constant_v:
+            self.v0 = Mm*np.ones_like(x) # constant v=0.1
+        else:
+            if Mm < 1:
+                self.v0 = M(x, Mm=Mm, k=0) # subsonic velocity profile, M_m < 1
+            elif Mm == 1:
+                # transonic profile, accelerating/decelerating
+                if accelerating:
+                    self.v0 = np.concatenate([M(x[x<0], Mm=1, k=0), [1], M(x[x>0], Mm=1, k=-1)]) # accelerating velocity profile
+                else:
+                    self.v0 = np.concatenate([M(x[x<0], Mm=1, k=-1), [1], M(x[x>0], Mm=1, k=0)]) # decelerating velocity profile
+            else:
+                self.v0 = M(x, Mm=Mm, k=-1) # supersonic velocity profile, M_m > 1
+
+    def polyeig(self, *A: np.array):
+        """
+        Solve the polynomial eigenvalue problem:
+            (e^0 A0 + e^1 A1 +...+  e^p Ap)x=0 
+
+        Return the eigenvectors [x_i] and eigenvalues [e_i] that are solutions.
+
+        Usage:
+            X,e = polyeig(A0,A1,..,Ap)
+
+        Most common usage, to solve a second order system: (K + C e + M e**2) x =0
+            X,e = polyeig(K,C,M)
+
+        """
+        n = A[0].shape[0]
+        l = len(A)-1 
+        # Assemble matrices for generalized problem
+        C = np.block([
+            [np.zeros((n*(l-1),n)), np.eye(n*(l-1))],
+            [-np.column_stack( A[0:-1])]
+            ])
+        D = np.block([
+            [np.eye(n*(l-1)), np.zeros((n*(l-1), n))],
+            [np.zeros((n, n*(l-1))), A[-1]]
+            ])
+        # Solve generalized eigenvalue problem
+        e, X = sl.eig(C, D)
+        if np.all(np.isreal(e)):
+            e=np.real(e)
+        X=X[:n,:]
+
+        # Scaling each mode by max
+        X /= np.tile(np.max(np.abs(X),axis=0), (n,1))
+        return X, e 
+
+    def solve(self, *matrices: np.array):
+        """ 
+        If len(matrices)==1, then we are solving A@v = lambda*v 
+        If len(matrices)>1, then we are solving polynomial eigenvalue problem
+        """
+        if len(matrices) == 1:
+            self.omega, V = np.linalg.eig(matrices[0])
+            # only need half of the eigenvector
+            self.V = np.pad(V[:int(V.shape[0]/2)], ((1,1),(0,0)))
+        else:
+            self.polyeig(matrices)
+    
+    def sort_solutions(self, real_range: list=[0,50], imag_range: list=[]):
+        selection = (self.omega.real > real_range[0]) & (self.omega.real < real_range[1])
+        self.omega = self.omega[selection]
+        self.V = self.V[:,selection]
+        if imag_range:
+            selection = (self.omega.imag > imag_range[0]) & (self.omega.imag < imag_range[1])
+            self.omega = self.omega[selection]
+            self.V = self.V[:,selection]
+        
+        ind = np.argsort(self.omega.real)
+        self.omega = self.omega[ind]
+        self.V = self.V[:,ind]
+
+    def plot_eigenvalues(self):
+        # have to manually set face color here because of weird vscode behavior
+        _, ax = plt.subplots(facecolor="white")
+        plt.plot(self.omega.real, self.omega.imag, 'o')
+        plt.xlabel("$\Re(\omega)$")
+        plt.ylabel("$\Im(\omega)$")
+        return ax
+
+    def plot_eigenfunctions(self, num_funcs:int=3):
+        _, ax = plt.subplots(facecolor="white")
+        for i in range(num_funcs):
+            plt.plot(self.x, self.V[:,i].real, color=f"C{i}")
+            plt.plot(self.x, self.V[:,i].imag, '--', color=f"C{i}")
+            plt.xlabel("x")
+            plt.ylabel("v")
+        return ax
 
 
-def polyeig(*A):
-    """
-    Solve the polynomial eigenvalue problem:
-        (e^0 A0 + e^1 A1 +...+  e^p Ap)x=0 
+if __name__ == '__main__':
+    N = 101
+    spectral = Spectral(N, "symmetric", "FD")
+    params = Params(Mm=0.5, constant_v=True)
+    nozzle = Nozzle(params, spectral.x)
+    v0 = nozzle.v0
+    x = spectral.x
+    D1 = spectral.D1
+    D2 = spectral.D2
 
-    Return the eigenvectors [x_i] and eigenvalues [e_i] that are solutions.
+    I = np.eye(*D1.shape)
+    A11 = np.zeros_like(D1)
+    A12 = I
+    A21 = -np.diag(1-v0**2)@D2 \
+            + np.diag((3*v0 + 1/v0)*(D1@v0))@D1 \
+            + np.diag((1-1/v0**2)*(D1@v0)**2) \
+            + np.diag((v0+1/v0)*(D2@v0))
+    A22 = -2j*(np.diag(v0)@D1 + np.diag(D1@v0)) #- eta*np.diag(v0)@D2
 
-    Usage:
-        X,e = polyeig(A0,A1,..,Ap)
-
-    Most common usage, to solve a second order system: (K + C e + M e**2) x =0
-        X,e = polyeig(K,C,M)
-
-    """
-    n = A[0].shape[0]
-    l = len(A)-1 
-    # Assemble matrices for generalized problem
-    C = np.block([
-        [np.zeros((n*(l-1),n)), np.eye(n*(l-1))],
-        [-np.column_stack( A[0:-1])]
-        ])
-    D = np.block([
-        [np.eye(n*(l-1)), np.zeros((n*(l-1), n))],
-        [np.zeros((n, n*(l-1))), A[-1]]
-        ])
-    # Solve generalized eigenvalue problem
-    e, X = sl.eig(C, D)
-    if np.all(np.isreal(e)):
-        e=np.real(e)
-    X=X[:n,:]
-
-    # Scaling each mode by max
-    X /= np.tile(np.max(np.abs(X),axis=0), (n,1))
-    return X, e 
-
-def stability_condition(plasma, spectral, P,Q, omega_r, v_tilde):
-    """
-    Full instability condition from real part
-
-    check stability condition for a specific omega and a specific v
-    """
-    mean = lambda y_vals: np.trapz(y_vals,spectral.x)/(spectral.x.max()-spectral.x.min())
-
-    x, D1 = spectral.x, spectral.D1
-    v0 = plasma.v
-
-    v_sqr = np.real(v_tilde*v_tilde.conj())
-
-    pdv_v = D1@v_tilde
-    pdv_v[[0,-1]] = 0
-
-    pdv_v0 = D1@v0
-    pdv_v0[[0,-1]] = 0
-
-    pdv_v_sqr = D1@v_sqr
-    pdv_v_sqr[[0,-1]] = 0
-
-    pdv_P = D1@P
-    pdv_P[[0,-1]] = 0
-
-    # coefficients of quadratic equation about gamma
-    a = -mean(v_sqr)
-    b = -mean(pdv_v0*v_sqr)
-    c = omega_r**2*mean(v_sqr) \
-        - 2*omega_r*mean(v0*np.imag(v_tilde.conj()*pdv_v)) \
-        - mean((1-v0**2)*np.real(pdv_v.conj()*pdv_v)) \
-        + mean((Q-0.5*pdv_P)*v_sqr)
-
-    discriminant = b**2 - 4*a*c
-    # if discriminant > 0:
-    #     print(f"discriminant={discriminant:0.5f}>0, unstable")
-    # elif discriminant < 0:
-    #     print(f"discriminant={discriminant:0.5f}<0, stable")
-    return discriminant
-
-
+    A = np.block([[A11[1:-1,1:-1], A12[1:-1,1:-1]],[A21[1:-1,1:-1], A22[1:-1,1:-1]]])
+    nozzle.solve(A)
+    nozzle.sort_solutions()
+    nozzle.plot_eigenvalues()
+    plt.show()

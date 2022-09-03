@@ -1,3 +1,0 @@
-[ ] Try VDR on `stability-and-boundary-condition` (9) and (10)
-[ ] Reduce the second order DE to normal form, so that the first derivative term vanishes.
-[ ] Reproduce the results in electromagnetic instability ...
