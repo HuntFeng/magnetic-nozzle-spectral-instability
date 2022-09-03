@@ -200,13 +200,16 @@ class Nozzle:
             # only need half of the eigenvector
             self.V = np.pad(V[:int(V.shape[0]/2)], ((1,1),(0,0)))
         else:
-            self.polyeig(matrices)
+            V, self.omega = self.polyeig(matrices)
+            self.V = np.pad(V, ((1,1),(0,0)))
+
     
     def sort_solutions(self, real_range: list=[0,50], imag_range: list=[]):
         selection = (self.omega.real > real_range[0]) & (self.omega.real < real_range[1])
         self.omega = self.omega[selection]
         self.V = self.V[:,selection]
         if imag_range:
+            print("jere")
             selection = (self.omega.imag > imag_range[0]) & (self.omega.imag < imag_range[1])
             self.omega = self.omega[selection]
             self.V = self.V[:,selection]
