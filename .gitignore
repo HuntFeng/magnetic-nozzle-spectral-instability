@@ -1,6 +1,6 @@
 # cache
-__pycache__
-.vscode
+__pycache__/
+.vscode/
 
 # latex auxiliary files
 **/*.aux
