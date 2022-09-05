@@ -4,14 +4,13 @@ from scipy.special import lambertw
 from dataclasses import dataclass
 import matplotlib.pyplot as plt
 
-plt.rcParams["figure.figsize"] = (10,7)
-plt.rcParams["axes.titlesize"] = 20
-plt.rcParams["axes.labelsize"] = 18
-plt.rcParams["xtick.labelsize"] = 18
-plt.rcParams["ytick.labelsize"] = 18
-plt.rcParams["legend.fontsize"] = 16
-# NOTE: have set face color in plt.figure command not in rcParams,
-# otherwise the ticks background is transparent in vscode
+# set mpl settings at runtime
+import json
+
+with open("./mpl_config.json") as fp:
+    config = json.load(fp)
+    for k,v in config.items():
+        plt.rcParams[k] = v
 
 class Spectral:
     def __init__(self, N:int, domain:str, method:str) -> None:
@@ -200,7 +199,7 @@ class Nozzle:
             # only need half of the eigenvector
             self.V = np.pad(V[:int(V.shape[0]/2)], ((1,1),(0,0)))
         else:
-            V, self.omega = self.polyeig(matrices)
+            V, self.omega = self.polyeig(*matrices)
             self.V = np.pad(V, ((1,1),(0,0)))
 
     
@@ -218,21 +217,24 @@ class Nozzle:
         self.omega = self.omega[ind]
         self.V = self.V[:,ind]
 
-    def plot_eigenvalues(self):
-        # have to manually set face color here because of weird vscode behavior
-        _, ax = plt.subplots(facecolor="white")
+    def plot_eigenvalues(self, ax=None):
+        if not ax:
+            # have to manually set face color here because of weird vscode behavior
+            _, ax = plt.subplots(facecolor="white")
         plt.plot(self.omega.real, self.omega.imag, 'o')
         plt.xlabel("$\Re(\omega)$")
         plt.ylabel("$\Im(\omega)$")
         return ax
 
-    def plot_eigenfunctions(self, num_funcs:int=3):
-        _, ax = plt.subplots(facecolor="white")
+    def plot_eigenfunctions(self, num_funcs:int=3, ax=None):
+        if not ax:
+            _, ax = plt.subplots(facecolor="white")
         for i in range(num_funcs):
-            plt.plot(self.x, self.V[:,i].real, color=f"C{i}")
+            plt.plot(self.x, self.V[:,i].real, color=f"C{i}", label=f"$\omega=${self.omega[i]:.3f}")
             plt.plot(self.x, self.V[:,i].imag, '--', color=f"C{i}")
             plt.xlabel("x")
             plt.ylabel("v")
+        ax.legend()
         return ax
 
 

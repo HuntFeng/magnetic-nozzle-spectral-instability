@@ -1,1 +1,13 @@
+# cache
 __pycache__
+.vscode
+
+# latex auxiliary files
+**/*.aux
+**/*.log
+**/*.out
+**/*.gz
+**/*.synctex.gz
+**/*.lof
+**/*.lot
+**/*.toc
