@@ -118,8 +118,15 @@ class Params:
         
 
 class Nozzle:
-    """ Investigate the instability of magnetic nozzle using finite difference discretization """
-    def __init__(self, params: Params, x: np.array) -> None:
+    def __init__(self, params: Params, x: np.array, u: callable=None) -> None:
+        """ 
+        Investigate the instability of magnetic nozzle
+        
+        Input:
+            params: physical parameters and experiment setup
+            x: mesh of the magnetic nozzle
+            u(x,n): if None, we are using finite difference; if provided, we are using finite element
+        """
         # params
         Mm = params.Mm
         constant_v = params.constant_v
@@ -132,6 +139,9 @@ class Nozzle:
         
         # mesh
         self.x = x 
+
+        # trial functions for finite element
+        self.u = u 
 
         # velocity normalized to sound speed
         # k=-1: supersonic branch
@@ -193,22 +203,40 @@ class Nozzle:
         """ 
         If len(matrices)==1, then we are solving A@v = lambda*v 
         If len(matrices)>1, then we are solving polynomial eigenvalue problem
+        If self.u==None, using finite difference discretization
+        If self.u!=None, using finite element discretization
         """
-        if len(matrices) == 1:
-            self.omega, V = np.linalg.eig(matrices[0])
-            # only need half of the eigenvector
-            self.V = np.pad(V[:int(V.shape[0]/2)], ((1,1),(0,0)))
-        else:
-            V, self.omega = self.polyeig(*matrices)
+        if not self.u:
+            # finite difference
+            if len(matrices) == 1:
+                self.omega, V = np.linalg.eig(matrices[0])
+                # only need half of the eigenvector
+                V = V[:int(V.shape[0]/2)]
+            else:
+                V, self.omega = self.polyeig(*matrices)
+            # Dirichlet boundary condition
             self.V = np.pad(V, ((1,1),(0,0)))
-
+        else:
+            # finite element
+            if len(matrices) == 1:
+                self.omega, C = np.linalg.eig(matrices[0])
+                # only need half of the eigenvector
+                C = C[:int(C.shape[0]/2)]
+            else:
+                C, self.omega = self.polyeig(*matrices)
+            # Dirichlet boundary condition
+            C[0,:] = 0
+            C[-1,:] = 0
+            self.V = np.zeros((self.x.size, C.shape[1]), dtype=complex)
+            for i in range(C.shape[1]):
+                for n in range(C.shape[0]):
+                    self.V[:,i] += C[n,i]*self.u(self.x, n)
     
     def sort_solutions(self, real_range: list=[0,50], imag_range: list=[]):
         selection = (self.omega.real > real_range[0]) & (self.omega.real < real_range[1])
         self.omega = self.omega[selection]
         self.V = self.V[:,selection]
         if imag_range:
-            print("jere")
             selection = (self.omega.imag > imag_range[0]) & (self.omega.imag < imag_range[1])
             self.omega = self.omega[selection]
             self.V = self.V[:,selection]
