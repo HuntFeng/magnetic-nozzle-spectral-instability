@@ -1,8 +1,15 @@
-\documentclass[subfigure]{uofsthesis-cs}
+% Don't include figurelist and tablelist,
+% otherwise pdflatex can't compile twice causing crossrefs not working
+\documentclass[subfigure, nofigurelist, notablelist]{uofsthesis-cs}
 \usepackage{amsmath, amssymb, amsthm}
 \usepackage{physics}
 \usepackage{float, subcaption, graphicx}
 
+\theoremstyle{plain}
+\newtheorem{proposition}{Proposition}
+
+\theoremstyle{definition}
+\newtheorem{definition}{Definition}
 % Documentation for the uofsthesis-cs class is given in uofsthesis-cs.dvi
 % 
 % It is recommended that you read the CGSR thesis preparation
@@ -55,7 +62,6 @@ This is the abstract of my thesis.
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % END OF FRONTMATTER SECTION
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
 \begin{document}
 % Typeset the title page
 \maketitle
@@ -67,13 +73,11 @@ This is the abstract of my thesis.
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % FIRST CHAPTER OF THESIS BEGINS HERE
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
-\input{chap1.tex}
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-% SUBSEQUENT CHAPTERS (or \input's)  GO HERE
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
-
+%\include{introduction}
+%\include{equations-of-motion}
+%\include{eigenvalue-problem}
+%\include{numerical-experiments}
+\include{conclusion}
 
 
 
@@ -87,7 +91,9 @@ This is the abstract of my thesis.
 % Optionally, you can specify the bibliography style to use:
 % \uofsbibliography[stylename]{yourbibfile}
 
-\uofsbibliography{880Paper}
+\bibliography{references} % this is for intellisence
+
+%\uofsbibliography{references}
 
 % If you are not using bibtex, comment the line above and uncomment
 % the line below.  
