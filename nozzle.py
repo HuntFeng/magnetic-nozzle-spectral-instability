@@ -157,10 +157,11 @@ class Nozzle:
                 self.v0 = M(x, Mm=Mm, k=0) # subsonic velocity profile, M_m < 1
             elif Mm == 1:
                 # transonic profile, accelerating/decelerating
+                mid_point = [] if (x.size % 2 ==0) else [1]
                 if accelerating:
-                    self.v0 = np.concatenate([M(x[x<0], Mm=1, k=0), [1], M(x[x>0], Mm=1, k=-1)]) # accelerating velocity profile
+                    self.v0 = np.concatenate([M(x[x<0], Mm=1, k=0), mid_point, M(x[x>0], Mm=1, k=-1)]) # accelerating velocity profile
                 else:
-                    self.v0 = np.concatenate([M(x[x<0], Mm=1, k=-1), [1], M(x[x>0], Mm=1, k=0)]) # decelerating velocity profile
+                    self.v0 = np.concatenate([M(x[x<0], Mm=1, k=-1), mid_point, M(x[x>0], Mm=1, k=0)]) # decelerating velocity profile
             else:
                 self.v0 = M(x, Mm=Mm, k=-1) # supersonic velocity profile, M_m > 1
 
