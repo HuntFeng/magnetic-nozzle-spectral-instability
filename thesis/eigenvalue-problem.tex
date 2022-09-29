@@ -1,6 +1,5 @@
-\chapter{Eigenvalue Problem}
-\section{Formulation of the problem}
-\subsection{Polynomial Eigenvalue Problem}
+\chapter{Formulation of the Problem}
+To investigate the instability of magnetic nozzle, we can formulate it as an eigenvalue problem.
 \begin{proposition}
 	\begin{equation}
 		\pdv{z}\ln(\frac{n_0}{B}) = -\frac{1}{v_0}\pdv{v_0}{z}
@@ -76,11 +75,10 @@
 	\end{align*}
 \end{proof}
 
-\subsection{Eigenvalue problem}
-We can decouple the polynomial eigenvalue problem so that it becomes an eigenvalue problem,
+Next step we can decouple this equation so that it becomes an algebraic eigenvalue problem,
 
 \begin{equation}
-	\mqty[ O & I\\A_{21} & A_{22} ]\mqty[ \tilde{v}\\ a] = \omega\mqty[ \tilde{v}\\ \omega v]
+	\mqty[ O & I\\A_{21} & A_{22} ]\mqty[ \tilde{v}\\ \omega \tilde{v}] = \omega\mqty[ \tilde{v}\\ \omega \tilde{v}]
 	\label{eq:eigenvalue-problem}
 \end{equation}
 where $O$ is zero matrix, $I$ is identity matrix, and

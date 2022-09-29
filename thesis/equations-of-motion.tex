@@ -1,4 +1,64 @@
-\chapter{Equations Of Motion}
+\chapter{Governing Equations}
+
+\section{Equations of Motion}
+In magnetic nozzle, the magnetic field is along z-axis. The charged particles gyrates about the magnetic field lines, so the velocity of particles can be written as $\mathbf{v} = v\mathbf{B}/B$. Therefore the conservation of density 
+\begin{align*}
+	\pdv{n}{t} + \div(n\mathbf{v}) &= 0 \\
+	\pdv{n}{t} + \div(nv\frac{\mathbf{B}}{B}) &= 0 \\
+ 	\pdv{n}{t} + B\pdv{z}(\frac{nv}{B}) &= 0
+\end{align*}
+In the derivation, $\div{\mathbf{B}} = 0$ is used.
+
+
+Starting from the conservation of momentum, 
+\[ \pdv{v}{t} + v\pdv{v}{z} = -\frac{1}{\rho}\grad{p} \]
+Let $\grad{p} = k_BT\pdv*{n}{z}$, we have
+\[ \pdv{v}{t} + v\pdv{v}{z} = -c_s^2\frac{1}{n}\pdv{n}{z} \]
+where $c_s^2 = k_BT/m$ is the square of sound speed.
+
+The magnetic field is given by
+\[ B(z) = B_0 \left[1 + R\exp(-\left(\frac{x}{\delta}\right)^2)\right] \]
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=0.7\linewidth]{img/magnetic-field}
+	\caption{This is the magnetic field in nozzle with mirror ratio $1+R=B_{max}/B_{min}=2.5$, and the spread of magnetic field, $\delta=0.1/0.3=0.\bar{3}$. }
+	\label{fig:magnetic-field}
+\end{figure}
+
+
+At equilibrium, $\pdv{t}=0$. Denote $n_0$ and $v_0$ as the equilibrium density and velocity profile, they satisfy
+\begin{align*}
+	&B\pdv{z}(\frac{n_0v_0}{B}) = 0\\
+	&v_0\pdv{v_0}{z} = -c_s^2\frac{1}{n_0}\pdv{n_0}{z}
+\end{align*}
+
+\section{Velocity Profile}
+Let $M(z) = v_0(z)/c_s$ be the mach number (nondimensionalized velocity). The equations of motion become
+\begin{align*}
+	&B\pdv{z}(\frac{n_0M}{B}) = 0\\
+	&M\pdv{M}{z} = -\frac{1}{n_0}\pdv{n_0}{z}
+\end{align*}
+Substitute $\frac{1}{n_0}\pdv*{n_0}{z}$ using first equation, the conservation of momentum becomes
+\[ (M^2-1)\pdv{M}{z} = -\frac{M}{B}\pdv{B}{z} \]
+
+Notice that there is a singularity at $M=1$, the sonic speed.
+
+This is a separable equation, integrate it and use the conditions at midpoint $B(0)=B_m, M(0)=M_m$ we get
+\[ M^2e^{-M^2} = \frac{B^2}{B_m^2}M_m^2e^{-M_m^2} \]
+We can now express $M$ using the Lambert W function,
+\[ M(z) = \left[ -W_k\left(-\frac{B(z)^2}{B_m^2}M_m^2e^{-M_m^2}\right) \right]^{1/2} \]
+where the subscript $k$ of $W$ stands for branch of Lambert W function. When $k=0$, it is the subsonic branch; When $k=-1$, it is the supersonic branch.
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=0.7\linewidth]{img/velocity-profiles}
+	\caption{The velocity profile in the magnetic nozzle is completely determined by $M_m$, the velocity at the midpoint, $z=0$. For the transonic velocity profiles, $M_m$ alone is not enough to determine the profile, we need to specify the branch of Lambert W function to determine whether it is accelerating or decelerating.}
+	\label{fig:velocity-profiles}
+\end{figure}
+
+
+
+
+\section{Linearized Equations}
 The dynamics of magnetic nozzle can be characterized by conservation of mass and momentum,
 \begin{align*}
     &\pdv{n}{t} + B\pdv{z}(\frac{nv}{B}) = 0\\
@@ -21,12 +81,8 @@ where $B_m\equiv 1+R$ is the maximum magnetic field (or magnetic field at mid-po
     \item $M_m = 1$, accelerating or decelerating profile (depending on the branch of the Lambert function).
     \item $M_m > 1$, supersonic velocity profile
 \end{itemize}
-\begin{figure}[H]
-    \centering
-    \includegraphics[width=0.7\linewidth]{img/nozzle-velocity-profile.png}
-    \caption{$M_m < 1$, subsonic. $M_m = 1$, accelerating if we select Lambert function branch $k=0$ for $z<0$ and brach $k=-1$ for $z>=0$; decelerating if we choose branch $k=-1$ for $z<0$ and brach $k=0$ for $z>=0$. $M_m > 1$, supersonic.}
-    \label{fig:nozzle-velocity-profile}
-\end{figure}
+
+
 
 For convenience, we nondimensionalize the equations by normalizing the velocity to $c_s$, $v\mapsto v/c_s$, $z$ to system length $L$, $z \mapsto z/L$ and time $t\mapsto c_s t/L$.
 \begin{align}
@@ -94,7 +150,3 @@ and the nondimensionalized equilibrium condition is
     \end{align*}
     Using the equilibrium condition Eq.(\ref{eq:equilibrium-convervation-of-momentum}) on the RHS, we get the desired form.
 \end{proof}
-
-\[ \int fdx = 1 \]
-
-\cite{stellingwerf_stability_1978}

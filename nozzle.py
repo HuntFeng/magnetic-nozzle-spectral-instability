@@ -248,8 +248,7 @@ class Nozzle:
 
     def plot_eigenvalues(self, ax=None):
         if not ax:
-            # have to manually set face color here because of weird vscode behavior
-            _, ax = plt.subplots(facecolor="white")
+            _, ax = plt.subplots()
         plt.plot(self.omega.real, self.omega.imag, 'o')
         plt.xlabel("$\Re(\omega)$")
         plt.ylabel("$\Im(\omega)$")
@@ -257,12 +256,12 @@ class Nozzle:
 
     def plot_eigenfunctions(self, num_funcs:int=3, ax=None):
         if not ax:
-            _, ax = plt.subplots(facecolor="white")
+            _, ax = plt.subplots()
         for i in range(num_funcs):
-            plt.plot(self.x, self.V[:,i].real, color=f"C{i}", label=f"$\omega=${self.omega[i]:.3f}")
-            plt.plot(self.x, self.V[:,i].imag, '--', color=f"C{i}")
-            plt.xlabel("x")
-            plt.ylabel("v")
+            plt.plot(self.x, self.V[:,i].real/np.abs(self.V[:,i].real).max(), color=f"C{i}", label=f"$\omega=${self.omega[i]:.3f}")
+            plt.plot(self.x, self.V[:,i].imag/np.abs(self.V[:,i].imag).max(), '--', color=f"C{i}")
+            plt.xlabel("$z$")
+            plt.ylabel("$\\tilde{v}$")
         ax.legend()
         return ax
 
