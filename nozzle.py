@@ -127,21 +127,28 @@ class Nozzle:
             x: mesh of the magnetic nozzle
             u(x,n): if None, we are using finite difference; if provided, we are using finite element
         """
-        # params
-        Mm = params.Mm
-        constant_v = params.constant_v
-        accelerating = params.accelerating
-
-        B0 = params.B0
-        R = params.R
-        Bm = params.Bm
-        Delta = params.Delta
         
-        # mesh
-        self.x = x 
+        self.params = params # params
+        self.x = x # mesh
+        self.u = u # trial functions for finite element
+        self.v0 = self.velocity_profile(x)
 
-        # trial functions for finite element
-        self.u = u 
+    def velocity_profile(self, x):
+        """ 
+        For convience of DVR method, make v0 a function of x 
+        input:
+            x
+        output:
+            v0
+        """
+        Mm = self.params.Mm
+        constant_v = self.params.constant_v
+        accelerating = self.params.accelerating
+
+        B0 = self.params.B0
+        R = self.params.R
+        Bm = self.params.Bm
+        Delta = self.params.Delta
 
         # velocity normalized to sound speed
         # k=-1: supersonic branch
@@ -151,19 +158,20 @@ class Nozzle:
         M = lambda x, Mm, k: np.sqrt( -W(-Mm**2 * (B(x)/Bm)**2 * np.exp(-Mm**2), k=k) )
 
         if constant_v:
-            self.v0 = Mm*np.ones_like(x) # constant v=0.1
+            v0 = Mm*np.ones_like(x) # constant v=0.1
         else:
             if Mm < 1:
-                self.v0 = M(x, Mm=Mm, k=0) # subsonic velocity profile, M_m < 1
+                v0 = M(x, Mm=Mm, k=0) # subsonic velocity profile, M_m < 1
             elif Mm == 1:
                 # transonic profile, accelerating/decelerating
                 mid_point = [] if (x.size % 2 ==0) else [1]
                 if accelerating:
-                    self.v0 = np.concatenate([M(x[x<0], Mm=1, k=0), mid_point, M(x[x>0], Mm=1, k=-1)]) # accelerating velocity profile
+                    v0 = np.concatenate([M(x[x<0], Mm=1, k=0), mid_point, M(x[x>0], Mm=1, k=-1)]) # accelerating velocity profile
                 else:
-                    self.v0 = np.concatenate([M(x[x<0], Mm=1, k=-1), mid_point, M(x[x>0], Mm=1, k=0)]) # decelerating velocity profile
+                    v0 = np.concatenate([M(x[x<0], Mm=1, k=-1), mid_point, M(x[x>0], Mm=1, k=0)]) # decelerating velocity profile
             else:
-                self.v0 = M(x, Mm=Mm, k=-1) # supersonic velocity profile, M_m > 1
+                v0 = M(x, Mm=Mm, k=-1) # supersonic velocity profile, M_m > 1
+        return v0
 
     def polyeig(self, *A: np.array):
         """
@@ -249,19 +257,19 @@ class Nozzle:
     def plot_eigenvalues(self, ax=None):
         if not ax:
             _, ax = plt.subplots()
-        plt.plot(self.omega.real, self.omega.imag, 'o')
-        plt.xlabel("$\Re(\omega)$")
-        plt.ylabel("$\Im(\omega)$")
+        ax.plot(self.omega.real, self.omega.imag, 'o')
+        ax.set_xlabel("$\Re(\omega)$")
+        ax.set_ylabel("$\Im(\omega)$")
         return ax
 
     def plot_eigenfunctions(self, num_funcs:int=3, ax=None):
         if not ax:
             _, ax = plt.subplots()
         for i in range(num_funcs):
-            plt.plot(self.x, self.V[:,i].real/np.abs(self.V[:,i].real).max(), color=f"C{i}", label=f"$\omega=${self.omega[i]:.3f}")
-            plt.plot(self.x, self.V[:,i].imag/np.abs(self.V[:,i].imag).max(), '--', color=f"C{i}")
-            plt.xlabel("$z$")
-            plt.ylabel("$\\tilde{v}$")
+            line = ax.plot(self.x, self.V[:,i].real/np.abs(self.V[:,i].real).max(), label=f"$\omega=${self.omega[i]:.3f}")
+            ax.plot(self.x, self.V[:,i].imag/np.abs(self.V[:,i].imag).max(), '--', color=line[-1].get_color())
+            ax.set_xlabel("$z$")
+            ax.set_ylabel("$\\tilde{v}$")
         ax.legend()
         return ax
 
