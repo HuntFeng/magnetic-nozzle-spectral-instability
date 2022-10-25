@@ -6,11 +6,13 @@ import matplotlib.pyplot as plt
 
 # set mpl settings at runtime
 import json
-
 with open("./mpl_config.json") as fp:
     config = json.load(fp)
     for k,v in config.items():
         plt.rcParams[k] = v
+
+import os
+
 
 class Spectral:
     def __init__(self, N:int, domain:str, method:str) -> None:
@@ -233,13 +235,16 @@ class Nozzle:
                 C = C[:int(C.shape[0]/2)]
             else:
                 C, self.omega = self.polyeig(*matrices)
-            # Dirichlet boundary condition
-            C[0,:] = 0
-            C[-1,:] = 0
+            # # Dirichlet boundary condition
+            # C[0,:] = 0
+            # C[-1,:] = 0
             self.V = np.zeros((self.x.size, C.shape[1]), dtype=complex)
             for i in range(C.shape[1]):
                 for n in range(C.shape[0]):
                     self.V[:,i] += C[n,i]*self.u(self.x, n)
+            # Dirichlet boundary condition
+            self.V[0,:] = 0
+            self.V[-1,:] = 0
     
     def sort_solutions(self, real_range: list=[0,50], imag_range: list=[]):
         selection = (self.omega.real > real_range[0]) & (self.omega.real < real_range[1])
@@ -272,6 +277,36 @@ class Nozzle:
             ax.set_ylabel("$\\tilde{v}$")
         ax.legend()
         return ax
+
+    def save_data(self, method: str, N: int = None):
+        """
+        Input:
+            method: name of the method
+            N: number of trial functions
+        """
+        if not os.path.exists("data"):
+            os.mkdir("data")
+            os.mkdir("data/constant-v")
+            os.mkdir("data/subsonic-v")
+            os.mkdir("data/supersonic-v")
+            os.mkdir("data/acclerating-v")
+            os.mkdir("data/declerating-v")
+        file_path = "data"
+        if self.params.constant_v:
+            file_path = os.path.join(file_path, "constant-v")
+        elif (self.params.Mm < 1):
+            file_path = os.path.join(file_path, "subsonic-v")
+        elif (self.params.Mm > 1):
+            file_path = os.path.join(file_path, "supersonic-v")
+        elif (self.params.Mm == 1):
+            if self.params.accelerating:
+                file_path = os.path.join(file_path, "accelerating-v")
+            else:
+                file_path = os.path.join(file_path, "decelerating-v")
+        file_path = os.path.join(file_path, f"{method}-Mm={self.params.Mm}")
+        if N:
+            file_path += f"-N={N}"
+        np.savez(file_path, omega=self.omega, V=self.V, x=self.x)
 
 
 if __name__ == '__main__':

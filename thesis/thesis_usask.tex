@@ -1,0 +1,129 @@
+% Don't include figurelist and tablelist,
+% otherwise pdflatex can't compile twice causing crossrefs not working
+\documentclass[subfigure, nofigurelist, notablelist]{uofsthesis-cs}
+\usepackage{amsmath, amssymb, amsthm}
+\usepackage{physics}
+\usepackage{float, subcaption, graphicx}
+
+\theoremstyle{plain}
+\newtheorem{proposition}{Proposition}
+
+\theoremstyle{definition}
+\newtheorem{definition}{Definition}
+
+\newtheorem{theorem}{Theorem}
+% Documentation for the uofsthesis-cs class is given in uofsthesis-cs.dvi
+% 
+% It is recommended that you read the CGSR thesis preparation
+% guidelines before proceeding.
+% They can be found at http://www.usask.ca/cgsr/thesis/index.htm
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% FRONTMATTER - In this section, specify information to be used to
+% typeset the thesis frontmatter.
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\title{Instability In Magnetic Nozzle and Spectral Pollution}
+\author{Hunt Feng}
+\degree{\MSc}
+
+% THESIS DEFENCE DATE
+% Should be month year, e.g. July 2004
+\defencedate{Month Year}
+\department{Physics and Engineering Physics}
+% PERMISSION TO USE ADDRESS
+\ptuaddress{Head of the Department of Physics and Engineering Physics\\
+University of Saskatchewan\\
+116 Science Place, Rm 163\\
+Saskatoon, SK S7N 5E2\\
+Canada
+}
+
+% ABSTRACT
+\abstract{
+This is the abstract of my thesis.  
+}
+
+% THESIS ACKNOWLEDGEMENTS -- This can be free-form.
+\acknowledgements{
+    I would like to express my deepest appreciation to my professor, Andrei Smolyakov. I am also grateful to the former student of my professor, Ivan Khalzov.
+}
+
+% THESIS DEDICATION -- Also free-form.  If you don't want a dedication, comment out the following
+% line.
+\dedication{To my wife and my parents.}
+
+% LIST OF ABBREVIATIONS - Sample  
+% If you don't want a list of abbreviations, comment the following 4 lines.
+% \loa{
+% \abbrev{SCUBA}{Self Contained Underwater Breathing Apparatus\hfill}
+% \abbrev{LOF}{List of Figures}
+% \abbrev{LOT}{List of Tables}
+% }
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% END OF FRONTMATTER SECTION
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{document}
+% Typeset the title page
+\maketitle
+\tracingall
+
+% Typeset the frontmatter.  
+\frontmatter
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% FIRST CHAPTER OF THESIS BEGINS HERE
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\include{introduction}
+\include{spectral-method}
+\include{equations-of-motion}
+%\include{numerical-experiments}
+%\include{conclusion}
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% The Bibliograpy should go here. BEFORE appendices!
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+% Typeset the Bibliography.  The bibliography style used is "plain".
+% Optionally, you can specify the bibliography style to use:
+% \uofsbibliography[stylename]{yourbibfile}
+
+\bibliography{references} % this is for intellisence, comment this later
+
+\uofsbibliography{references}
+
+% If you are not using bibtex, comment the line above and uncomment
+% the line below.  
+%Follow the line below with a thebibliography environmentand bibitems.  
+% Note: use of bibtex is usually the preferred method.
+
+%\uofsbibliographynobibtex
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% APPENDICES
+%
+% Any chapters appearing after the \appendix command get numbered with
+% capital letters starting with appendix 'A'.
+% New chapters from here on will be called 'Appendix A', 'Appendix B'
+% as opposed to 'Chapter 1', 'Chapter 2', etc.
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+% Activate thesis appendix mode.
+\uofsappendix
+
+% Put appendix chapters in the appendices environment so that they appear correcty
+% in the table of contents.  You can use \input's here as well.
+\begin{appendices}
+
+\chapter{Sample Appendix}
+
+Stuff for this appendix goes here.
+
+\end{appendices}
+
+\end{document}

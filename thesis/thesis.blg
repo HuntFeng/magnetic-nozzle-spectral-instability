@@ -2,52 +2,50 @@ This is BibTeX, Version 0.99d (TeX Live 2022/dev/Debian)
 Capacity: max_strings=200000, hash_size=200000, hash_prime=170003
 The top-level auxiliary file: thesis.aux
 A level-1 auxiliary file: introduction.aux
+A level-1 auxiliary file: spectral-method.aux
 A level-1 auxiliary file: equations-of-motion.aux
 The style file: plain.bst
-Illegal, another \bibdata command---line 25 of file thesis.aux
- : \bibdata
- :         {references}
-I'm skipping whatever remains of this command
 Database file #1: references.bib
-You've used 1 entry,
+Warning--empty booktitle in ryutov_divertor_2016
+You've used 16 entries,
             2118 wiz_defined-function locations,
-            507 strings with 4208 characters,
-and the built_in function-call counts, 395 in all, are:
-= -- 34
-> -- 23
-< -- 0
-+ -- 9
-- -- 8
-* -- 37
-:= -- 74
-add.period$ -- 3
-call.type$ -- 1
-change.case$ -- 7
+            607 strings with 6849 characters,
+and the built_in function-call counts, 5694 in all, are:
+= -- 551
+> -- 284
+< -- 3
++ -- 115
+- -- 98
+* -- 445
+:= -- 959
+add.period$ -- 50
+call.type$ -- 16
+change.case$ -- 95
 chr.to.int$ -- 0
-cite$ -- 1
-duplicate$ -- 11
-empty$ -- 27
-format.name$ -- 8
-if$ -- 75
+cite$ -- 17
+duplicate$ -- 201
+empty$ -- 425
+format.name$ -- 98
+if$ -- 1163
 int.to.chr$ -- 0
-int.to.str$ -- 1
-missing$ -- 1
-newline$ -- 8
-num.names$ -- 2
-pop$ -- 5
+int.to.str$ -- 16
+missing$ -- 17
+newline$ -- 84
+num.names$ -- 32
+pop$ -- 91
 preamble$ -- 1
-purify$ -- 6
+purify$ -- 81
 quote$ -- 0
-skip$ -- 7
+skip$ -- 138
 stack$ -- 0
-substring$ -- 23
-swap$ -- 1
-text.length$ -- 0
+substring$ -- 359
+swap$ -- 38
+text.length$ -- 3
 text.prefix$ -- 0
 top$ -- 0
-type$ -- 4
-warning$ -- 0
-while$ -- 3
-width$ -- 2
-write$ -- 13
-(There was 1 error message)
+type$ -- 60
+warning$ -- 1
+while$ -- 53
+width$ -- 18
+write$ -- 182
+(There was 1 warning)
