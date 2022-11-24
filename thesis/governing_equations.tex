@@ -116,12 +116,12 @@ where the subscript $k$ of $W$ stands for branch of Lambert W function. When $k=
 	\item $M_m = 1$, $k=-1$ for $x<0$ and $k=0$ for $x>0$, decelerating profile
 	\item $M_m > 1, k=-1$, supersonic velocity profile
 \end{itemize}
- Fig.(\ref{fig:velocity-profiles}) shows some cases of the solution.
+ Fig.(\ref{fig:velocity_profiles}) shows some cases of the solution.
 \begin{figure}[H]
 	\centering
 	\includegraphics[width=0.7\linewidth]{img/governing_equations/velocity_profiles}
 	\caption{The velocity profile in the magnetic nozzle is completely determined by $M_m$, the velocity at the midpoint, $z=0$. For the transonic velocity profiles, $M_m$ alone is not enough to determine the profile, we need to specify the branch of Lambert W function to determine whether it is accelerating or decelerating.}
-	\label{fig:velocity-profiles}
+	\label{fig:velocity_profiles}
 \end{figure}
 
 
@@ -293,35 +293,8 @@ This becomes an algebraic eigenvalue problem if we discretize the operators and 
 
 
 \section{Discretization}
-There are many ways to discretize Eq.(\ref{eq:eigenvalue-problem}).
 
 \subsection{Finite Difference}
-Consider equally spaced nodes on domain $[-1,1]$, $\{x_1, x_2, \dots, x_N\}$ with $x_{j+1}-x_{j} = h$ for each $j$, and the set of corresponding function values, $\{ f_1, f_2, \dots, f_N \}$. We can approximate the derivatives using second-order central difference formulas
-\[ 
-\pdv{f}{z} = \frac{f_{j+1} - f_{j-1}}{2h}
-\qquad
-\pdv[2]{f}{z} = \frac{f_{j+1} -2f_{j} +f_{j-1}}{h^2}
-\]
-
-We can discretize the differentiation operators to the following matrices
-\[ 
-\pdv{z} \rightarrow D = \frac{1}{2h}\begin{bmatrix}
-	0 & 1 & 0 & \dots & 0 \\
-	-1 & \ddots & \ddots & \ddots & \vdots \\ 
-	0 & \ddots & \ddots & \ddots & 0 \\
-	\vdots & \ddots & \ddots & \ddots & 1 \\
-	0 & \dots & 0 & -1 & 0 
-\end{bmatrix} 
-\qquad
-\pdv[2]{z} \rightarrow  D^2 = \frac{1}{h^2}\begin{bmatrix}
-	-2 & 1 & 0 & \dots & 0 \\
-	1 & \ddots & \ddots & \ddots & \vdots \\ 
-	0 & \ddots & \ddots & \ddots & 0 \\
-	\vdots & \ddots & \ddots & \ddots & 1 \\
-	0 & \dots & 0 & 1 & -2 
-\end{bmatrix} 
-\]
-
 Using these differentiation matrices, Eq.(\ref{eq:eigenvalue-problem}) becomes
 \begin{equation}
 	\mqty[ O & I\\ M & N ]\mqty[ \mathbf{\tilde{v}}\\ \omega\mathbf{\tilde{v}} ] = \omega\mqty[ \mathbf{\tilde{v}}\\ \omega\mathbf{\tilde{v}} ]
@@ -360,14 +333,7 @@ Because of the Dirichlet boundary condition, we fixed $\tilde{v}(-1)=\tilde{v}(1
 
 \subsection{DVR Method}
 \subsubsection{Sine DVR}
-Let $\psi_n(z) = \sin(n\pi(z+1)/2)$, then we define $u_k$ using Gaussian quadrature, then
-\[ u_k(z) = w_k\sum_{n=1}^N \psi_n(z)\psi_n^*(z_k) \]
-where $w_k$ is the k-th weight for the Gaussian quadrature and $u_k$ satisfies the Kronecker delta property,
-\[ u_j(x_k) = \delta_{jk} \]
-
-Now the eigenfunction $\tilde{v} = \sum_{n=1}^N c_nu_n(z)$. The rest is the same as finite element, except the integrals are computed using Gaussian quadrature.
+Same structure as that of finite element
 
 \subsubsection{Sinc DVR}
-Let $sinc(x) = \sin(\pi x)/\pi x$, and define
-\[ u_n(z) = \frac{1}{\sqrt{\Delta x}} sinc\left(\frac{x-x_q}{\Delta x}\right) \]
-where $x_{q}$ are the quadrature points.
+Same structure as that of finite element

@@ -3,6 +3,7 @@ import scipy.linalg as sl
 from scipy.special import lambertw
 from dataclasses import dataclass
 import matplotlib.pyplot as plt
+from enum import Enum
 
 # set mpl settings at runtime
 import json
@@ -13,20 +14,23 @@ with open("./mpl_config.json") as fp:
 
 import os
 
+class Boundary(Enum):
+    FIXED_FIXED = "fixed_fixed"
+    FIXED_OPEN = "fixed_open"
 
 class Spectral:
-    def __init__(self, N:int, domain:str, method:str) -> None:
+    def __init__(self, N:int, domain:str, method:str, boundary: Boundary=Boundary.FIXED_FIXED) -> None:
         """
         domain: either "symmetric" or "nonsymmetric"
         method: either "FD" (finite difference) or "CH" (chebyshev)
         """
         self.N = N
         self.domain = domain
+        self.boundary = boundary
         if method == "FD":
             self.x, self.D1, self.D2 = self.matrix_FD()
         if method == "CH":
             self.x, self.D1, self.D2 = self.matrix_CH()
-
 
     def matrix_FD(self):
         """
@@ -55,8 +59,15 @@ class Spectral:
         D1 = np.diag(0.5/h*np.ones(N-1), k=1) + np.diag(-0.5/h*np.ones(N-1), k=-1)
         D2 = np.diag(-2/h**2*np.ones(N), k=0) + np.diag(1/h**2*np.ones(N-1), k=1) + np.diag(1/h**2*np.ones(N-1), k=-1)
         
-        return x, D1, D2
+        if self.boundary == Boundary.FIXED_OPEN:
+            # set open right end by setting last row and col
+            D1[-1,-3:] = np.array([1,-4,3])/(2*(x[1]-x[0])) # 2nd order f' on right end
+            D2[-1,:] = D1[-1,:] 
+        elif self.boundary == Boundary.FIXED_FIXED:
+            # do nothing
+            pass
 
+        return x, D1, D2
 
     def matrix_CH(self):
         """
@@ -69,6 +80,8 @@ class Spectral:
             grid points array x
             differential operators d/dx and d^2/dx^2 in matrix form 
         """
+        if self.boundary == Boundary.FIXED_OPEN:
+            raise NotImplementedError("Chebyshev differentiation matrix does not support fixed-open boundary yet")
         N = self.N 
         domain = self.domain
         if domain == "symmetric":
@@ -108,6 +121,7 @@ class Params:
     Mm: float
     constant_v: bool = None
     accelerating: bool = None
+    boundary: Boundary = Boundary.FIXED_FIXED
 
     B0: float = 1
     R: float = 1.5
@@ -166,11 +180,11 @@ class Nozzle:
                 v0 = M(x, Mm=Mm, k=0) # subsonic velocity profile, M_m < 1
             elif Mm == 1:
                 # transonic profile, accelerating/decelerating
-                mid_point = [] if (x.size % 2 ==0) else [1]
+                mid_point = [] if (x.size % 2 ==0) else [1.0]
                 if accelerating:
-                    v0 = np.concatenate([M(x[x<0], Mm=1, k=0), mid_point, M(x[x>0], Mm=1, k=-1)]) # accelerating velocity profile
+                    v0 = np.concatenate([M(x[(x<0)&(~np.isclose(x,0))], Mm=1, k=0), mid_point, M(x[(x>0)&(~np.isclose(x,0))], Mm=1, k=-1)]) # accelerating velocity profile
                 else:
-                    v0 = np.concatenate([M(x[x<0], Mm=1, k=-1), mid_point, M(x[x>0], Mm=1, k=0)]) # decelerating velocity profile
+                    v0 = np.concatenate([M(x[(x<0)&(~np.isclose(x,0))], Mm=1, k=-1), mid_point, M(x[(x>0)&(~np.isclose(x,0))], Mm=1, k=0)]) # decelerating velocity profile
             else:
                 v0 = M(x, Mm=Mm, k=-1) # supersonic velocity profile, M_m > 1
         return v0
@@ -225,8 +239,10 @@ class Nozzle:
                 V = V[:int(V.shape[0]/2)]
             else:
                 V, self.omega = self.polyeig(*matrices)
-            # Dirichlet boundary condition
-            self.V = np.pad(V, ((1,1),(0,0)))
+            if self.params.boundary == Boundary.FIXED_FIXED:
+                self.V = np.pad(V, ((1,1),(0,0))) # pad two ends by 0
+            elif self.params.boundary == Boundary.FIXED_OPEN:
+                self.V = np.pad(V, ((1,0),(0,0)))  # pad left end by 0
         else:
             # finite element
             if len(matrices) == 1:
@@ -286,26 +302,27 @@ class Nozzle:
         """
         if not os.path.exists("data"):
             os.mkdir("data")
-            os.mkdir("data/constant-v")
-            os.mkdir("data/subsonic-v")
-            os.mkdir("data/supersonic-v")
-            os.mkdir("data/acclerating-v")
-            os.mkdir("data/declerating-v")
-        file_path = "data"
+            for boundary in Boundary:
+                folder = boundary.value
+                os.mkdir(os.path.join("data", folder))
+                for subfolder in  ["constant_v","subsonic_v","supersonic_v","accelerating_v","decelerating_v"]:
+                    path = os.path.join("data",folder,subfolder)
+                    os.mkdir(path)
+        file_path = os.path.join("data",self.params.boundary.value)
         if self.params.constant_v:
-            file_path = os.path.join(file_path, "constant-v")
+            file_path = os.path.join(file_path, "constant_v")
         elif (self.params.Mm < 1):
-            file_path = os.path.join(file_path, "subsonic-v")
+            file_path = os.path.join(file_path, "subsonic_v")
         elif (self.params.Mm > 1):
-            file_path = os.path.join(file_path, "supersonic-v")
+            file_path = os.path.join(file_path, "supersonic_v")
         elif (self.params.Mm == 1):
             if self.params.accelerating:
-                file_path = os.path.join(file_path, "accelerating-v")
+                file_path = os.path.join(file_path, "accelerating_v")
             else:
-                file_path = os.path.join(file_path, "decelerating-v")
-        file_path = os.path.join(file_path, f"{method}-Mm={self.params.Mm}")
+                file_path = os.path.join(file_path, "decelerating_v")
+        file_path = os.path.join(file_path, f"{method}_Mm={self.params.Mm}")
         if N:
-            file_path += f"-N={N}"
+            file_path += f"_N={N}"
         np.savez(file_path, omega=self.omega, V=self.V, x=self.x)
 
 

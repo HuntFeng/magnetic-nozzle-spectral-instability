@@ -50,129 +50,52 @@ There are different ways to discretize the operator. For example, we can use fin
 One important thing we need to keep in mind is that, the discretized version of the eigenvalue problem can have eigenvalues that are not in $\sigma(\hat{T})$. Those eigenvalues are called spurious eigenvalues, and this phenomenon is called spectral pollution. It is due to the improper discretization of the operators. We will discuss spectral pollution in the next section.
 
 \section{Spectral Method}
+Spectral method is one of the best tool to solve PDE and ODE problems. \cite{trefethen_spectral_nodate}. The central idea of spectral method is by discretizing the equation, we can transform that to a linear system or an eigenvalue problem.
 \subsection{Finite Difference}
+Consider equally spaced nodes on domain $[-1,1]$, $\{x_1, x_2, \dots, x_N\}$ with $x_{j+1}-x_{j} = h$ for each $j$, and the set of corresponding function values, $\{ f_1, f_2, \dots, f_N \}$. We can approximate the derivatives using second-order central difference formulas
+\[ 
+\pdv{f}{z} = \frac{f_{j+1} - f_{j-1}}{2h}
+\qquad
+\pdv[2]{f}{z} = \frac{f_{j+1} -2f_{j} +f_{j-1}}{h^2}
+\]
+
+We can discretize the differentiation operators to the following matrices
+\[ 
+\pdv{z} \rightarrow D = \frac{1}{2h}\begin{bmatrix}
+	0 & 1 & 0 & \dots & 0 \\
+	-1 & \ddots & \ddots & \ddots & \vdots \\ 
+	0 & \ddots & \ddots & \ddots & 0 \\
+	\vdots & \ddots & \ddots & \ddots & 1 \\
+	0 & \dots & 0 & -1 & 0 
+\end{bmatrix} 
+\qquad
+\pdv[2]{z} \rightarrow  D^2 = \frac{1}{h^2}\begin{bmatrix}
+	-2 & 1 & 0 & \dots & 0 \\
+	1 & \ddots & \ddots & \ddots & \vdots \\ 
+	0 & \ddots & \ddots & \ddots & 0 \\
+	\vdots & \ddots & \ddots & \ddots & 1 \\
+	0 & \dots & 0 & 1 & -2 
+\end{bmatrix} 
+\]
 \subsection{Finite Element}
+Suppose the trial functions are $\{u_k(z)\}_{k=1}^\infty$, then the eigenfunction $\tilde{v}$ can be approximated by finite amount of them, $\tilde{v}(z) = \sum_{k=1}^N c_ku_k(z)$ where $c_k$ are coefficients to be determined.
+
+Then by multiplying $u_{i}$ to any term and integrate through the domain, we can discretize the equation. Using the notation of inner product $(f,g)=\int_{-1}^{1} dz fg$, we see that
+
+\[ \int_{-1}^{1} dz \; u_i\tilde{v} = \sum_{j}(u_i,u_j)c_j \]
+\[ \int_{-1}^{1} dz \; u_i\pdv{\tilde{v}}{z} = \sum_{j}\left(u_i,\pdv{u_j}{z}\right)c_j \]
+\[ \int_{-1}^{1} dz \; u_i\pdv[2]{\tilde{v}}{z} = \sum_{j}\left(u_i,\pdv[2]{u_j}{z}\right)c_j \]
+
 \subsection{DVR Method}
+\subsubsection{Sine DVR}
+Let $\psi_n(z) = \sin(n\pi(z+1)/2)$, then we define $u_k$ using Gaussian quadrature, then
+\[ u_k(z) = w_k\sum_{n=1}^N \psi_n(z)\psi_n^*(z_k) \]
+where $w_k$ is the k-th weight for the Gaussian quadrature and $u_k$ satisfies the Kronecker delta property,
+\[ u_j(x_k) = \delta_{jk} \]
 
-\section{Spectral Pollution}
-\subsection{Background}
-In this document, we are going to investigate the spectral pollution in the problem
-\begin{equation} \label{polynomial-eigenvalue-problem}
-	\omega^2v + 2iv_0\dv{v}{x} + (1-v_0^2)\dv[2]{v}{x} = 0, \;\;\; v(\pm 1) = 0
-\end{equation}
+Now the eigenfunction $\tilde{v} = \sum_{n=1}^N c_nu_n(z)$. The rest is the same as finite element, except the integrals are computed using Gaussian quadrature.
 
-where the dispersion relation is known,
-\begin{equation} \label{dispersion-relation}
-	\omega = k(v_0 \pm 1) 
-\end{equation}
-
-If we introduce staggered grid, then there are 2 possible ways to discretize the Eq.(\ref{polynomial-eigenvalue-problem}).
-
-\begin{figure}[H]
-	\centering
-	\includegraphics[width=0.7\linewidth]{img/spectral_theory/staggered_grid.jpg}
-\end{figure}
-
-\begin{enumerate}
-	\item Discretize the equation on the OPPOSITE grid where the function $v$ is defined on.
-	\item Discretize the equation on the SAME grid where the function $v$ is defined on.
-\end{enumerate}
-
-
-If we assume $v\sim \exp(-ikx)$, and let $\beta\equiv kh/2$. Then the differential operators $\dv*[n]{x}$ are equivalent to the following factors \cite{llobet_spectral_1990},
-\begin{itemize}
-	\item Evaluate equation on the OPPOSITE grid
-	align
-	\begin{align}
-		&H_0 = [\exp(i\beta)+\exp(-i\beta)]/2 = \cos(2\beta) \nonumber \\
-		&H_1 = [\exp(i\beta)-\exp(-i\beta)]/h = (2i/h)\sin(\beta) 
-		\label{H-operator} \\
-		&H_2 = [\exp(3i\beta)-\exp(i\beta)-\exp(i\beta)+\exp(-3i\beta)]/2h^2 = H_1^2H_0 \nonumber 
-	\end{align}
-	
-	\item Evaluate equation on the SAME grid
-	\begin{align}
-		&G_0 = 1 \nonumber \\
-		&G_1 = [\exp(2i\beta)-\exp(-2i\beta)]/2h = (i/h)\sin(2\beta) = H_1H_0 
-		\label{G-operator}\\
-		&G_2 = [\exp(2i\beta)-2-\exp(-2i\beta)]/h^2 = (2/h^2)(\cos(2\beta)-1) = H_1^2 \nonumber 
-	\end{align}
-\end{itemize}
-
-
-\subsection{Analysis of Numerical Spectrum}
-\subsubsection{Discretize on the Same Grid}
-Using the G-operator, Eq.(\ref{G-operator}), the discretized equation of Eq.(\ref{polynomial-eigenvalue-problem}) is 
-\[ \omega^2 + \omega(2iv_0H_1H_0) + (1-v_0^2)H_1^2 = 0 \]
-
-Thus the numerical dispersion relation is
-\begin{equation} \label{dispersion-relation-G}
-	\omega = -iH_1 \left(v_0 \pm \sqrt{v_0^2H_0^2 + (1-v_0^2)}\right) = \frac{2\sin(\beta)}{h}\left(v_0 \pm \sqrt{1 - v_0^2\sin[2](\beta)}\right)
-\end{equation}
-
-We see that 
-\begin{itemize}
-	\item $\omega$ is real for all $k$ if $v_0 < 1$.
-	\item $\omega$ is complex for large $k$, more specifically $k>h/2\arcsin(1/v_0)$, if $v_0 > 1$.
-	\item For small $k$, meaning $k\to 0$, Eq.(\ref{dispersion-relation-G}) is a good representation for the analytical dispersion relation, Eq.(\ref{dispersion-relation}). 
-\end{itemize}
-This explains why the spurious unstable modes occur when $v_0>1$.
-
-
-\begin{figure}[H]
-	\centering
-	\begin{subfigure}[b]{0.5\linewidth}
-		\includegraphics[width=\linewidth]{img/spectral_theory/eigvals_G_filtered.png} 
-		\caption{Filtered eigenvalues}
-		\label{fig:results-G-a}
-	\end{subfigure}%
-	\begin{subfigure}[b]{0.5\linewidth}
-		\includegraphics[width=\linewidth]{img/spectral_theory/eigfuncs_G_filtered.png} 
-		\caption{Filtered eigenfunctions}
-		\label{fig:results-G-b}
-	\end{subfigure}
-	\caption{Filter out the spurious modes with $k>h/2\arcsin(1/v_0)$.}
-	\label{fig:results-G}
-\end{figure}
-
-\subsubsection{Discretize on the Opposite Grid}
-Using the H-operator, Eq.(\ref{H-operator}), Eq.(\ref{polynomial-eigenvalue-problem}) becomes
-\[ \omega^2H_0 + \omega(2iv_0H_1) + (1-v_0^2)H_1^2H_0 = 0 \]
-
-So the numerical dispersion relation is
-\begin{equation}\label{dispersion-relation-H}
-	\omega = -iH_1 \left(v_0 \pm \sqrt{v_0^2 + (1-v_0^2)H_0^2}\right) = \frac{2\sin(\beta)}{h}\left(v_0 \pm \sqrt{\cos[2](\beta) + v_0^2\sin[2](\beta)}\right)
-\end{equation}
-
-We see that 
-\begin{itemize}
-	\item $\omega$ is real for all $k$ for all $v_0$.
-	\item For small $k$, Eq.(\ref{dispersion-relation-H}) dramatically deviates from the analytical dispersion relation Eq.(\ref{dispersion-relation}). 
-\end{itemize}
-
-\begin{figure}[H]
-	\centering
-	\begin{subfigure}[b]{0.3\linewidth}
-		\includegraphics[width=\linewidth]{img/spectral_theory/eigvals_H.png} 
-		\caption{Deformed eigenvalues, accumulation point occurs.}
-		\label{fig:results-H-a}
-	\end{subfigure}
-	\begin{subfigure}[b]{0.3\linewidth}
-		\includegraphics[width=\linewidth]{img/spectral_theory/eigfuncs_good_H.png} 
-		\caption{Good eigenfunctions}
-		\label{fig:results-H-b}
-	\end{subfigure}
-	\begin{subfigure}[b]{0.3\linewidth}
-		\includegraphics[width=\linewidth]{img/spectral_theory/eigfuncs_bad_H.png}
-		\caption{Spurious modes.} 
-		\label{fig:results-H-c}  
-	\end{subfigure}
-	\caption{Although the spurious unstable modes are much smaller, but the eigenvalues deviate from the analytical dispersion relation.}
-	\label{fig:results-H}
-\end{figure}
-
-\subsection{Conclusion}
-\begin{enumerate}
-	\item If we discretize Eq.(\ref{polynomial-eigenvalue-problem}) on the same grid as the function $v$ is defined on, then the eigenvalues are good for small $k$ modes. To get the good modes, we can filter out the modes with wave number $k>h/2\arcsin(1/v_0)$.
-	\item While we get less spurious unstable modes if we discretize Eq.(\ref{polynomial-eigenvalue-problem}) on the opposite grid as the $v$ is defined on, we suffer the inaccurate eigenvalues.
-\end{enumerate}
+\subsubsection{Sinc DVR}
+Let $sinc(x) = \sin(\pi x)/\pi x$, and define
+\[ u_n(z) = \frac{1}{\sqrt{\Delta x}} sinc\left(\frac{x-x_q}{\Delta x}\right) \]
+where $x_{q}$ are the quadrature points.

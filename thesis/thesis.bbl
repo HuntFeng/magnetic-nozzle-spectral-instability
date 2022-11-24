@@ -84,6 +84,10 @@ Satoshi Togo, Tomonori Takizuka, Dirk Reiser, Mizuki Sakamoto, Yuichi Ogawa,
   configuration.
 \newblock {\em Nuclear Materials and Energy}, 19:149--154, May 2019.
 
+\bibitem{trefethen_spectral_nodate}
+Lloyd~N Trefethen.
+\newblock {\em Spectral {Methods} in {Matlab}}.
+
 \bibitem{williams_fusion_2003}
 Craig~H. Williams.
 \newblock Fusion {Propulsion} {Through} a {Magnetic} {Nozzle} and {Open}
