@@ -1,58 +1,86 @@
 \chapter{Numerical Experiments}
-In this chapter, we will solve the eigenvalue problem, Eq.(\ref{eq:eigenvalue-problem}), with different discretizations. There will be three major categories of methods used. Finite difference (FD) method, finite element (FE) method and discrete variable representation (DVR) method.
+In this chapter, we will solve the eigenvalue problem, Eq.(\ref{eq:eigenvalue-problem}), with different discretizations. There will be three major categories of methods used. Finite difference (FD) method, finite element (FE) method and spectral element method (SE).
 
-The finite difference method will be used together with equally spaced nodes. The finite element method will be used with three different basis functions: tent function, B-spline and sine. Different basis function results in different discretization. Finally, sine DVR and sinc DVR will also be used to solve the eigenvalue problem.
+The finite difference method will be used together with equally spaced nodes. The finite element method will use B-spline as basis functions. Finally, the spectral element method uses sine functions as the spectral elements.
 
 The parameters of different discretizations are listed below
 \begin{table} [H]
-	\begin{tabular}{|c|c|c|c|c|c|c|}
+	\centering
+	\caption{All methods use 101 nodes in the region $[0,1]$. For FE and SE methods, their accuracy mainly depend on the number of basis functions used, so set the same number of basis for them.}
+	\begin{tabular}{|c|c|c|c|}
 		\hline
-		& FD & FE\_TENT & FE\_BSPLINE & FE\_SINE & DVR\_SINE & DVR\_SINC \\
+		& FD & FE\_BSPLINE & SE\_SINE  \\
 		\hline
-		N & 201 &  &  &  &  &  \\
+		N & 101 & 101 & 101 \\
 		\hline
-		NUM\_BASIS &  & 15 & 21 & 50 & 31 & 39 \\
+		NUM\_BASIS &  & 50 & 50 \\
 		\hline
 	\end{tabular}
 	\label{table:parameters}
 \end{table}
 
-\section{Constant Velocity}
-Because the existence of exact solution to problems Eq.(\ref{eq:constant_v_problem_dirichlet}) and Eq.(\ref{eq:constant_v_problem_openright}). The case with constant velocity profile is used as a sanity check. It allows us to verify the correctness of each method's implementation. This also serves as a reference to the accuracy spectral methods can achieve.
+\section{Constant Velocity Case}
+Because the existence of exact solution to problems Eq.(\ref{eq:constant_v_problem_dirichlet}). The case with constant velocity profile is used as a sanity check. It allows us to verify the correctness of each method's implementation. This also serves as a reference to the accuracy spectral methods can achieve.
 
-From Fig.(\ref{fig:constant_v}), we see that the flow in magnetic nozzle with subsonic and supersonic velocity profile are both stable. The accuracy of spectral method is high, the imaginary part of eigenvalues are about $10^{-13}$.
+From Fig.(\ref{fig:constant_v}), we see that the order of growth rates obtained by different methods is about $~10^{-14}$ for subsonic case and  $\sim 10^{-12}$ for supersonic case. We will use these numbers as a reference to the accuracy of our numerical methods. If a method produces growth rates with order close to or smaller than these numbers, we consider the growth rates to be 0.
+
+\begin{table} [H]
+	\centering
+	\caption{Relative error of each eigenvalue.}
+	\begin{tabular}{|c|c|c|c|c|c|}
+		\hline
+		$v_0=0.5$   & 1 & 2 & 3 & 4 & 5 \\
+		\hline
+		FD & 2.8274e-05 & 1.130e-04 & 2.541e-04 & 4.512e-04 & 7.040e-04 \\
+		\hline
+		FE & 0.003 & 0.059 & 0.330 & 0.085 & 0.025  \\
+		\hline
+		SE & 2.896e-05 & 1.157e-04 & 2.603e-04 & 4.626e-04 & 7.217e-04 \\
+		\hline
+	\end{tabular}
+	\begin{tabular}{|c|c|c|c|c|c|}
+		\hline
+		$v_0=1.5$   & 1 & 2 & 3 & 4 & 5 \\
+		\hline
+		FD & 0.001 & 0.005 & 0.010 & 0.019 & 0.030 \\
+		\hline
+		FE & 0.009 & nan & 0.027 & 0.018 & 0.003  \\
+		\hline
+		SE & 0.001 & 0.005 & 0.011 & 0.019 & 0.030 \\
+		\hline
+	\end{tabular}
+	\label{table:eigenvalue_error}
+\end{table}
 
 \begin{figure}[H]
 	\centering
 	\begin{subfigure}{0.5\textwidth}
 		\includegraphics[width=\linewidth]{img/numerical_experiments/constant_v_v0=0.5}
-		\caption{Subsonic}
+		\caption{All modes are stable.}
 	\end{subfigure}%
 	\begin{subfigure}{0.5\textwidth}
 		\includegraphics[width=\linewidth]{img/numerical_experiments/constant_v_v0=1.5}
-		\caption{Supersonic}
+		\caption{Filtered modes are stable.}
 	\end{subfigure}
-	\caption{In subsonic case, all methods produces stable modes. In supersonic case, all modes are stable after filtering the spurious modes.}
+	\caption{Showing the first 5 eigenvalues of each method in each case. All methods are close to the exact eigenvalues.}
 	\label{fig:constant_v}
 \end{figure}
 
 
 \section{Subsonic Case}
-\subsection{Fixed Ends}
-With Dirichlet boundary condition, $\tilde{v}(\pm 1) =0$. The flow in magnetic nozzle with subsonic velocity profile is stable. Fig.\ref{fig:subsonic_v} shows the first few eigenvalues obtained by different discretizations, they all produced similar results.
+When setting the mid-point velocity to be $M_m=0.5$, we have the subsonic velocity profile. This velocity profile is the orange line shown in Fig.\ref{fig:velocity_profiles}. With Dirichlet boundary condition, $\tilde{v}(\pm 1) =0$. The flow in magnetic nozzle is stable. Fig.\ref{fig:subsonic_v} shows the first few eigenvalues obtained by different discretizations. 
+
+The order of growth rates obtained by different methods is $10^{-13}$, we can consider it to be stable.
 \begin{figure} [H]
 	\centering
 	\includegraphics[width=0.7\linewidth]{img/numerical_experiments/subsonic_v}
-	\caption{The flow is stable.}
+	\caption{Showing the first 5 modes. It suggests that the flow in magnetic nozzle with subsonic velocity profile and Dirichlet boundary condition is stable.}
 	\label{fig:subsonic_v}
 \end{figure}
 
-\subsection{Open Right End}
-
 
 \section{Supersonic Case}
-\subsection{Fixed Ends}
-When the velocity profile is supersonic, spurious modes appeared as predicted in Chap.\ref{chap:theoretical_analysis}. Using the convergence test, we successfully eliminates all spurious modes. Fig.(\ref{fig:supersonic_v}) shows the first few filtered eigenvalues. As we can see the flow is stable.
+When the velocity profile is supersonic, shown as purple line in Fig.\ref{fig:velocity_profiles}, spurious modes appeared as predicted in Chap.\ref{chap:theoretical_analysis}. Using the convergence test, we successfully eliminates all unstable modes. Fig.(\ref{fig:supersonic_v}) shows the first few filtered eigenvalues. As we can see the flow is stable.
 \begin{figure} [H]
 	\centering
 	\includegraphics[width=0.7\linewidth]{img/numerical_experiments/supersonic_v}
@@ -60,12 +88,8 @@ When the velocity profile is supersonic, spurious modes appeared as predicted in
 	\label{fig:supersonic_v}
 \end{figure}
 
-\subsection{Open Right Ends}
-
-
 \section{Accelerating Case}
 In this case, the flow starts from subsonic speed and accelerates to supersonic case, the velocity is exactly at sonic point $M_m=1$ at the center of the magnetic nozzle as shown in Fig.(\ref{fig:velocity_profiles})
-\subsection{Fixed Ends}
 With Dirichlet boundary condition, spectral method with different discretizations gave negative eigenvalues. This indicates that the perturbation $\tilde{v}$ is damped oscillation, its amplitude will be decrease to zero exponentially in time, $\tilde{v} \sim \exp(\Im(\omega)t)$. Hence, the flow in magnetic nozzle is stable.
 \begin{figure} [H]
 	\centering
@@ -74,54 +98,14 @@ With Dirichlet boundary condition, spectral method with different discretization
 	\label{fig:accelerating_v}
 \end{figure}
 
-\subsection{Open Right Ends}
-
 
 \section{Decelerating Case}
-\subsection{Fixed Ends}
-Let $v_a(z)$ denotes the accelerating velocity profile, and $v_d(z)$ the decelerating velocity profile. Then we know $v_a(-z) = v_d(z)$.
-
-The eigenvalue problem with accelerating profile is given by
-\[
-	\hspace{-0.5in}
-	\omega^2 \tilde{v} 
-	+ 2i\omega\left(v_a\pdv{}{z} + \pdv{v_a}{z}\right) \tilde{v} 
-	+ \left[ (1-v_a^2)\pdv[2]{}{z} 
-	-\left(3v_a + \frac{1}{v_a}\right)\pdv{v_a}{z}\pdv{}{z} 
-	- \left(1-\frac{1}{v_a^2}\right)\left(\pdv{v_a}{z}\right)^2 
-	- \left(v_a+\frac{1}{v_a}\right)\pdv[2]{v_a}{z} \right]\tilde{v}
-	= 0
-\]
-Let $z\mapsto -z$, the eigenvalue problem becomes
-\[
-	\hspace{-1.5in}
-	\omega^2 \tilde{v} 
-	+ 2i\omega\left(v_d\pdv{}{(-z)} + \pdv{v_d}{(-z)}\right) \tilde{v} 
-	+ \left[ (1-v_d^2)\pdv[2]{}{(-z)} 
-	-\left(3v_d + \frac{1}{v_d}\right)\pdv{v_d}{(-z)}\pdv{}{(-z)} 
-	- \left(1-\frac{1}{v_d^2}\right)\left(\pdv{v_d}{(-z)}\right)^2 
-	- \left(v_d+\frac{1}{v_d}\right)\pdv[2]{v_d}{(-z)} \right]\tilde{v}
-	= 0
-\]
-Hence, we have
-\[
-\hspace{-0.5in}
-\omega^2 \tilde{v} 
-- 2i\omega\left(v_d\pdv{}{z} + \pdv{v_d}{z}\right) \tilde{v} 
-+ \left[ (1-v_d^2)\pdv[2]{}{z} 
--\left(3v_d + \frac{1}{v_d}\right)\pdv{v_d}{z}\pdv{}{z} 
-- \left(1-\frac{1}{v_d^2}\right)\left(\pdv{v_d}{z}\right)^2 
-- \left(v_d+\frac{1}{v_d}\right)\pdv[2]{v_d}{z} \right]\tilde{v}
-= 0
-\]
-
-We see that the flow with decelerating profile is a different physical process than the that with accelerating profile.
+As predicted by Proposition.\ref{prop:symmetry_of_eigenvalue}, the growth rates must be positive since they are complex conjugates of the eigenvalues in accelerating case.
 
 \begin{figure} [H]
 	\centering
 	\includegraphics[width=0.7\linewidth]{img/numerical_experiments/decelerating_v}
-	\caption{Unstable}
+	\caption{The flow with decelerating velocity profile and Dirichlet boundaries is unstable. The grow rates are opposite to that in accelerating case.}
 	\label{fig:decelerating_v}
 \end{figure}
 
-\subsection{Open Right Ends}

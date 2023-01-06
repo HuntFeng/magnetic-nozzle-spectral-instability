@@ -1,9 +1,9 @@
 \chapter{Theoretical Analysis} \label{chap:theoretical_analysis}
 \section{Constant Velocity}
-If we set the velocity profile of the equilibrium flow to constant $v_0=\text{const}$, then Eq.(\ref{eq:polynomial-eigenvalue-problem}) becomes a simple boundary value problem with second order constant coefficients differential equation.
+If we set the velocity profile of the equilibrium flow to constant $v_0=\text{const}$, then Eq.(\ref{eq:polynomial_eigenvalue_problem}) becomes a simple boundary value problem with second order constant coefficients differential equation.
 
 \begin{equation} \label{eq:constant_v_problem_dirichlet}
-    \omega^2\tilde{v} + 2i\omega\pdv{\tilde{v}}{z} + (1-v_0^2)\pdv[2]{\tilde{v}}{z} = 0
+    \omega^2\tilde{v} + 2i\omega v_0\pdv{\tilde{v}}{z} + (1-v_0^2)\pdv[2]{\tilde{v}}{z} = 0
     \quad
     \tilde{v}(-1) = \tilde{v}(1) = 0
 \end{equation}
@@ -16,7 +16,7 @@ The solution to this problem is
 
 This result tells us for constant velocity case, the flow in magnetic nozzle is stable regardless the velocity $v_0$. It is worth to mention $v_0=1$ is a singular point of this problem.
 
-We will use this as a base case and check our experimental results. 
+We will use this to benchmark the experimental results. 
 
 \begin{figure}[H]
 	\centering
@@ -30,39 +30,6 @@ We will use this as a base case and check our experimental results.
 	\end{subfigure}
 	\caption{The plots show the first three exact solutions to Eq.(\ref{eq:constant_v_problem_dirichlet}) for both subsonic and supersonic case. These solutions are stable.}
 	\label{fig:exact_v}
-\end{figure}
-
-If we change the boundary condition to fixed left end and open right end, then we have the following problem
-\begin{equation} \label{eq:constant_v_problem_openright}
-    \omega^2\tilde{v} + 2i\omega\pdv{\tilde{v}}{z} + (1-v_0^2)\pdv[2]{\tilde{v}}{z} = 0
-    \quad
-    \tilde{v}(-1) = \pdv{\tilde{v}}{z}(1) = 0
-\end{equation}
-This is also easy to solve, the solution is 
-\begin{equation} \label{eq:constant_v_solution_openright}
-    v = \exp\left(-\frac{i\omega}{v_0+1}\right)\left[ \exp\left(i\omega\frac{z+1}{v_0+1}\right) - \exp\left(i\omega\frac{z+1}{v_0-1}\right) \right]
-\end{equation} 
-Depending on the value of $v_0$, the frequency $\omega$ can be real or complex,
-\begin{equation}
-    \begin{aligned}
-        \omega &= (v_0^2-1) \left[ \frac{n\pi}{2} + \frac{1}{4}\cos^{-1}\left(\frac{v_0-1}{v_0+1}\right) \right] \in\mathbb{R}, \quad v_0>1 \\
-        \omega &= (1-v_0^2) \left[ \frac{n\pi}{2} + \frac{1}{4}\cos^{-1}\left(\frac{v_0+1}{v_0-1}\right) \right] \in\mathbb{C}, \quad v_0<1
-    \end{aligned}
-\end{equation}
-This tells us that the flow in magnetic nozzle with open right end is stable when $v_0>1$. For the case of $v_0<1$, since $\Im(\omega)<0$, so the oscillation is damped. Hence, the flow is also stable.
-
-\begin{figure}[H]
-	\centering
-	\begin{subfigure}{0.5\textwidth}
-		\includegraphics[width=\linewidth]{img/theoretical_analysis/exact_openright_v0=0.5}
-		\caption{Subsonic}
-	\end{subfigure}%
-	\begin{subfigure}{0.5\textwidth}
-		\includegraphics[width=\linewidth]{img/theoretical_analysis/exact_openright_v0=1.5}
-		\caption{Supersonic}
-	\end{subfigure}
-	\caption{The plots show both subsonic and supersonic exact solutions to Eq.(\ref{eq:constant_v_problem_openright}). These solutions are stable.}
-	\label{fig:exact_v_openright}
 \end{figure}
 
 
@@ -140,3 +107,59 @@ One way to filter the spurious modes is to remove all modes with $k>h/2 \arcsin(
 \end{figure}
 
 A better way to filter the spurious modes is by doing a "convergence test". Since the frequency Eq.(\ref{dispersion_relation_G}) is changing with mesh resolution $h$. We can simply solve the discretized problem using spectral method under different mesh resolution. Then filter out the eigenmodes that are changing dramatically.
+
+\section{Symmetry of Growth Rates in Accelerating and Decelerating Cases}
+Notice that there exists a symmetry between the accelerating and decelerating velocity profiles. To be specific, these two profiles are symmetric about the axis $z=0$.
+\[ v_a(-z) = v_d(z) \]
+where the subscript $a$ stands for accelerating and $d$ stands for decelerating.
+
+The symmetry between the two velocity profiles will lead us to the symmetry of growth rates between the accelerating case and decelerating case. 
+
+\begin{proposition} \label{prop:symmetry_of_eigenvalue}
+	If $\omega$ is an eigenvalue to the polynomial eigenvalue problem, Eq.\ref{eq:polynomial_eigenvalue_problem} width accelerating velocity profile $v_a(z)$, then its complex conjugate, $\overline{\omega}$, is an eigenvalue to the same equation with decelerating velocity profile, $v_d(z)$.
+\end{proposition}
+\begin{proof}
+	Suppose $\omega=\omega_r + i\omega_i$ is an eigenvalue to Eq.\ref{eq:polynomial_eigenvalue_problem}. Substitute $\tilde{v}(z)$ by $\exp(ikz)$ and split the equation to real and imaginary part, we see that $\omega$ and $\omega_i$ must satisfy
+	\begin{equation} \label{eq:eigenvalue_problem_real_part}
+		\omega_r^2 - \omega_i^2 
+		- 2\omega_r kv_0 - 2\omega_i\pdv{v_0}{z}
+		+ \left[
+		-k^2(1-v_0^2) 
+		-\left(1-\frac{1}{v_0^2}\right)\left(\pdv{v_0}{z}\right)^2
+		-\left(v_0+\frac{1}{v_0}\right)\pdv[2]{v_0}{z}
+		\right]
+		= 0
+	\end{equation}
+	\begin{equation} \label{eq:eigenvalue_problem_imag_part}
+		2\omega_r\omega_i 
+		- 2\omega_i kv_0 + 2\omega_r\pdv{v_0}{z} 
+		- k\left(3v_0+\frac{1}{v_0}\right)\pdv{v_0}{z} 
+		= 0
+	\end{equation}
+	Here the velocity profile $v_0$ can be accelerating, $v_a$, or decelerating, $v_d$.
+	
+	Since $v_d(z)=v_a(-z)$, so $\partial_zv_d=-\partial_zv_a$ and $\partial_z^2v_d=\partial_z^2v_a$. If the transformation $z\to -z$ is made, then Eq.\ref{eq:eigenvalue_problem_real_part} and Eq.\ref{eq:eigenvalue_problem_imag_part} become
+	
+	\[
+		\omega_r^2 - \omega_i^2 
+		- 2\omega_r kv_0' + 2\omega_i\pdv{v_0'}{z}
+		+ \left[
+		-k^2(1-v_0'^2) 
+		-\left(1-\frac{1}{v_0'^2}\right)\left(\pdv{v_0'}{z}\right)^2
+		-\left(v_0'+\frac{1}{v_0'}\right)\pdv[2]{v_0'}{z}
+		\right]
+		= 0
+	\]
+	\[
+		2\omega_r\omega_i 
+		- 2\omega_i kv_0' - 2\omega_r\pdv{v_0'}{z} 
+		- k\left(3v_0'+\frac{1}{v_0'}\right)\pdv{v_0'}{z} 
+		= 0
+	\]
+	where $v_0'(z) \equiv v_0(-z)$. We see that the imaginary part of the eigenvalue changes from $\omega_i$ to $-\omega_i$.
+\end{proof}
+
+\begin{remark}
+	This proposition tells us that if the flow in magnetic nozzle is unstable in one case, then the flow will stable in the opposite case. More specifically, the perturbation is damped oscillation.
+\end{remark}
+

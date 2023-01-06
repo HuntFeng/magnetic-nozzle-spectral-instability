@@ -45,7 +45,7 @@ In practice, the eigenvalue problem in infinite dimension is difficult.
 Therefore, the usual approach to the eigenvalue problem $\hat{T}x=\lambda x$ is to first discretize the operator $\hat{T}$ to an approximated matrix operator $T$, then the eigenvalue problem becomes,
 \[ Tx = \lambda x \]
 
-There are different ways to discretize the operator. For example, we can use finite difference, finite element and DVR methods. 
+There are different ways to discretize the operator. For example, we can use finite difference, finite element and spectral element methods. 
 
 One important thing we need to keep in mind is that, the discretized version of the eigenvalue problem can have eigenvalues that are not in $\sigma(\hat{T})$. Those eigenvalues are called spurious eigenvalues, and this phenomenon is called spectral pollution. It is due to the improper discretization of the operators. We will discuss spectral pollution in the next section.
 
@@ -77,8 +77,9 @@ We can discretize the differentiation operators to the following matrices
 	0 & \dots & 0 & 1 & -2 
 \end{bmatrix} 
 \]
-\subsection{Finite Element}
-Suppose the trial functions are $\{u_k(z)\}_{k=1}^\infty$, then the eigenfunction $\tilde{v}$ can be approximated by finite amount of them, $\tilde{v}(z) = \sum_{k=1}^N c_ku_k(z)$ where $c_k$ are coefficients to be determined.
+
+\subsection{Spectral Element}
+Suppose the basis functions are $\{u_k(z)\}_{k=1}^\infty$, then the eigenfunction $\tilde{v}$ can be approximated by finite amount of them, $\tilde{v}(z) = \sum_{k=1}^N c_ku_k(z)$ where $c_k$ are coefficients to be determined.
 
 Then by multiplying $u_{i}$ to any term and integrate through the domain, we can discretize the equation. Using the notation of inner product $(f,g)=\int_{-1}^{1} dz fg$, we see that
 
@@ -86,16 +87,7 @@ Then by multiplying $u_{i}$ to any term and integrate through the domain, we can
 \[ \int_{-1}^{1} dz \; u_i\pdv{\tilde{v}}{z} = \sum_{j}\left(u_i,\pdv{u_j}{z}\right)c_j \]
 \[ \int_{-1}^{1} dz \; u_i\pdv[2]{\tilde{v}}{z} = \sum_{j}\left(u_i,\pdv[2]{u_j}{z}\right)c_j \]
 
-\subsection{DVR Method}
-\subsubsection{Sine DVR}
-Let $\psi_n(z) = \sin(n\pi(z+1)/2)$, then we define $u_k$ using Gaussian quadrature, then
-\[ u_k(z) = w_k\sum_{n=1}^N \psi_n(z)\psi_n^*(z_k) \]
-where $w_k$ is the k-th weight for the Gaussian quadrature and $u_k$ satisfies the Kronecker delta property,
-\[ u_j(x_k) = \delta_{jk} \]
+\subsection{Finite Element}
+Finite-element method is a generalization of the spectral element method. We are allow to use a set of basis functions similar to spectral method in a cell. The region consists of many of these cells.
 
-Now the eigenfunction $\tilde{v} = \sum_{n=1}^N c_nu_n(z)$. The rest is the same as finite element, except the integrals are computed using Gaussian quadrature.
-
-\subsubsection{Sinc DVR}
-Let $sinc(x) = \sin(\pi x)/\pi x$, and define
-\[ u_n(z) = \frac{1}{\sqrt{\Delta x}} sinc\left(\frac{x-x_q}{\Delta x}\right) \]
-where $x_{q}$ are the quadrature points.
+The formulation is the same as Eq.(\ref{eq:eigenvalue_problem_SE}). The only difference is that in finite-element we need to solve Eq.(\ref{eq:eigenvalue_problem_SE}) simultaneously for all cells.

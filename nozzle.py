@@ -61,8 +61,9 @@ class Spectral:
         
         if self.boundary == Boundary.FIXED_OPEN:
             # set open right end by setting last row and col
-            D1[-1,-3:] = np.array([1,-4,3])/(2*(x[1]-x[0])) # 2nd order f' on right end
-            D2[-1,:] = D1[-1,:] 
+            D1[-1,-3:] = np.array([1,-4,3])/(2*h) # 2nd order f' on right end
+            # D2[-1,:] = D1[-1,:] 
+            D2[-1,-4:] = np.array([-1,4,-5,2])/h**3 # 2nd order f'' on right end
         elif self.boundary == Boundary.FIXED_FIXED:
             # do nothing
             pass

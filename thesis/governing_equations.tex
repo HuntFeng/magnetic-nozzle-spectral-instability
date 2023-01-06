@@ -225,7 +225,7 @@ The first step, we can combine Eq.(\ref{eq:linearized-conservation-of-mass}) and
 		- \left(1-\frac{1}{v_0^2}\right)\left(\pdv{v_0}{z}\right)^2 
 		- \left(v_0+\frac{1}{v_0}\right)\pdv[2]{v_0}{z} \right]\tilde{v}
 		= 0
-		\label{eq:polynomial-eigenvalue-problem}
+		\label{eq:polynomial_eigenvalue_problem}
 	\end{equation}
 \end{proposition}
 \begin{proof}
@@ -313,10 +313,10 @@ Here we abused the notation for the purpose of convenience, $\mathbf{v}_0^2$ mea
 We impose Dirichlet boundary condition on the problem, meaning that $\tilde{v}(-1)=\tilde{v}(1)=0$. Further more, the differentiation matrices do not do well on the edges, so during the computation, we remove the first and last row of the differentiation matrices and the vectors $\mathbf{\tilde{v}}$ and $\mathbf{v}_0$. After the computation, we set $\tilde{v}_1=\tilde{v}_N = 0$.
 
 
-\subsection{Finite Element}
-Suppose the trial functions are $\{u_k(z)\}_{k=1}^\infty$, then the eigenfunction $\tilde{v}$ can be approximated by finite amount of them, $\tilde{v}(z) = \sum_{k=1}^N c_ku_k(z)$ where $c_k$ are coefficients to be determined.
+\subsection{Spectral Element}
+Suppose the basis functions are $\{u_k(z)\}_{k=1}^\infty$, then the eigenfunction $\tilde{v}$ can be approximated by finite amount of them, $\tilde{v}(z) = \sum_{k=1}^N c_ku_k(z)$ where $c_k$ are coefficients to be determined.
 
-\begin{equation}
+\begin{equation} \label{eq:eigenvalue_problem_SE}
 	\mqty[ O & I\\ M & N ]\mqty[ \mathbf{c}\\ \omega\mathbf{c} ] = \omega\mqty[ \mathbf{c}\\ \omega\mathbf{c} ]
 \end{equation}
 where $O$ is a zero matrix, $I$ is an identity matrix, and
@@ -328,12 +328,43 @@ where $O$ is a zero matrix, $I$ is an identity matrix, and
 	N_{jk} &= -2i\int_{-1}^{1}dz \; u_{j}\left(v_0\pdv{}{z} +\pdv{v_0}{z} \right)u_{k}
 \end{align*}
 
-\subsubsection{Boundary Condition}
-Because of the Dirichlet boundary condition, we fixed $\tilde{v}(-1)=\tilde{v}(1)=0$.
+\subsubsection{Boundary Conditions and Basis Function}
+To satisfy the Dirichlet boundary condition, $\tilde{v}(\pm 1)=0$, we can choose a set of basis functions that satisfy the boundary condition $u_k(\pm 1)=0,\forall k\in\mathbb{N}$. For example, the sine functions
+\[ u_n(z) = \sin(\frac{n\pi}{2}(z+1)), n\in\mathbb{N} \]
+is a set of basis functions that satisfy the Dirichlet boundary condition.
 
-\subsection{DVR Method}
-\subsubsection{Sine DVR}
-Same structure as that of finite element
 
-\subsubsection{Sinc DVR}
-Same structure as that of finite element
+\subsection{Finite Element}
+Finite-element method is a generalization of the spectral element method. We are allow to use a set of basis functions similar to spectral method in a cell. The region consists of many of these cells.
+
+The formulation is the same as Eq.(\ref{eq:eigenvalue_problem_SE}). The only difference is that in finite-element we need to solve Eq.(\ref{eq:eigenvalue_problem_SE}) simultaneously for all cells.
+
+\subsubsection{Boundary Conditions and B-Spline}
+The B-Spline is a commonly used basis function for finite-element method. B-Spline can be defined recursively starting with piecewise constants [reference needed]
+
+\begin{equation}
+	B_{i,0}(\xi) = \begin{cases}
+		1, &\text{if } \xi_i\leq \xi \leq \xi_{i+1} \\
+		0, &\text{otherwise}
+	\end{cases}
+\end{equation}
+For $j\in\mathbb{N}$, they are defined by
+\begin{equation}
+	B_{i,j}(\xi) = \frac{\xi-\xi_i}{\xi_{i+j}-\xi_i}B_{i,j-1}(\xi) 
+	+ \frac{\xi_{i+j+1}-\xi}{\xi_{i+j+1}-\xi_{i+1}}B_{i+1,p-1}(\xi) 
+\end{equation}
+where $\mathbf{\xi}=[\xi_0,\cdots,\xi_m]$ is called the knot vector, where $m=n+j+1$ where $n+1$ is the number of B-Splines and $j$ is the degree of B-Spline polynomials. The knot vector defines the shapes of the B-Splines, see Fig.\ref{fig:bspline}. The variable $\xi$ is within the range $[\xi_0, \xi_m]$. 
+
+Any function $u(x)$ on $[\xi_0,\xi_N]$ can be approximated by
+\[ u(x) \simeq \sum_{j=0}^{n} c_jB_{i,j}(x) \]
+
+The Dirichlet boundary condition can be set by letting the coefficients of the first and last B-Spline to 0, $c_{0}=c_{n} = 0$, where $N$ is the number of B-Splines.
+
+
+\begin{figure} [H]
+	\centering
+	\includegraphics[width=0.7\linewidth]{img/governing_equations/bspline}
+	\caption{An example of open uniform quadratic B-Spline on $[-1,1]$. The knot vector is $[-1,-1,-1,-1/3,1/3,1,1,1]$.}
+	\label{fig:bspline}
+\end{figure}
+
