@@ -235,33 +235,36 @@ class Nozzle:
         if not self.u:
             # finite difference
             if len(matrices) == 1:
-                self.omega, V = np.linalg.eig(matrices[0])
+                omega, V = np.linalg.eig(matrices[0])
                 # only need half of the eigenvector
                 V = V[:int(V.shape[0]/2)]
             else:
-                V, self.omega = self.polyeig(*matrices)
-            if self.params.boundary == Boundary.FIXED_FIXED:
-                self.V = np.pad(V, ((1,1),(0,0))) # pad two ends by 0
-            elif self.params.boundary == Boundary.FIXED_OPEN:
-                self.V = np.pad(V, ((1,0),(0,0)))  # pad left end by 0
+                V, omega = self.polyeig(*matrices)
+            # if self.params.boundary == Boundary.FIXED_FIXED:
+            #     self.V = np.pad(V, ((1,1),(0,0))) # pad two ends by 0
+            # elif self.params.boundary == Boundary.FIXED_OPEN:
+            #     # self.V = np.pad(V, ((1,0),(0,0)))  # pad left end by 0
+            #     pass
+            return V, omega
         else:
             # finite element
             if len(matrices) == 1:
-                self.omega, C = np.linalg.eig(matrices[0])
+                omega, C = np.linalg.eig(matrices[0])
                 # only need half of the eigenvector
                 C = C[:int(C.shape[0]/2)]
             else:
-                C, self.omega = self.polyeig(*matrices)
+                C, omega = self.polyeig(*matrices)
             # # Dirichlet boundary condition
             # C[0,:] = 0
             # C[-1,:] = 0
-            self.V = np.zeros((self.x.size, C.shape[1]), dtype=complex)
-            for i in range(C.shape[1]):
-                for n in range(C.shape[0]):
-                    self.V[:,i] += C[n,i]*self.u(self.x, n)
-            # Dirichlet boundary condition
-            self.V[0,:] = 0
-            self.V[-1,:] = 0
+            # self.V = np.zeros((self.x.size, C.shape[1]), dtype=complex)
+            # for i in range(C.shape[1]):
+            #     for n in range(C.shape[0]):
+            #         self.V[:,i] += C[n,i]*self.u(self.x, n)
+            # # Dirichlet boundary condition
+            # self.V[0,:] = 0
+            # self.V[-1,:] = 0
+            return C, omega
     
     def sort_solutions(self, real_range: list=[0,50], imag_range: list=[]):
         selection = (self.omega.real > real_range[0]) & (self.omega.real < real_range[1])
