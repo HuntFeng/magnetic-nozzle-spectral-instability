@@ -3,10 +3,10 @@ In this chapter, we will solve the eigenvalue problem, Eq.(\ref{eq:eigenvalue-pr
 
 The finite difference method will be used together with equally spaced nodes. The finite element method will use B-spline as basis functions. Finally, the spectral element method uses sine functions as the spectral elements.
 
-The parameters of different discretizations are listed below
+For Dirichlet boundary, The parameters of different discretizations are listed below
 \begin{table} [H]
 	\centering
-	\caption{All methods use 101 nodes in the region $[0,1]$. For FE and SE methods, their accuracy mainly depend on the number of basis functions used, so set the same number of basis for them.}
+	\caption{With Dirichlet boundary condition, all methods have good accuracy, so using 101 nodes in the region $[0,1]$ is enough. For FE and SE methods, they are using ~50 basis functions.}
 	\begin{tabular}{|c|c|c|c|}
 		\hline
 		& FD & FE\_BSPLINE & SE\_SINE  \\
@@ -16,8 +16,25 @@ The parameters of different discretizations are listed below
 		NUM\_BASIS &  & 51 & 50 \\
 		\hline
 	\end{tabular}
-	\label{table:parameters}
+	\label{table:parameters_dirichlet}
 \end{table}
+
+For left-fixed and right-open (fixed-open) boundary condition, the parameters are    
+\begin{table} [H]
+	\centering
+	\caption{With fixed-open boundary condition, it requires higher resolution in order to get accurate results. Therefore all methods use 501 nodes in the region $[0,1]$, and FE method uses 101 basis functions.}
+	\begin{tabular}{|c|c|c|}
+		\hline
+		& FD & FE\_BSPLINE \\
+		\hline
+		N & 501 & 501 \\
+		\hline
+		NUM\_BASIS &  & 101 \\
+		\hline
+	\end{tabular}
+	\label{table:parameters_fixed_open}
+\end{table}
+
 
 \section{Constant Velocity Case}
 \subsection{Dirichlet Boundary}
@@ -32,7 +49,7 @@ From Fig.(\ref{fig:constant_v}), we see that the order of growth rates obtained 
 		\hline
 		$v_0=0.5$   & 1 & 2 & 3 & 4 & 5 \\
 		\hline
-		FD & 2.8274e-05 & 1.130e-04 & 2.541e-04 & 4.512e-04 & 7.040e-04 \\
+		FD & 2.827e-05 & 1.130e-04 & 2.541e-04 & 4.512e-04 & 7.040e-04 \\
 		\hline
 		FE & 0.005 & 0.005 & 0.006 & 0.008 & 0.010  \\
 		\hline
@@ -50,7 +67,7 @@ From Fig.(\ref{fig:constant_v}), we see that the order of growth rates obtained 
 		SE & 0.001 & 0.005 & 0.011 & 0.019 & 0.030 \\
 		\hline
 	\end{tabular}
-	\label{table:eigenvalue_error}
+	\label{table:eigenvalue_error_dirichlet}
 \end{table}
 
 \begin{figure}[H]
@@ -68,6 +85,30 @@ From Fig.(\ref{fig:constant_v}), we see that the order of growth rates obtained 
 \end{figure}
 
 \subsection{Fixed-Open Boundary}
+\begin{table} [H]
+	\centering
+	\caption{Relative error of each eigenvalue. Notice that the ground mode for subsonic case is non-zero.}
+	\begin{tabular}{|c|c|c|c|c|c|}
+		\hline
+		$v_0=0.5$   & 0 & 1 & 2 & 3 & 4 \\
+		\hline
+		FD & 1.209e-05 & 3.458e-05 & 5.775e-05 & 8.153e-05 & 1.061e-04 \\
+		\hline
+		FE & 8.090e-05 & 2.007e-04 & 2.981e-04 & 6.596e-04 & 1.821e-03  \\
+		\hline
+	\end{tabular}
+	\begin{tabular}{|c|c|c|c|c|c|}
+		\hline
+		$v_0=1.5$   & 1 & 2 & 3 & 4 & 5 \\
+		\hline
+		FD & 9.163e-05 & 2.435e-04 & 4.833e-04 & 8.160e-04 & 1.243e-03 \\
+		\hline
+		FE & 4.431e-04 & 7.924e-04 & 1.516e-03 & 3.103e-03 & 8.001e-03  \\
+		\hline
+	\end{tabular}
+	\label{table:eigenvalue_error}
+\end{table}
+
 \begin{figure}[H]
 	\centering
 	\begin{subfigure}{0.5\textwidth}
@@ -99,7 +140,7 @@ The order of growth rates obtained by different methods is $10^{-13}$, we can co
 \begin{figure} [H]
 	\centering
 	\includegraphics[width=0.7\linewidth]{img/numerical_experiments/fixed_open/subsonic_v}
-	\caption{Showing the first 5 modes. Hard to tell if the flow is stable or unstable.}
+	\caption{Showing the first 5 modes. The ground mode is unstable, other modes are stable.}
 	\label{fig:subsonic_v_fixed_open}
 \end{figure}
 
@@ -118,7 +159,7 @@ When the velocity profile is supersonic, shown as purple line in Fig.\ref{fig:ve
 \begin{figure} [H]
 	\centering
 	\includegraphics[width=0.7\linewidth]{img/numerical_experiments/fixed_open/supersonic_v}
-	\caption{Unstable.}
+	\caption{All modes are unstable.}
 	\label{fig:supersonic_v_fixed_open}
 \end{figure}
 
@@ -135,6 +176,7 @@ With Dirichlet boundary condition, spectral method with different discretization
 \end{figure}
 
 \subsection{Fixed-Open Boundary}
+These numerical methods do not work well in this case. It is hard to conclude whether or not the flows are stable.
 \begin{figure} [H]
 	\centering
 	\includegraphics[width=0.7\linewidth]{img/numerical_experiments/fixed_open/accelerating_v}
@@ -155,6 +197,7 @@ As predicted by Proposition.\ref{prop:symmetry_of_eigenvalue}, the growth rates 
 \end{figure}
 
 \subsection{Fixed-Open Boundary}
+These numerical methods do not work well in this case. It is hard to conclude whether or not the flows are stable.
 \begin{figure} [H]
 	\centering
 	\includegraphics[width=0.7\linewidth]{img/numerical_experiments/fixed_open/decelerating_v}

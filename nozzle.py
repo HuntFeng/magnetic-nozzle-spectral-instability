@@ -1,4 +1,5 @@
 import numpy as np
+from scipy.integrate import simpson
 import scipy.linalg as sl
 from scipy.special import lambertw
 from dataclasses import dataclass
@@ -19,14 +20,13 @@ class Boundary(Enum):
     FIXED_OPEN = "fixed_open"
 
 class Spectral:
-    def __init__(self, N:int, domain:str, method:str, boundary: Boundary=Boundary.FIXED_FIXED) -> None:
+    def __init__(self, N:int, domain:str, method:str) -> None:
         """
         domain: either "symmetric" or "nonsymmetric"
         method: either "FD" (finite difference) or "CH" (chebyshev)
         """
         self.N = N
         self.domain = domain
-        self.boundary = boundary
         if method == "FD":
             self.x, self.D1, self.D2 = self.matrix_FD()
         if method == "CH":
@@ -56,17 +56,18 @@ class Spectral:
             raise NameError(f"Valid domain types are 'symmetric' and 'nonsymmetric'")
 
         # 2nd-order finite difference
-        D1 = np.diag(0.5/h*np.ones(N-1), k=1) + np.diag(-0.5/h*np.ones(N-1), k=-1)
-        D2 = np.diag(-2/h**2*np.ones(N), k=0) + np.diag(1/h**2*np.ones(N-1), k=1) + np.diag(1/h**2*np.ones(N-1), k=-1)
+        # mid point
+        major = np.ones(N, dtype=complex)
+        minor = np.ones(N-1, dtype=complex)
+        D1 = np.diag(0.5/h*minor, k=1) + np.diag(-0.5/h*minor, k=-1)
+        D2 = np.diag(-2/h**2*major, k=0) + np.diag(1/h**2*minor, k=1) + np.diag(1/h**2*minor, k=-1)
         
-        if self.boundary == Boundary.FIXED_OPEN:
-            # set open right end by setting last row and col
-            D1[-1,-3:] = np.array([1,-4,3])/(2*h) # 2nd order f' on right end
-            # D2[-1,:] = D1[-1,:] 
-            D2[-1,-4:] = np.array([-1,4,-5,2])/h**3 # 2nd order f'' on right end
-        elif self.boundary == Boundary.FIXED_FIXED:
-            # do nothing
-            pass
+        # end points
+        D1[0,:3] = np.array([-3, 4, -1])/(2*h)
+        D1[-1,-3:] = np.array([1, -4, 3])/(2*h)
+
+        D2[0,:4] = np.array([2, -5, 4, -1])/(h**3)
+        D2[-1,-4:] = np.array([-1, 4, -5, 2])/(h**3)
 
         return x, D1, D2
 
@@ -81,8 +82,6 @@ class Spectral:
             grid points array x
             differential operators d/dx and d^2/dx^2 in matrix form 
         """
-        if self.boundary == Boundary.FIXED_OPEN:
-            raise NotImplementedError("Chebyshev differentiation matrix does not support fixed-open boundary yet")
         N = self.N 
         domain = self.domain
         if domain == "symmetric":
@@ -149,10 +148,19 @@ class Nozzle:
         self.x = x # mesh
         self.u = u # trial functions for finite element
         self.v0 = self.velocity_profile(x)
+        self.B = self.magnetic_induction_profile(x)
+
+    def magnetic_induction_profile(self, x):
+        B0 = self.params.B0
+        R = self.params.R
+        Bm = self.params.Bm
+        Delta = self.params.Delta
+        B = lambda x: B0*(1+R*np.exp(-(x/Delta)**2))
+        return B(x)
 
     def velocity_profile(self, x):
         """ 
-        For convience of DVR method, make v0 a function of x 
+        For convience, make v0 a function of x 
         input:
             x
         output:
@@ -240,11 +248,6 @@ class Nozzle:
                 V = V[:int(V.shape[0]/2)]
             else:
                 V, omega = self.polyeig(*matrices)
-            # if self.params.boundary == Boundary.FIXED_FIXED:
-            #     self.V = np.pad(V, ((1,1),(0,0))) # pad two ends by 0
-            # elif self.params.boundary == Boundary.FIXED_OPEN:
-            #     # self.V = np.pad(V, ((1,0),(0,0)))  # pad left end by 0
-            #     pass
             return V, omega
         else:
             # finite element
@@ -254,24 +257,14 @@ class Nozzle:
                 C = C[:int(C.shape[0]/2)]
             else:
                 C, omega = self.polyeig(*matrices)
-            # # Dirichlet boundary condition
-            # C[0,:] = 0
-            # C[-1,:] = 0
-            # self.V = np.zeros((self.x.size, C.shape[1]), dtype=complex)
-            # for i in range(C.shape[1]):
-            #     for n in range(C.shape[0]):
-            #         self.V[:,i] += C[n,i]*self.u(self.x, n)
-            # # Dirichlet boundary condition
-            # self.V[0,:] = 0
-            # self.V[-1,:] = 0
             return C, omega
     
     def sort_solutions(self, real_range: list=[0,50], imag_range: list=[]):
-        selection = (self.omega.real > real_range[0]) & (self.omega.real < real_range[1])
+        selection = (self.omega.real >= real_range[0]) & (self.omega.real <= real_range[1])
         self.omega = self.omega[selection]
         self.V = self.V[:,selection]
         if imag_range:
-            selection = (self.omega.imag > imag_range[0]) & (self.omega.imag < imag_range[1])
+            selection = (self.omega.imag >= imag_range[0]) & (self.omega.imag <= imag_range[1])
             self.omega = self.omega[selection]
             self.V = self.V[:,selection]
         
@@ -297,6 +290,38 @@ class Nozzle:
             ax.set_ylabel("$\\tilde{v}$")
         ax.legend()
         return ax
+
+    def integral_form_eigenvalues(self, num: int=-1):
+        """
+        solve first {num} of eigenvalues from integral form
+        """
+        if num == -1:
+            num = self.omega.size
+
+        v0 = self.v0
+        x = self.x 
+        spectral = Spectral(x.size, "symmetric", "FD")
+        D1, D2 = spectral.D1, spectral.D2
+
+        # omega = np.array([])
+        for i in range(num):
+            v = self.V[:,i]
+
+            a = simpson(v.conj()*v,x)
+            b = 2j*simpson(v.conj()*(v0*(D1@v) + (D1@v0)*v),x)
+            c = simpson(
+                v.conj()*((1-v0**2)*(D2@v) 
+                - ((3*v0 + 1/v0)*(D1@v0))*(D1@v) 
+                - ((1-1/v0**2)*(D1@v0)**2)*v 
+                - ((v0+1/v0)*(D2@v0))*v)
+                ,x)
+            roots = np.roots([a,b,c])
+            # omega = np.append(omega, roots[roots.real>0])
+            if i == 0:
+                omega = roots
+            else:
+                omega = np.row_stack([omega, roots])
+        return omega
 
     def save_data(self, method: str, N: int = None):
         """
