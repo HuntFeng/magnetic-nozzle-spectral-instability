@@ -16,7 +16,7 @@ For Dirichlet boundary, The parameters of different discretizations are listed b
 		NUM\_BASIS &  & 51 & 50 \\
 		\hline
 	\end{tabular}
-	\label{table:parameters_dirichlet}
+	\label{table:parameters-dirichlet}
 \end{table}
 
 For left-fixed and right-open (fixed-open) boundary condition, the parameters are    
@@ -32,15 +32,15 @@ For left-fixed and right-open (fixed-open) boundary condition, the parameters ar
 		NUM\_BASIS &  & 101 \\
 		\hline
 	\end{tabular}
-	\label{table:parameters_fixed_open}
+	\label{table:parameters-fixed-open}
 \end{table}
 
 
 \section{Constant Velocity Case}
 \subsection{Dirichlet Boundary}
-Because the existence of exact solution to problems Eq.(\ref{eq:constant_v_problem_dirichlet}). The case with constant velocity profile is used as a sanity check. It allows us to verify the correctness of each method's implementation. This also serves as a reference to the accuracy spectral methods can achieve.
+Because the existence of exact solution to problems Eq.(\ref{eq:constant-v-problem-dirichlet}). The case with constant velocity profile is used as a sanity check. It allows us to verify the correctness of each method's implementation. This also serves as a reference to the accuracy spectral methods can achieve.
 
-From Fig.(\ref{fig:constant_v}), we see that the order of growth rates obtained by different methods is about $~10^{-14}$ for both subsonic and supersonic cases. We will use these numbers as a reference to the accuracy of our numerical methods. If a method produces growth rates with order close to $10^{-14}$, we consider the growth rates to be 0.
+From Fig.(\ref{fig:constant-v}), we see that the order of growth rates obtained by different methods is about $~10^{-14}$ for both subsonic and supersonic cases. We will use these numbers as a reference to the accuracy of our numerical methods. If a method produces growth rates with order close to $10^{-14}$, we consider the growth rates to be 0.
 
 \begin{table} [H]
 	\centering
@@ -67,21 +67,21 @@ From Fig.(\ref{fig:constant_v}), we see that the order of growth rates obtained 
 		SE & 0.001 & 0.005 & 0.011 & 0.019 & 0.030 \\
 		\hline
 	\end{tabular}
-	\label{table:eigenvalue_error_dirichlet}
+	\label{table:eigenvalue-error-dirichlet}
 \end{table}
 
 \begin{figure}[H]
 	\centering
 	\begin{subfigure}{0.5\textwidth}
-		\includegraphics[width=\linewidth]{img/numerical_experiments/fixed_fixed/constant_v_v0=0.5}
+		\includegraphics[width=\linewidth]{img/numerical-experiments/fixed-fixed/constant-v-v0=0.5}
 		\caption{All modes are stable.}
 	\end{subfigure}%
 	\begin{subfigure}{0.5\textwidth}
-		\includegraphics[width=\linewidth]{img/numerical_experiments/fixed_fixed/constant_v_v0=1.5}
+		\includegraphics[width=\linewidth]{img/numerical-experiments/fixed-fixed/constant-v-v0=1.5}
 		\caption{Filtered modes are stable.}
 	\end{subfigure}
 	\caption{Showing the first 5 eigenvalues of each method in each case. All methods are close to the exact eigenvalues.}
-	\label{fig:constant_v_dirichlet}
+	\label{fig:constant-v-dirichlet}
 \end{figure}
 
 \subsection{Fixed-Open Boundary}
@@ -106,101 +106,101 @@ From Fig.(\ref{fig:constant_v}), we see that the order of growth rates obtained 
 		FE & 4.431e-04 & 7.924e-04 & 1.516e-03 & 3.103e-03 & 8.001e-03  \\
 		\hline
 	\end{tabular}
-	\label{table:eigenvalue_error}
+	\label{table:eigenvalue-error}
 \end{table}
 
 \begin{figure}[H]
 	\centering
 	\begin{subfigure}{0.5\textwidth}
-		\includegraphics[width=\linewidth]{img/numerical_experiments/fixed_open/constant_v_v0=0.5}
+		\includegraphics[width=\linewidth]{img/numerical-experiments/fixed-open/constant-v-v0=0.5}
 		\caption{All modes are stable.}
 	\end{subfigure}%
 	\begin{subfigure}{0.5\textwidth}
-		\includegraphics[width=\linewidth]{img/numerical_experiments/fixed_open/constant_v_v0=1.5}
+		\includegraphics[width=\linewidth]{img/numerical-experiments/fixed-open/constant-v-v0=1.5}
 		\caption{All modes are unstable.}
 	\end{subfigure}
 	\caption{Showing the first 5 eigenvalues of each method. Finite-difference method has much better accuracy than finite-element method.}
-	\label{fig:constant_v_fixed_open}
+	\label{fig:constant-v-fixed-open}
 \end{figure}
 
 
 \section{Subsonic Case}
 \subsection{Dirichlet Boundary}
-When setting the mid-point velocity to be $M_m=0.5$, we have the subsonic velocity profile. This velocity profile is the orange line shown in Fig.\ref{fig:velocity_profiles}. With Dirichlet boundary condition, $\tilde{v}(\pm 1) =0$. The flow in magnetic nozzle is stable. Fig.\ref{fig:subsonic_v_dirichlet} shows the first few eigenvalues obtained by different discretizations. 
+When setting the mid-point velocity to be $M_m=0.5$, we have the subsonic velocity profile. This velocity profile is the orange line shown in Fig.\ref{fig:velocity-profiles}. With Dirichlet boundary condition, $\tilde{v}(\pm 1) =0$. The flow in magnetic nozzle is stable. Fig.\ref{fig:subsonic-v-dirichlet} shows the first few eigenvalues obtained by different discretizations. 
 
 The order of growth rates obtained by different methods is $10^{-13}$, we can consider it to be stable.
 \begin{figure} [H]
 	\centering
-	\includegraphics[width=0.7\linewidth]{img/numerical_experiments/fixed_fixed/subsonic_v}
+	\includegraphics[width=0.7\linewidth]{img/numerical-experiments/fixed-fixed/subsonic-v}
 	\caption{Showing the first 5 modes. It suggests that the flow in magnetic nozzle with subsonic velocity profile and Dirichlet boundary condition is stable.}
-	\label{fig:subsonic_v_dirichlet}
+	\label{fig:subsonic-v-dirichlet}
 \end{figure}
 
 \subsection{Fixed-Open Boundary}
 \begin{figure} [H]
 	\centering
-	\includegraphics[width=0.7\linewidth]{img/numerical_experiments/fixed_open/subsonic_v}
+	\includegraphics[width=0.7\linewidth]{img/numerical-experiments/fixed-open/subsonic-v}
 	\caption{Showing the first 5 modes. The ground mode is unstable, other modes are stable.}
-	\label{fig:subsonic_v_fixed_open}
+	\label{fig:subsonic-v-fixed_open}
 \end{figure}
 
 
 \section{Supersonic Case}
 \subsection{Dirichlet Boundary}
-When the velocity profile is supersonic, shown as purple line in Fig.\ref{fig:velocity_profiles}, spurious modes appeared as predicted in Chap.\ref{chap:theoretical_analysis}. Using the convergence test, we successfully eliminates all unstable modes. Fig.(\ref{fig:supersonic_v_dirichlet}) shows the first few filtered eigenvalues. As we can see the flow is stable.
+When the velocity profile is supersonic, shown as purple line in Fig.\ref{fig:velocity-profiles}, spurious modes appeared as predicted in Chap.\ref{chap:theoretical-analysis}. Using the convergence test, we successfully eliminates all unstable modes. Fig.(\ref{fig:supersonic-v-dirichlet}) shows the first few filtered eigenvalues. As we can see the flow is stable.
 \begin{figure} [H]
 	\centering
-	\includegraphics[width=0.7\linewidth]{img/numerical_experiments/fixed_fixed/supersonic_v}
+	\includegraphics[width=0.7\linewidth]{img/numerical-experiments/fixed-fixed/supersonic-v}
 	\caption{First few filtered eigenvalues are shown. The spurious modes are filtered by convergence test.}
-	\label{fig:supersonic_v_dirichlet}
+	\label{fig:supersonic-v-dirichlet}
 \end{figure}
 
 \subsection{Fixed-Open Boundary}
 \begin{figure} [H]
 	\centering
-	\includegraphics[width=0.7\linewidth]{img/numerical_experiments/fixed_open/supersonic_v}
+	\includegraphics[width=0.7\linewidth]{img/numerical-experiments/fixed-open/supersonic-v}
 	\caption{All modes are unstable.}
-	\label{fig:supersonic_v_fixed_open}
+	\label{fig:supersonic-v-fixed-open}
 \end{figure}
 
 
 \section{Accelerating Case}
 \subsection{Dirichlet Boundary}
-In this case, the flow starts from subsonic speed and accelerates to supersonic case, the velocity is exactly at sonic point $M_m=1$ at the center of the magnetic nozzle as shown in Fig.(\ref{fig:velocity_profiles})
+In this case, the flow starts from subsonic speed and accelerates to supersonic case, the velocity is exactly at sonic point $M_m=1$ at the center of the magnetic nozzle as shown in Fig.(\ref{fig:velocity-profiles})
 With Dirichlet boundary condition, spectral method with different discretizations gave negative eigenvalues. This indicates that the perturbation $\tilde{v}$ is damped oscillation, its amplitude will be decrease to zero exponentially in time, $\tilde{v} \sim \exp(\Im(\omega)t)$. Hence, the flow in magnetic nozzle is stable.
 \begin{figure} [H]
 	\centering
-	\includegraphics[width=0.7\linewidth]{img/numerical_experiments/fixed_fixed/accelerating_v}
+	\includegraphics[width=0.7\linewidth]{img/numerical-experiments/fixed-fixed/accelerating-v}
 	\caption{The filtered eigenvalues are negative. This indicates that the perturbation $\tilde{v}$ is a damped oscillation, their amplitude will decrease to zero as time elapse.}
-	\label{fig:accelerating_v_dirichlet}
+	\label{fig:accelerating-v-dirichlet}
 \end{figure}
 
 \subsection{Fixed-Open Boundary}
 These numerical methods do not work well in this case. It is hard to conclude whether or not the flows are stable.
 \begin{figure} [H]
 	\centering
-	\includegraphics[width=0.7\linewidth]{img/numerical_experiments/fixed_open/accelerating_v}
+	\includegraphics[width=0.7\linewidth]{img/numerical-experiments/fixed-open/accelerating-v}
 	\caption{Hard to tell.}
-	\label{fig:accelerating_v_fixed_open}
+	\label{fig:accelerating-v-fixed_open}
 \end{figure}
 
 
 \section{Decelerating Case}
 \subsection{Dirichlet Boundary}
-As predicted by Proposition.\ref{prop:symmetry_of_eigenvalue}, the growth rates must be positive since they are complex conjugates of the eigenvalues in accelerating case.
+As predicted by Proposition.\ref{prop:symmetry-of-eigenvalue}, the growth rates must be positive since they are complex conjugates of the eigenvalues in accelerating case.
 
 \begin{figure} [H]
 	\centering
-	\includegraphics[width=0.7\linewidth]{img/numerical_experiments/fixed_fixed/decelerating_v}
+	\includegraphics[width=0.7\linewidth]{img/numerical-experiments/fixed-fixed/decelerating-v}
 	\caption{The flow with decelerating velocity profile and Dirichlet boundaries is unstable. The grow rates are opposite to that in accelerating case.}
-	\label{fig:decelerating_v_dirichlet}
+	\label{fig:decelerating-v-dirichlet}
 \end{figure}
 
 \subsection{Fixed-Open Boundary}
 These numerical methods do not work well in this case. It is hard to conclude whether or not the flows are stable.
 \begin{figure} [H]
 	\centering
-	\includegraphics[width=0.7\linewidth]{img/numerical_experiments/fixed_open/decelerating_v}
+	\includegraphics[width=0.7\linewidth]{img/numerical-experiments/fixed-open/decelerating-v}
 	\caption{Hard to tell.}
-	\label{fig:decelerating_v_fixed_open}
+	\label{fig:decelerating-v-fixed_open}
 \end{figure}

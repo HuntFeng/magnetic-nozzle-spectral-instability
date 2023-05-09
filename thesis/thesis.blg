@@ -1,11 +1,11 @@
-This is BibTeX, Version 0.99d (TeX Live 2022/dev/Debian)
+This is BibTeX, Version 0.99d (TeX Live 2023)
 Capacity: max_strings=200000, hash_size=200000, hash_prime=170003
 The top-level auxiliary file: thesis.aux
 A level-1 auxiliary file: introduction.aux
-A level-1 auxiliary file: spectral_method.aux
-A level-1 auxiliary file: governing_equations.aux
-A level-1 auxiliary file: theoretical_analysis.aux
-A level-1 auxiliary file: numerical_experiments.aux
+A level-1 auxiliary file: spectral-method.aux
+A level-1 auxiliary file: governing-equations.aux
+A level-1 auxiliary file: theoretical-analysis.aux
+A level-1 auxiliary file: numerical-experiments.aux
 A level-1 auxiliary file: conclusion.aux
 The style file: plain.bst
 A level-1 auxiliary file: appendix.aux

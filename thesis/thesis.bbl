@@ -11,11 +11,8 @@ S.~A. Andersen.
 \newblock {\em Phys. Fluids}, 12(3):557, 1969.
 
 \bibitem{boswell_experimental_2004}
-R.~W. Boswell, O.~Sutherland, C.~Charles, J.~P. Squire, F.~R. Chang~Díaz,
-  T.~W. Glover, V.~T. Jacobson, D.~G. Chavers, R.~D. Bengtson, E.~A. Bering,
-  R.~H. Goulding, and M.~Light.
-\newblock Experimental evidence of parametric decay processes in the variable
-  specific impulse magnetoplasma rocket ({VASIMR}) helicon plasma source.
+R.~W. Boswell, O.~Sutherland, C.~Charles, J.~P. Squire, F.~R. Chang~Díaz, T.~W. Glover, V.~T. Jacobson, D.~G. Chavers, R.~D. Bengtson, E.~A. Bering, R.~H. Goulding, and M.~Light.
+\newblock Experimental evidence of parametric decay processes in the variable specific impulse magnetoplasma rocket ({VASIMR}) helicon plasma source.
 \newblock {\em Physics of Plasmas}, 11(11):5125--5129, November 2004.
 
 \bibitem{chen_introduction_2016}
@@ -25,8 +22,7 @@ Francis~F. Chen.
 
 \bibitem{ha_nonlinear_2011}
 Seung-Yeal Ha, Taeyoung Ha, Chi-Ok Hwang, and Ho~Lee.
-\newblock Nonlinear instability of the one-dimensional {Vlasov}-{Yukawa}
-  system.
+\newblock Nonlinear instability of the one-dimensional {Vlasov}-{Yukawa} system.
 \newblock {\em Journal of Mathematical Physics}, 52(3):033301, March 2011.
 
 \bibitem{jockers_stability_1968}
@@ -37,8 +33,7 @@ Klaus Jockers.
 \bibitem{keto_stability_2020}
 Eric Keto.
 \newblock Stability and solution of the time-dependent {Bondi}–{Parker} flow.
-\newblock {\em Monthly Notices of the Royal Astronomical Society},
-  493(2):2834--2840, April 2020.
+\newblock {\em Monthly Notices of the Royal Astronomical Society}, 493(2):2834--2840, April 2020.
 
 \bibitem{kreyszig_introductory_1978}
 Erwin Kreyszig.
@@ -47,8 +42,7 @@ Erwin Kreyszig.
 
 \bibitem{little_performance_2015}
 Justin~M Little.
-\newblock Performance scaling of magnetic nozzles for electric propulsion,
-  2015.
+\newblock Performance scaling of magnetic nozzles for electric propulsion, 2015.
 \newblock ISBN: 9781321565317.
 
 \bibitem{llobet_spectral_1990}
@@ -58,8 +52,7 @@ X.~Llobet, K.~Appert, A.~Bondeson, and J.~Vaclavik.
 
 \bibitem{mazouffre_electric_2016}
 Stéphane Mazouffre.
-\newblock Electric propulsion for satellites and spacecraft: established
-  technologies and novel approaches.
+\newblock Electric propulsion for satellites and spacecraft: established technologies and novel approaches.
 \newblock {\em Plasma Sources Sci. Technol.}, 25(3):033002, June 2016.
 
 \bibitem{ryutov_divertor_2016}
@@ -78,10 +71,8 @@ R.~F. Stellingwerf and J.~Buff.
 \newblock {\em ApJ}, 221:661, April 1978.
 
 \bibitem{togo_characteristics_2019}
-Satoshi Togo, Tomonori Takizuka, Dirk Reiser, Mizuki Sakamoto, Yuichi Ogawa,
-  Naomichi Ezumi, Kenzo Ibano, Kunpei Nojiri, Yue Li, and Yousuke Nakashima.
-\newblock Characteristics of plasma flow profiles in a super-{X}-divertor-like
-  configuration.
+Satoshi Togo, Tomonori Takizuka, Dirk Reiser, Mizuki Sakamoto, Yuichi Ogawa, Naomichi Ezumi, Kenzo Ibano, Kunpei Nojiri, Yue Li, and Yousuke Nakashima.
+\newblock Characteristics of plasma flow profiles in a super-{X}-divertor-like configuration.
 \newblock {\em Nuclear Materials and Energy}, 19:149--154, May 2019.
 
 \bibitem{trefethen_spectral_nodate}
@@ -90,10 +81,8 @@ Lloyd~N Trefethen.
 
 \bibitem{williams_fusion_2003}
 Craig~H. Williams.
-\newblock Fusion {Propulsion} {Through} a {Magnetic} {Nozzle} and {Open}
-  {Divertor}.
-\newblock In {\em {AIP} {Conference} {Proceedings}}, volume 654, pages
-  510--515, Albuquerque, New Mexico (USA), 2003. AIP.
+\newblock Fusion {Propulsion} {Through} a {Magnetic} {Nozzle} and {Open} {Divertor}.
+\newblock In {\em {AIP} {Conference} {Proceedings}}, volume 654, pages 510--515, Albuquerque, New Mexico (USA), 2003. AIP.
 \newblock ISSN: 0094243X.
 
 \end{thebibliography}
