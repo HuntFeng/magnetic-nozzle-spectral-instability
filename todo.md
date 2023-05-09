@@ -1,8 +1,9 @@
 TODO:
-[x] finish the proof of symmetry in the thesis
-[x] delete DVR related sections in the thesis
-[x] write parameters for simulations of fixed_open boundaries
-[x] add ground state to all results (no need to do this since the grounds state are already there, even though they look weird)
-[ ] use integral form to check the eigenvalues
+Experimentations
+[ ] check if my expansion near singular point is okay.
+[ ] The expansion near singular point is actually a Bessel equation?
+[ ] If shooting from singular point to a non-zero left boundary, what are the coefficients of the power series? This problem comes from the above question, we better make it a bessel function, so we can have an exact solution rather than power series.
+
+Thesis writting:
 [ ] swap chapter spectral method and governing equations? Make the logic flow more smoothly, chapters about physics stays together and chapters about math stay together.
 [ ] comments on different methods
