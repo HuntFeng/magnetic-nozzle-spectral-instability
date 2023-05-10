@@ -165,42 +165,10 @@ When the velocity profile is supersonic, shown as purple line in Fig.\ref{fig:ve
 
 
 \section{Accelerating Case}
-\subsection{Dirichlet Boundary}
-In this case, the flow starts from subsonic speed and accelerates to supersonic case, the velocity is exactly at sonic point $M_m=1$ at the center of the magnetic nozzle as shown in Fig.(\ref{fig:velocity-profiles})
-With Dirichlet boundary condition, spectral method with different discretizations gave negative eigenvalues. This indicates that the perturbation $\tilde{v}$ is damped oscillation, its amplitude will be decrease to zero exponentially in time, $\tilde{v} \sim \exp(\Im(\omega)t)$. Hence, the flow in magnetic nozzle is stable.
+Starting from the singular point, we shoot the solution to the left boundary. We find the set of eigenvalues such that $\tilde{v}(-1)=0$. With these eigenvalues, we can extend the solution to the supersonic region $(0,1]$. The first five eigenvalues are drawn in the graph.
 \begin{figure} [H]
 	\centering
-	\includegraphics[width=0.7\linewidth]{img/numerical-experiments/fixed-fixed/accelerating-v}
-	\caption{The filtered eigenvalues are negative. This indicates that the perturbation $\tilde{v}$ is a damped oscillation, their amplitude will decrease to zero as time elapse.}
-	\label{fig:accelerating-v-dirichlet}
-\end{figure}
-
-\subsection{Fixed-Open Boundary}
-These numerical methods do not work well in this case. It is hard to conclude whether or not the flows are stable.
-\begin{figure} [H]
-	\centering
-	\includegraphics[width=0.7\linewidth]{img/numerical-experiments/fixed-open/accelerating-v}
-	\caption{Hard to tell.}
-	\label{fig:accelerating-v-fixed_open}
-\end{figure}
-
-
-\section{Decelerating Case}
-\subsection{Dirichlet Boundary}
-As predicted by Proposition.\ref{prop:symmetry-of-eigenvalue}, the growth rates must be positive since they are complex conjugates of the eigenvalues in accelerating case.
-
-\begin{figure} [H]
-	\centering
-	\includegraphics[width=0.7\linewidth]{img/numerical-experiments/fixed-fixed/decelerating-v}
-	\caption{The flow with decelerating velocity profile and Dirichlet boundaries is unstable. The grow rates are opposite to that in accelerating case.}
-	\label{fig:decelerating-v-dirichlet}
-\end{figure}
-
-\subsection{Fixed-Open Boundary}
-These numerical methods do not work well in this case. It is hard to conclude whether or not the flows are stable.
-\begin{figure} [H]
-	\centering
-	\includegraphics[width=0.7\linewidth]{img/numerical-experiments/fixed-open/decelerating-v}
-	\caption{Hard to tell.}
-	\label{fig:decelerating-v-fixed_open}
+	\includegraphics[width=0.7\linewidth]{img/numerical-experiments/accelerating-v}
+	\caption{first five modes are stable.}
+	\label{fig:accelerating-v}
 \end{figure}
