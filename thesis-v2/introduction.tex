@@ -28,7 +28,7 @@ It is used in plasma physics research, nuclear fusion experiments, plasma cuttin
 Overall, plasma is an intriguing and versatile state of matter with significant implications in various fields of science, technology, and industry.
 
 \subsection{Single Particle Motion Along Magnetic Field Line}
-The motion of charged particles in magnetic field is determined by the magnetic force,
+Since plasma consists of charged particles, its motion can is governed by Lorentz force. The equation of motion of a charged particle in magnetic field is given by
 \[ m\dv{\mathbf{v}}{t} = q\mathbf{v\times B} \]
 where $m$ is the mass of charged particle, and $q$ is the charge of particles.
 
@@ -39,21 +39,17 @@ q\mathbf{v_{\perp}\times B} = \frac{mv_{\perp}^2}{r}\mathbf{\hat{r}},
 \mathbf{v}_{\parallel} = v_{\parallel} \mathbf{\hat{z}} \]
 where $\mathbf{v}_{\perp}$ is the velocity perpendicular to the magnetic field, and $\mathbf{v}_{\parallel}$ is the velocity parallel to the magnetic field. In this way, we see that the charged particle gyrates about the magnetic field, doing helical motion along the magnetic field line. 
 
-Moreover, if we assume a static, nonuniform $\mathbf{B}$ field, the particles will stay on the same magnetic field line due to the so-called longitudinal invariant 
-\[J = \int_{a}^{b} v_{\parallel} ds\]
-where $[a,b]$ is the region of magnetic nozzle.  
-\begin{figure}[H]
+\begin{figure}[htbp]
 	\centering
 	\includegraphics[width=0.7\linewidth]{img/governing-equations/gyrate-along-b-field}
 	\caption{A charged particle gyrates about the magnetic field line. The velocity along the field line is $\mathbf{v}_{\parallel}$ and the gyrate frequency, radius is given by the radial equation, $q\mathbf{v_{\perp}\times B} = \mathbf{\hat{r}} mv_\perp^2/r$. Moreover, for static, nonuniform magnetic field, the charged particle will stay on the same of magnetic field line as it gyrates.}
 	\label{fig:gyrate-along-b-field}
 \end{figure}
 
-
 \subsection{From Kinetic Theory to Fluid Description}
 In kinetic theory, the charged particles in plasma obey a certain distribution function $f(\mathbf{x}, \mathbf{v}, t)$. This distribution function is affected by plasma temperature. Assuming there is only one species of particles in the plasma, the plasma temperature is just the sum of the kinetic energy of all particles. We expect at higher temperature, faster the particles will be.
 
-At equilibrium, the particles can be characterized by Maxwell-Boltzmann distribution
+Suppose a collisionless plasma is at equilibrium, then the particles can be characterized by Maxwell-Boltzmann distribution
 \[ f_M(\mathbf{x}, \mathbf{v}, t) = \frac{1}{(\pi v_{th}^2)^{3/2}} \exp(-\left(\frac{v}{v_{th}}\right)^2) \]
 where $v_{th} = \sqrt{2k_BT/m}$ is the thermal velocity.
 
@@ -79,19 +75,9 @@ In the process we assume isotropic pressure, and no viscosity exists in the plas
 
 As we can see the fluid description only depends on the macroscopic properties of plasma, such as the fluid velocity along the magnetic field line $\mathbf{V}$, density $\rho$, and pressure $p$ of the plasma. This simplifies the problem.
 
-\section{Magnetic Mirror Configuration}
-In this thesis, we are going to deal with plasma flow in magnetic mirror configuration.
-The magnetic mirror configuration is a concept in plasma physics and magnetic confinement fusion research. 
-It involves using magnetic fields to confine and control the movement of charged particles, typically in a linear or cylindrical geometry.
-
-In a magnetic mirror configuration, a combination of magnetic field lines is employed to create regions of high magnetic field strength called "magnetic mirrors" or "mirror cells".
-These magnetic mirrors can trap and reflect charged particles, such as ions or electrons, preventing them from escaping along the magnetic field lines. 
-The particles are confined within the magnetic mirrors, bouncing back and forth between the mirror cells.
-
-The following are examples of plasma flow in magnetic mirror configuration.
-
-\subsection{Flow in Magnetic Nozzle}
-A magnetic nozzle is a device that uses a magnetic field to shape and control the flow of charged particles in a plasma propulsion system. By employing magnetic mirrors, the magnetic nozzle can efficiently direct and accelerate the plasma particles, generating thrust for propulsion. The magnetic field in the nozzle helps collimate and focus the plasma exhaust, increasing its velocity and enhancing the performance of the propulsion system.
+\section{Magnetic Nozzle}
+In this thesis, we are going to deal with plasma flow in magnetic nozzle.
+A magnetic nozzle is a device that uses a magnetic field to shape and control the flow of charged particles in a plasma propulsion system, see Fig.\ref{fig:magnetic-nozzle} . By employing magnetic mirrors, the magnetic nozzle can efficiently direct and accelerate the plasma particles, generating thrust for propulsion. The magnetic field in the nozzle helps collimate and focus the plasma exhaust, increasing its velocity and enhancing the performance of the propulsion system.
 
 \begin{figure}[htbp]
 	\centering
@@ -100,8 +86,58 @@ A magnetic nozzle is a device that uses a magnetic field to shape and control th
 	\label{fig:magnetic-nozzle}
 \end{figure}
 
-\subsection{Bondi-Parker Flow}
-Bondi derived a steady-state solution for accretion flow which is governed by Bernoulli's equation in sperical symmetry around a point mass in 1952. Then Parker solved a similar problem but with outward wind in 1958. \cite{aikawa_stability_1979, bondi_spherically_1952,keto_stability_2020}
+\subsection{Magnetic Field in Magnetic Nozzle} \label{sec:magnetic-field-in-nozzle}
+This thesis will treat the flow in magnetic nozzle as a 1D motion. Hence, the magnetic field can be modeled as 
+\[ B(z) = B_0 \left[1 + R\exp(-\left(\frac{x}{\delta}\right)^2)\right] \]
+where $1+R$ is the magnetic mirror ratio, it is the ratio of the magnitude of magnetic field at the center of the nozzle to that at the end of the nozzle. Higher the magnetic mirror ratio, larger the difference between the magnitude of magnetic field at the center and at the end. On the other hand, $\delta$ determines the spread of the magnetic field. Larger the $\delta$, flatter the magnetic field. 
+
+An example of magnetic field is shown in Fig.(\ref{fig:magnetic-field}).
+\begin{figure}[H]
+	\centering 
+	\includegraphics[width=0.7\linewidth]{img/governing-equations/magnetic-field}
+	\caption{This is the magnetic field in nozzle with mirror ratio $1+R=B_{max}/B_{min}=2.5$, and the spread of magnetic field, $\delta=0.1/0.3=0.\bar{3}$. }
+	\label{fig:magnetic-field}
+\end{figure}
+
+
+\subsection{Velocity Profile at Equilibrium}
+Let $n_0$ and $v_0$ be the density and velocity at equilibrium, we know that $\pdv*{n_0}{t}=0$ and $\pdv*{v_0}{t}=0$ for the solution is stationary, in other words time independent. Therefore $n_0$ and $v_0$ satisfy the so-called equilibrium condition,
+\begin{align*}
+	&\pdv{z}(\frac{n_0v_0}{B}) = 0 \\
+	&v_0\pdv{v_0}{z} = -c_s^2\frac{1}{n_0}\pdv{n_0}{z} 
+\end{align*}
+
+Let $M(z) = v_0(z)/c_s$ be the mach number (nondimensionalized velocity). The equations of motion become
+\begin{align*}
+	&B\pdv{z}(\frac{n_0M}{B}) = 0\\
+	&M\pdv{M}{z} = -\frac{1}{n_0}\pdv{n_0}{z}
+\end{align*}
+Substitute $\frac{1}{n_0}\pdv*{n_0}{z}$ using first equation, the conservation of momentum becomes
+\[ (M^2-1)\pdv{M}{z} = -\frac{M}{B}\pdv{B}{z} \]
+
+Notice that there is a singularity at $M=1$, the sonic speed.
+
+This is a separable equation, integrate it and use the conditions at midpoint $B(0)=B_m, M(0)=M_m$ we get
+\[ M^2e^{-M^2} = \frac{B^2}{B_m^2}M_m^2e^{-M_m^2} \]
+We can now express $M$ using the Lambert W function,
+\[ M(z) = \left[ -W_k\left(-\frac{B(z)^2}{B_m^2}M_m^2e^{-M_m^2}\right) \right]^{1/2} \]
+where the subscript $k$ of $W$ stands for branch of Lambert W function. When $k=0$, it is the subsonic branch; When $k=-1$, it is the supersonic branch. Below shows a few cases of the solution.
+\begin{itemize}
+	\item $M_m < 1, k=0$, subsonic velocity profile.
+	\item $M_m = 1$, $k=0$ for $x<0$ and $k=-1$ for $x>0$, accelerating profile
+	\item $M_m = 1$, $k=-1$ for $x<0$ and $k=0$ for $x>0$, decelerating profile
+	\item $M_m > 1, k=-1$, supersonic velocity profile
+\end{itemize}
+ Fig.(\ref{fig:velocity-profiles}) shows some cases of the solution.
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=0.7\linewidth]{img/governing-equations/velocity-profiles}
+	\caption{The velocity profile in the magnetic nozzle is completely determined by $M_m$, the velocity at the midpoint, $z=0$. For the transonic velocity profiles, $M_m$ alone is not enough to determine the profile, we need to specify the branch of Lambert W function to determine whether it is accelerating or decelerating.}
+	\label{fig:velocity-profiles}
+\end{figure}
+
+\subsection{Flow in Similar Configuration: Bondi-Parker Flow}
+Bondi derived a steady-state solution for accretion flow which is governed by Bernoulli's equation in sperical symmetry around a point mass in 1952. Then Parker solved a similar problem but with outward wind in 1958. \cite{aikawa_stability_1979, bondi_spherically_1952,keto_stability_2020} The equilibrium velocity profiles in such configuration are shown in Fig.\ref{fig:BP-flow-velocity}.
 
 \begin{figure}[htbp]
     \centering
@@ -135,8 +171,52 @@ Understanding and studying plasma instabilities are crucial for several reasons:
     \item Plasma Diagnostics: Instabilities can manifest as measurable fluctuations in plasma parameters such as density, temperature, and electromagnetic fields. By studying these fluctuations and their characteristics, scientists can employ diagnostic techniques to gain valuable information about the plasma state, identify the presence of instabilities, and assess the stability and health of plasma devices.
 \end{enumerate}
 
-\subsection{MHD modes}
-An MHD mode can often be described as an oscillating wave $\exp(-i\omega t)$. If $\Im(\omega) > 0$, then it is growing exponentially in time.
+\subsection{Illustration: Two-Stream Instability} \label{sec:two-stream-instability}
+We take the famous two-stream instability as an illustration. Let the plasma be cold ($k_BT_e = k_BT_i = 0$), let there be no magnetic field ($B_0=0$). The linearized continuity equations are
+\begin{align} 
+	\pdv{n_{i1}}{t} + n_0\pdv{v_{i1}}{x} &= 0  \label{eq:two-stream-continuity1} \\
+	\pdv{n_{e1}}{t} + n_0\pdv{v_{e1}}{x} + v0\pdv{n_{e1}}{x} &= 0 \label{eq:two-stream-continuity2}
+\end{align}
+
+And the linearized equations of motion are
+\begin{align} 
+	Mn_0\pdv{v_{i1}}{t} &= en_0E_1  \label{eq:two-stream-eom1} \\
+	mn_0\left(\pdv{v_{e1}}{t} + v_0\pdv{v_{e1}}{x}\right) &= -en_0E_1 \label{eq:two-stream-eom2}
+\end{align}
+Here $v_0$ is the velocity of electron respect to the ions (the ion velocity at equilibrium is taken to be $v_{i0}=0$), $n_0$ is the equilibrium density of both ion and electron, $v_{i1}$ and $v_{e1}$ are perturbed velocity of ions and electrons, and $E_1$ is the perturbed electron field.
+
+If we assume perturbed electric field takes the wave form
+\[ E_1 = E\exp(i(kx-\omega t)) \]
+Plug this perturbed electric field into Eq.(\ref{eq:two-stream-eom1}) and (\ref{eq:two-stream-eom2}), then we can solve for $v_{i1}$ and $v_{e1}$,
+\begin{align*}
+	v_{i1} &= \frac{ie}{M\omega} E \\
+	v_{e1} &= -\frac{ie}{m}\frac{E}{\omega-kv_0}
+\end{align*}
+
+Using the perturbed velocities, the continuity equations Eq.(\ref{eq:two-stream-continuity1}) and (\ref{eq:two-stream-continuity2}) yields
+\begin{align*}
+	n_{i1} &= \frac{ien_0k}{M\omega^2} E \\
+	n_{e1} &= \frac{iekn_0}{m(\omega-kv_0)^2}E
+\end{align*}
+
+Finally, plug them into the Poisson's equation
+\[ \epsilon_0 \pdv{E_1}{x} = e(n_{i1}-n_{e1}) \]
+We now have the dispersion relation
+\[ 1 = \omega_p^2 \left[\frac{m/M}{\omega^2}+\frac{1}{(\omega-kv_0)^2}\right] \]
+
+Solving this equation for $\omega$, there is chance we will get complex frequency,
+\[ \omega = \omega_r + i\omega_i \]
+where $\omega_r, \omega_i \in\mathbb{R}$. Then the perturbed electric field becomes
+\[ E_1 = E\exp(i(kx-\omega_rt))\exp(\omega_it) \]
+
+When $\omega_i < 0$, it is a damped wave. The amplitude of the wave will decay exponentially in time. When $\omega_i > 0$, the amplitude of wave grows exponentially in time and therefore unstable. Since the complex root comes with pair, as long as $\omega_i\neq 0$, one of the roots must correspond to an unstable wave. The following graph shows the two-stream instability in phase space.
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=0.7\linewidth]{img/introduction/two_stream_instability}
+	\caption{Visualization of two-stream instability in the phase space. (a) Initially the ion and electron flow are in opposite direction. (b) The velocity of both flows start to oscillate. (c) Chaotic behavior occurs. (d) The chaotic behavior continues. \cite{ha_nonlinear_2011}}
+	\label{fig:two-stream-instability}
+\end{figure}
 
 
 Overall, the study of plasma instabilities is crucial for advancing plasma physics research, optimizing plasma devices, and improving our ability to control and utilize plasmas effectively in various applications such as fusion energy, plasma propulsion, materials processing, and astrophysics.

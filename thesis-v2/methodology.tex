@@ -1,7 +1,22 @@
 \chapter{Methodology} \label{chap:methodology}
 
 \section{Spectral Method}
-Spectral method is one of the best tool to solve PDE and ODE problems. \cite{trefethen_spectral_nodate}. The central idea of spectral method is by discretizing the equation, we can transform that to a linear system or an eigenvalue problem.
+Spectral method is one of the best tools to solve PDE and ODE problems. \cite{trefethen_spectral_nodate} The central idea of spectral method is by discretizing the equation, we can transform that to a linear system or an eigenvalue problem.
+
+Here we reformulate the polynomial eigenvalue problem, Eq.(\ref{eq:polynomial-eigenvalue-problem}) as the following, 
+\begin{equation} \label{eq:eigenvalue-problem}
+	\mqty[ 0 & 1\\ \hat{M} & \hat{N} ]\mqty[ \tilde{v}\\ \omega \tilde{v}] = \omega\mqty[ \tilde{v}\\ \omega \tilde{v}]
+\end{equation}
+where the operators $\hat{M}$ and $\hat{N}$ are defined as
+\begin{align*}
+	\hat{M} &= -\left[(1-v_0^2)\pdv[2]{}{z} 
+	-\left(3v_0 + \frac{1}{v_0}\right)\pdv{v_0}{z}\pdv{}{z} 
+	- \left(1-\frac{1}{v_0^2}\right)\left(\pdv{v_0}{z}\right)^2 
+	- \left(v_0+\frac{1}{v_0}\right)\pdv[2]{v_0}{z}\right] \\
+	\hat{N} &= -2i\left(v_0\pdv{}{z} +\pdv{v_0}{z} \right) 
+\end{align*}
+This becomes an ordinary algebraic eigenvalue problem if we discretize the operators and the function $\tilde{v}$. The following subsections discuss different discretizations of the problem.
+
 \subsection{Finite Difference}
 Consider equally spaced nodes on domain $[-1,1]$, $\{x_1, x_2, \dots, x_N\}$ with $x_{j+1}-x_{j} = h$ for each $j$, and the set of corresponding function values, $\{ f_1, f_2, \dots, f_N \}$. We can approximate the derivatives using second-order central difference formulas
 \[ 
@@ -29,6 +44,23 @@ We can discretize the differentiation operators to the following matrices
 \end{bmatrix} 
 \]
 
+Using these differentiation matrices, Eq.(\ref{eq:eigenvalue-problem}) becomes
+\begin{equation}
+	\mqty[ O & I\\ M & N ]\mqty[ \mathbf{\tilde{v}}\\ \omega\mathbf{\tilde{v}} ] = \omega\mqty[ \mathbf{\tilde{v}}\\ \omega\mathbf{\tilde{v}} ]
+\end{equation}
+where $O$ is a zero matrix, $I$ is an identity matrix, and
+\begin{align*}
+	M =& -\text{diag}(1-\mathbf{v}_0^2)D^2 
+	+\text{diag}\left(3\mathbf{v}_0 + \frac{1}{\mathbf{v}_0}\right) (D\mathbf{v}_0)D 
+	+\text{diag}\left(1-\frac{1}{\mathbf{v}_0^2}\right)\left(D\mathbf{v}_0\right)^2 \\
+	&+\text{diag}\left(\mathbf{v}_0+\frac{1}{\mathbf{v}_0}\right)(D^2\mathbf{v}_0) \\
+	N =& -2i\left(\text{diag}(\mathbf{v}_0)D + D\mathbf{v}_0 \right) 
+\end{align*}
+Here we abused the notation for the purpose of convenience, $\mathbf{v}_0^2$ means squaring every component of $\mathbf{v}_0$, and $1/\mathbf{v}_0$ denotes 1 divided by all components of $\mathbf{v}_0$.
+
+\subsubsection{Boundary Condition}
+We impose Dirichlet boundary condition on the problem, meaning that $\tilde{v}(-1)=\tilde{v}(1)=0$. Further more, the differentiation matrices do not do well on the edges, so during the computation, we remove the first and last row of the differentiation matrices and the vectors $\mathbf{\tilde{v}}$ and $\mathbf{v}_0$. After the computation, we set $\tilde{v}_1=\tilde{v}_N = 0$.
+
 \subsection{Spectral Element}
 Suppose the basis functions are $\{u_k(z)\}_{k=1}^\infty$, then the eigenfunction $\tilde{v}$ can be approximated by finite amount of them, $\tilde{v}(z) = \sum_{k=1}^N c_ku_k(z)$ where $c_k$ are coefficients to be determined.
 
@@ -38,55 +70,6 @@ Then by multiplying $u_{i}$ to any term and integrate through the domain, we can
 \[ \int_{-1}^{1} dz \; u_i\pdv{\tilde{v}}{z} = \sum_{j}\left(u_i,\pdv{u_j}{z}\right)c_j \]
 \[ \int_{-1}^{1} dz \; u_i\pdv[2]{\tilde{v}}{z} = \sum_{j}\left(u_i,\pdv[2]{u_j}{z}\right)c_j \]
 
-\subsection{Finite Element}
-Finite-element method is a generalization of the spectral element method. We are allow to use a set of basis functions similar to spectral method in a cell. The region consists of many of these cells.
-
-The formulation is the same as Eq.(\ref{eq:eigenvalue-problem-SE}). The only difference is that in finite-element we need to solve Eq.(\ref{eq:eigenvalue-problem-SE}) simultaneously for all cells.
-
-\subsection{Spectral Pollution}
-
-
-\section{Reformulate the Problem for Spectral Method}
-Next step we can decouple this equation so that it becomes an eigenvalue problem.
-\begin{equation}
-	\mqty[ 0 & 1\\ \hat{M} & \hat{N} ]\mqty[ \tilde{v}\\ \omega \tilde{v}] = \omega\mqty[ \tilde{v}\\ \omega \tilde{v}]
-	\label{eq:eigenvalue-problem}
-\end{equation}
-where $O$ is zero matrix, $I$ is identity matrix, and
-\begin{align*}
-	\hat{M} &= -\left[(1-v_0^2)\pdv[2]{}{z} 
-	-\left(3v_0 + \frac{1}{v_0}\right)\pdv{v_0}{z}\pdv{}{z} 
-	- \left(1-\frac{1}{v_0^2}\right)\left(\pdv{v_0}{z}\right)^2 
-	- \left(v_0+\frac{1}{v_0}\right)\pdv[2]{v_0}{z}\right] \\
-	\hat{N} &= -2i\left(v_0\pdv{}{z} +\pdv{v_0}{z} \right) 
-\end{align*}
-This becomes an algebraic eigenvalue problem if we discretize the operators and the function $\tilde{v}$.
-
-
-
-
-\section{Discretization}
-
-\subsection{Finite Difference}
-Using these differentiation matrices, Eq.(\ref{eq:eigenvalue-problem}) becomes
-\begin{equation}
-	\mqty[ O & I\\ M & N ]\mqty[ \mathbf{\tilde{v}}\\ \omega\mathbf{\tilde{v}} ] = \omega\mqty[ \mathbf{\tilde{v}}\\ \omega\mathbf{\tilde{v}} ]
-\end{equation}
-where $O$ is a zero matrix, $I$ is an identity matrix, and
-\begin{align*}
-	M &= -\text{diag}(1-\mathbf{v}_0^2)D^2 
-	+\text{diag}\left(3\mathbf{v}_0 + \frac{1}{\mathbf{v}_0}\right) (D\mathbf{v}_0)D 
-	+\text{diag}\left(1-\frac{1}{\mathbf{v}_0^2}\right)\left(D\mathbf{v}_0\right)^2 
-	+\text{diag}\left(\mathbf{v}_0+\frac{1}{\mathbf{v}_0}\right)(D^2\mathbf{v}_0) \\
-	N &= -2i\left(\text{diag}(\mathbf{v}_0)D + D\mathbf{v}_0 \right) 
-\end{align*}
-Here we abused the notation for the purpose of convenience, $\mathbf{v}_0^2$ means squaring every component of $\mathbf{v}_0$, and $1/\mathbf{v}_0$ denotes 1 divided by all components of $\mathbf{v}_0$.
-
-\subsubsection{Boundary Condition}
-We impose Dirichlet boundary condition on the problem, meaning that $\tilde{v}(-1)=\tilde{v}(1)=0$. Further more, the differentiation matrices do not do well on the edges, so during the computation, we remove the first and last row of the differentiation matrices and the vectors $\mathbf{\tilde{v}}$ and $\mathbf{v}_0$. After the computation, we set $\tilde{v}_1=\tilde{v}_N = 0$.
-
-
-\subsection{Spectral Element}
 Suppose the basis functions are $\{u_k(z)\}_{k=1}^\infty$, then the eigenfunction $\tilde{v}$ can be approximated by finite amount of them, $\tilde{v}(z) = \sum_{k=1}^N c_ku_k(z)$ where $c_k$ are coefficients to be determined.
 
 \begin{equation} \label{eq:eigenvalue-problem-SE}
@@ -105,6 +88,7 @@ where $O$ is a zero matrix, $I$ is an identity matrix, and
 To satisfy the Dirichlet boundary condition, $\tilde{v}(\pm 1)=0$, we can choose a set of basis functions that satisfy the boundary condition $u_k(\pm 1)=0,\forall k\in\mathbb{N}$. For example, the sine functions
 \[ u_n(z) = \sin(\frac{n\pi}{2}(z+1)), n\in\mathbb{N} \]
 is a set of basis functions that satisfy the Dirichlet boundary condition.
+
 
 
 \subsection{Finite Element}
@@ -133,7 +117,6 @@ Any function $u(x)$ on $[\xi_0,\xi_N]$ can be approximated by
 
 The Dirichlet boundary condition can be set by letting the coefficients of the first and last B-Spline to 0, $c_{0}=c_{n} = 0$, where $N$ is the number of B-Splines.
 
-
 \begin{figure} [H]
 	\centering
 	\includegraphics[width=0.7\linewidth]{img/governing-equations/bspline}
@@ -141,6 +124,8 @@ The Dirichlet boundary condition can be set by letting the coefficients of the f
 	\label{fig:bspline}
 \end{figure}
 
+
+\subsection{Spectral Pollution}
 
 \section{Shooting Method}
 Shooting method can be used to solve eigenvalue problem with specified boundary values,
@@ -165,15 +150,17 @@ where $\mathbf{u}\in\mathbb{R}^2$. Fixed an $\omega$, we can approximate $\mathb
 Define $F$ by $F(\mathbf{u}_l;\omega)=\tilde{v}(z_r;\omega)$. This function $F$ takes in the initial value $\mathbf{u}_l$ and a fixed $\omega$, and outputs the "landing point" $\tilde{v}(z_r;\omega)$. If $\omega$ is an eigenvalue of Eq.(\ref{eq:boundary-eigenvalue-problem}), then $\tilde{v}(z_r;\omega) = \tilde{v}_r$. Now we can find eigenvalues to Eq.(\ref{eq:boundary-eigenvalue-problem}) by solving the roots to the scalar equation
 \[h(\omega) = F(\mathbf{u}_l;\omega) - \tilde{v}_r\]
 
-\subsection{Solve as Root Finding Problem}
-Eq.(\ref{eq:polynomial-eigenvalue-problem}) can be rewrite as 
+Having this higher view of shooting method in mind, we first transform Eq.(\ref{eq:polynomial-eigenvalue-problem}) to a IVP,
 \begin{align*}
 v' &= u\\
 u' &= \frac{-1}{1-v_0^2}\left[
     \omega^2v + 2i\omega(v_0+v_0'v) - \left(3v_0 - \frac{1}{v_0}\right)v_0'u - \left(1-\frac{1}{v_0}^2\right)(v_0')^2v - \left(v_0+\frac{1}{v_0}v_0'' v\right)
 \right]
 \end{align*}
-and $v(0)=c_0=1,u(0)=c_1=(2i\omega v_0'-2v_0'')/2v_0'$. Moreover, $u'(0)=c_2=-((v_0')^4+(2i\omega v_0' + (v_0')^2 - v_0'')(i\omega v_0' - v_0''))/(v_0'(2i\omega-6v_0'))$
+and $v(0)=c_0=1,u(0)=c_1=(2i\omega v_0'-2v_0'')/2v_0'$. Moreover, $u'(0)=c_2=-((v_0')^4+(2i\omega v_0' + (v_0')^2 - v_0'')(i\omega v_0' - v_0''))/(v_0'(2i\omega-6v_0'))$.
+
+In order to get initially value for cases with transonic velocity profiles, we need to expand the solution at the singularity.
+
 \subsection{Expansion at Singularity}
 If the equilibrium velocity profile $v_0$ is a transonic profile, then $v_0(0) = 1$ at the throat of the magnetic mirror configuration. This is a singularity. More specifically, it is a regular singular point. 
 
