@@ -4,49 +4,53 @@ The top-level auxiliary file: thesis.aux
 A level-1 auxiliary file: introduction.aux
 A level-1 auxiliary file: governing-equations.aux
 A level-1 auxiliary file: methodology.aux
+A level-1 auxiliary file: theoretical-analysis.aux
 A level-1 auxiliary file: numerical-experiments.aux
 A level-1 auxiliary file: conclusion.aux
 The style file: plain.bst
 A level-1 auxiliary file: appendix.aux
 Database file #1: references.bib
-You've used 1 entry,
+Warning--empty publisher in trefethen_spectral_nodate
+Warning--empty year in trefethen_spectral_nodate
+You've used 7 entries,
             2118 wiz_defined-function locations,
-            510 strings with 4223 characters,
-and the built_in function-call counts, 321 in all, are:
-= -- 32
-> -- 7
+            546 strings with 5013 characters,
+and the built_in function-call counts, 1971 in all, are:
+= -- 192
+> -- 65
 < -- 0
-+ -- 4
-- -- 2
-* -- 26
-:= -- 58
-add.period$ -- 3
-call.type$ -- 1
-change.case$ -- 4
++ -- 28
+- -- 20
+* -- 141
+:= -- 333
+add.period$ -- 20
+call.type$ -- 7
+change.case$ -- 29
 chr.to.int$ -- 0
-cite$ -- 1
-duplicate$ -- 11
-empty$ -- 28
-format.name$ -- 2
-if$ -- 62
+cite$ -- 9
+duplicate$ -- 75
+empty$ -- 177
+format.name$ -- 20
+if$ -- 401
 int.to.chr$ -- 0
-int.to.str$ -- 1
-missing$ -- 1
-newline$ -- 8
-num.names$ -- 2
-pop$ -- 2
+int.to.str$ -- 7
+missing$ -- 8
+newline$ -- 37
+num.names$ -- 14
+pop$ -- 38
 preamble$ -- 1
-purify$ -- 3
+purify$ -- 24
 quote$ -- 0
-skip$ -- 7
+skip$ -- 46
 stack$ -- 0
-substring$ -- 31
-swap$ -- 1
+substring$ -- 142
+swap$ -- 7
 text.length$ -- 0
 text.prefix$ -- 0
 top$ -- 0
-type$ -- 4
-warning$ -- 0
-while$ -- 4
-width$ -- 2
-write$ -- 13
+type$ -- 24
+warning$ -- 2
+while$ -- 22
+width$ -- 8
+write$ -- 74
+(There were 2 warnings)
