@@ -10,12 +10,24 @@
 \author{Hunt Feng}
 \institute{University of Saskatchewan}
 \date{\today}
+	
+\AtBeginSection[]
+{
+    \begin{frame}{Outline of Presentation}
+        \tableofcontents[currentsection]
+    \end{frame}
+}
+
 \begin{document}
 	\frame{\titlepage}
-
-	\begin{frame}
-		\cite{aikawa_stability_1979}
+	\begin{frame}{Outline of Presentation}
+		\tableofcontents
 	\end{frame}
+
+	\input{introduction}
+	\input{governing-equations}
+	\input{numerical-experiments}
+	\input{future-work}
 
 	\bibliographystyle{plain}
 	\bibliography{../../thesis/references} 
