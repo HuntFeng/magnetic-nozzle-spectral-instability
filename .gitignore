@@ -5,16 +5,3 @@ __pycache__/
 
 # backup file
 **/*-bak
-
-# latex auxiliary files
-**/*.aux
-**/*.log
-**/*.out
-**/*.gz
-**/*.synctex.gz
-**/*.lof
-**/*.lot
-**/*.toc
-
-# report
-report/

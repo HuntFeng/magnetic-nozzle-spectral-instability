@@ -1,0 +1,31 @@
+\documentclass{report}
+\usepackage[margin=2.5cm]{geometry}
+\usepackage{amsmath, amssymb, amsthm}
+\usepackage{physics}
+\usepackage{float, subcaption, graphicx}
+\usepackage{hyperref}
+
+\theoremstyle{plain}
+\newtheorem{proposition}{Proposition}
+
+\theoremstyle{definition}
+\newtheorem{definition}{Definition}
+
+\newtheorem{theorem}{Theorem}
+
+\newtheorem*{remark}{Remark}
+
+\title{Instability In Magnetic Mirror Configuration}
+\author{Hunt Feng}
+\begin{document}
+	\maketitle
+	\tableofcontents
+	
+	\include{introduction}
+	\include{governing-equations}
+	\include{numerical-experiments}
+	\include{future-work}
+
+	\bibliographystyle{plain}
+	\bibliography{../../thesis/references} 
+\end{document}
