@@ -43,9 +43,10 @@ We will use this to benchmark the simulation results.
 
 The solution to this problem is
 \begin{equation} \label{eq:constant-v-solution-fixed-open}
-	\tilde{v} = C \left[\exp\left(i\omega\frac{z+1}{v_0+1}\right) - \exp\left(i\omega\frac{z+1}{v_0-1}\right) \right]
+	\tilde{v} = C \left[\exp\left(i\omega\frac{z+1}{v_0+1}\right) 
+  - \exp\left(i\omega\frac{z+1}{v_0-1}\right) \right]
 \end{equation}
-where $C\in\mathbb{C}$, and $\omega = (v_0^2 - 1) \left[\frac{n\pi}{2} - \frac{1}{4}i\ln(\frac{v_0-1}{v_0+1})\right]$ with $n\in\mathbb{Z}$. For any $v_0\neq 1$, the term $i\ln((v_0-1)/(v_0+1))\in\mathbb{C}$ and its imaginary part is positive. Therefore,
+where $C\in\mathbb{C}$, and $\omega = (v_0^2 - 1) \left[\frac{n\pi}{2} - \frac{1}{4}i\ln(\frac{v_0-1}{v_0+1})\right]$ with $n\in\mathbb{Z}$. The term $i\ln((v_0-1)/(v_0+1))\in\mathbb{C}$ and its imaginary part is positive for any $v_0\neq 1$. Therefore,
 \begin{itemize}
 	\item If $v_0<1$, then $\Im(\omega)<0$, it's damped oscillation, hence stable.
 	\item If $v_0>1$, then $\Im(\omega)>0$, it's unstable.
@@ -129,7 +130,7 @@ This explains why the spurious unstable modes occur when $v_0>1$.
 	\label{fig:results-bad}
 \end{figure}
 
-One way to filter the spurious modes is to remove all modes with $k>h/2 \arcsin(1/v_0)$, see Fig.\ref{fig:results_filter_k}. However, this is not a good way to deal with general cases because it requires the solution to the discretized problem Eq.(\ref{eq:discretized-eq-G}). For general problem with non-constant velocity profile, it is hard to solve the discretized problem directly.
+One way to filter the spurious modes is to remove all modes with $k>h/2 \arcsin(1/v_0)$, see Fig.\ref{fig:results-filter-k}. However, this is not a good way to deal with general cases because it requires the solution to the discretized problem Eq.(\ref{eq:discretized-eq-G}). For general problem with non-constant velocity profile, it is hard to solve the discretized problem directly.
 
 \begin{figure}[H]
 	\centering

@@ -1,0 +1,81 @@
+\chapter{Methodology}
+\section{Spectral Method}
+Spectral method is one of the best tools to solve PDE and ODE problems. \cite{trefethen_spectral_nodate} The central idea of spectral method is by discretizing the equation, we can transform that to a linear system or an eigenvalue problem.
+
+Here we reformulate the polynomial eigenvalue problem, Eq.(\ref{eq:polynomial-eigenvalue-problem}) as the following, 
+\begin{equation} \label{eq:eigenvalue-problem}
+	\mqty[ 0 & 1\\ \hat{M} & \hat{N} ]\mqty[ \tilde{v}\\ \omega \tilde{v}] = \omega\mqty[ \tilde{v}\\ \omega \tilde{v}]
+\end{equation}
+where the operators $\hat{M}$ and $\hat{N}$ are defined as
+\begin{align*}
+	\hat{M} &= -\left[(1-v_0^2)\pdv[2]{}{z} 
+	-\left(3v_0 + \frac{1}{v_0}\right)\pdv{v_0}{z}\pdv{}{z} 
+	- \left(1-\frac{1}{v_0^2}\right)\left(\pdv{v_0}{z}\right)^2 
+	- \left(v_0+\frac{1}{v_0}\right)\pdv[2]{v_0}{z}\right] \\
+	\hat{N} &= -2i\left(v_0\pdv{}{z} +\pdv{v_0}{z} \right) 
+\end{align*}
+This becomes an ordinary algebraic eigenvalue problem if we discretize the operators and the function $\tilde{v}$. In this thesis, finite-difference, finite-element and spectral-element discretizations are used.
+
+\section{Shooting Method}
+Shooting method can be used to solve eigenvalue problem with specified boundary values,
+\begin{equation} \label{eq:boundary-eigenvalue-problem}
+g(\tilde{v}(z);\omega) = 0,
+\quad
+z_l \leq z \leq z_r,
+\quad
+\tilde{v}(z_l) = \tilde{v}_l, \tilde{v}(z_r) = \tilde{v}_r
+\end{equation}
+where $\omega$ is the eigenvalue to be solved.
+
+Suppose a eigenvalue problem can be formulated as
+\[ \dv{z}\mathbf{u} = \mathbf{f}(\mathbf{u},z;\omega),
+\quad
+z_l<z<z_r,
+\quad
+\mathbf{u}(z_l) = \mathbf{u}_l
+\]
+where $\mathbf{u}\in\mathbb{R}^2$. Fixed an $\omega$, we can approximate $\mathbf{u}(z_r)$ by applying algorithms such as Runge-Kutta or Leap-frog.
+
+Define $F$ by $F(\mathbf{u}_l;\omega)=\tilde{v}(z_r;\omega)$. This function $F$ takes in the initial value $\mathbf{u}_l$ and a fixed $\omega$, and outputs the "landing point" $\tilde{v}(z_r;\omega)$. If $\omega$ is an eigenvalue of Eq.(\ref{eq:boundary-eigenvalue-problem}), then $\tilde{v}(z_r;\omega) = \tilde{v}_r$. Now we can find eigenvalues to Eq.(\ref{eq:boundary-eigenvalue-problem}) by solving the roots to the scalar equation
+\[h(\omega) = F(\mathbf{u}_l;\omega) - \tilde{v}_r\]
+
+Having this higher view of shooting method in mind, we first transform Eq.(\ref{eq:polynomial-eigenvalue-problem}) to a IVP,
+\begin{align*}
+v' &= u\\
+u' &= \frac{-1}{1-v_0^2}\left[
+    \omega^2v + 2i\omega(v_0+v_0'v) - \left(3v_0 - \frac{1}{v_0}\right)v_0'u - \left(1-\frac{1}{v_0}^2\right)(v_0')^2v - \left(v_0+\frac{1}{v_0}v_0'' v\right)
+\right]
+\end{align*}
+In order to get initially value for cases with transonic velocity profiles, we need to expand the solution at the singularity.
+
+\subsection{Expansion at Singularity}
+If the equilibrium velocity profile $v_0$ is a transonic profile, then $v_0(0) = 1$ at the throat of the magnetic mirror configuration. This is a singularity. More specifically, it is a regular singular point. 
+
+In order to supply initial values to shooting method, we need to expand Eq.(\ref{eq:polynomial-eigenvalue-problem}) at the singularity, 
+\[ - 2v_0'(0)z\pdv[2]{\tilde{v}}{z}
++ (2i\omega - 4v_0'(0))\pdv{\tilde{v}}{z} 
++ (\omega^2 + 2i\omega v_0'(0) - 2v_0''(0))\tilde{v}
+= 0 \]
+
+
+Use Frobenius method, assuming $\tilde{v} = \sum_{n\geq 0}c_nz^{n+r}$, we get two different roots, $r=0$ and $r=1-a$. They correspond to finite solution and diverging solution near the singularity, respectively. The coefficients of the power series are given by 
+where 
+\begin{align*}    
+  c_n &= \frac{(-1)^n b^n c_0}{\prod_{k=0}^{n-1} (n+r-k)(n+r-1+a-k)} \\
+      &= (-1)^n b^n c_0 \frac{\Gamma(r+1)\Gamma(r+a)}{\Gamma(n+r+1)\Gamma(n+r+a)}
+\end{align*}
+where
+\[ a = \frac{2i\omega - 4v_0'(0)}{-2v_0'(0)}; \quad 
+  b = \frac{\omega^2 + 2i\omega v_0'(0) - 2v_0''(0)}{-2v_0'(0)}
+\]
+
+Worth to mention that the diverging solution goes like 
+\[ 
+\tilde{v}(z) \sim z^{1-a} = z^{-1-\omega_i/v_0'(0)}z^{i\omega_r/v_0'(0)}  \]
+where $\omega = \omega_r + i\omega_i$. Meaning that the solution will be divergent iff $\omega_i > -v'(0)$.
+
+Now we have the initial conditions to the IVP,
+\begin{align*}
+  v'(0) &= c_1 \\
+  u'(0) &= v''(0) = 2c_2
+\end{align*}

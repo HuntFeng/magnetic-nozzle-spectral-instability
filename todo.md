@@ -1,4 +1,5 @@
 TODO:
+jlsdkflasj
 - [ ] figure out why there is oscillation near the singularity even when we are using regular solution
 - [ ] make better citations (format of citations are not unified)
 - [ ] make our own figure for the magnetic nozzle since there are too many details we don't need on the current figure
