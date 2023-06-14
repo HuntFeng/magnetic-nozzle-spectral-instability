@@ -1,7 +1,48 @@
 \section{Governing Equations}
-\begin{frame}
-    \frametitle{Governing Equations}
+\begin{frame}{Governing Equations}
+  For convenience, we nondimensionalize the governing equations by normalizing the velocity to $c_s$, $v\mapsto v/c_s$, $z$ to system length $L$, coordinate along the nozzle $z \mapsto z/L$ and time $t\mapsto c_s t/L$. The governing equations become
+  \begin{align}
+    & \text{Cons. of Den.}  &&\pdv{n}{t} + n\pdv{v}{z} + v\pdv{n}{z} - nv\frac{\partial_z B}{B} = 0 \\
+    & \text{Cons. of Mom.}  &&n\pdv{v}{t} + nv\pdv{v}{z} = -\pdv{n}{z}
+  \end{align}
+  where $n$ is nondimensionalized density. 
 
-    
+  The nondimensionalized equilibrium condition is
+  \begin{align}
+      &\pdv{z}(\frac{n_0v_0}{B}) = 0 \label{eq:equilibrium-convervation-of-mass}\\
+      &v_0\pdv{v_0}{z} = -\frac{1}{n_0}\pdv{n_0}{z} \label{eq:equilibrium-convervation-of-momentum}
+  \end{align}
+  where $n_0$ and $v_0$ are equilibrium density and velocity, respectively.
+\end{frame}
 
+\begin{frame}{Linearized Equations}
+  To linearized the governing equations, we perturbed the density and velocity profiles. Let $n = n_0(z) + \tilde{n}(z,t)$ and $v = v_0(z) + \tilde{v}(z,t)$, where $\tilde{n}$ and $\tilde{v}$ are small perturbed quantities. Then Eq.(\ref{eq:equilibrium-convervation-of-mass}) and Eq.(\ref{eq:equilibrium-convervation-of-momentum}) becomes 
+  \begin{align}
+    &\frac{1}{n_0}\pdv{\tilde{n}}{t} 
+    + \pdv{\tilde{v}}{z} + v_0\tilde{Y} + \tilde{v}\frac{\partial_z n_0}{n_0} - \tilde{v}\frac{\partial_z B}{B} = 0 
+    \label{eq:linearized-conservation-of-mass}
+    \\
+    &\pdv{\tilde{v}}{t} + \pdv{(v_0\tilde{v})}{z} = -\tilde{Y}
+    \label{eq:linearized-conservation-of-momentum}
+  \end{align}
+  where 
+  \[ \tilde{Y} \equiv \frac{1}{n_0}\pdv{\tilde{n}}{z} - \frac{\partial_z n_0}{n_0^2}\tilde{n} = \pdv{z}(\frac{\tilde{n}}{n_0}) \]
+\end{frame}
+ 
+\begin{frame}{Polynomial Eigenvalue Problem}
+  Suppose the perturbed quantities are oscillating, $\tilde{n}\sim \exp(-i\omega t)$ and $\tilde{v} \sim \exp(-i\omega t)$. The perturbed quantities will blow up if $\Im(\omega) > 0$, so-called unstable flow. 
+
+  Substituting them into Eq.(\ref{eq:linearized-conservation-of-mass}) and Eq.(\ref{eq:linearized-conservation-of-momentum}), and combine the two equation, we get the so-called polynomial eigenvalue problem
+  \begin{equation}
+    \begin{aligned}
+      &\omega^2 \tilde{v} \\ 
+      +& 2i\omega\left(v_0\pdv{}{z} + \pdv{v_0}{z}\right) \tilde{v} \\
+      +& \left[ (1-v_0^2)\pdv[2]{}{z} 
+        -\left(3v_0 + \frac{1}{v_0}\right)\pdv{v_0}{z}\pdv{}{z} \right. \\
+        &- \left. \left(1-\frac{1}{v_0^2}\right)\left(\pdv{v_0}{z}\right)^2 
+      - \left(v_0+\frac{1}{v_0}\right)\pdv[2]{v_0}{z} \right]\tilde{v}
+      = 0
+    \end{aligned}
+    \label{eq:polynomial_eigenvalue_problem}
+  \end{equation}
 \end{frame}

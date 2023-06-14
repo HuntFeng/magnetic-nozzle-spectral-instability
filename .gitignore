@@ -5,3 +5,9 @@ __pycache__/
 
 # backup file
 **/*-bak
+
+# aux files
+**/*.aux
+**/*.bbl
+**/*.synctex.gz
+
