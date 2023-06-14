@@ -50,7 +50,7 @@ There are different ways to discretize the operator. For example, we can use fin
 One important thing we need to keep in mind is that, the discretized version of the eigenvalue problem can have eigenvalues that are not in $\sigma(\hat{T})$. Those eigenvalues are called spurious eigenvalues, and this phenomenon is called spectral pollution. It is due to the improper discretization of the operators. We will discuss spectral pollution in the next section.
 
 \section{Spectral Method}
-Spectral method is one of the best tool to solve PDE and ODE problems. \cite{trefethen_spectral_nodate}. The central idea of spectral method is by discretizing the equation, we can transform that to a linear system or an eigenvalue problem.
+Spectral method is one of the best tool to solve PDE and ODE problems. \cite{trefethen_spectral_2000}. The central idea of spectral method is by discretizing the equation, we can transform that to a linear system or an eigenvalue problem.
 \subsection{Finite Difference}
 Consider equally spaced nodes on domain $[-1,1]$, $\{x_1, x_2, \dots, x_N\}$ with $x_{j+1}-x_{j} = h$ for each $j$, and the set of corresponding function values, $\{ f_1, f_2, \dots, f_N \}$. We can approximate the derivatives using second-order central difference formulas
 \[ 
