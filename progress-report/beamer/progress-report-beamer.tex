@@ -14,9 +14,9 @@
 	
 \AtBeginSection[]
 {
-    \begin{frame}{Outline of Presentation}
-        \tableofcontents[currentsection]
-    \end{frame}
+  \begin{frame}{Outline of Presentation}
+      \tableofcontents[currentsection]
+  \end{frame}
 }
 
 \begin{document}
@@ -26,13 +26,15 @@
 	\end{frame}
 
 	\input{introduction}
-	\input{governing-equations}
-	\input{numerical-experiments}
+  \input{spectral-method}
+  \input{singular-perturbation}
 	\input{future-work}
   
   \newpage
-  \begin{frame}{References}
-    \bibliographystyle{plain}
-    \bibliography{../../thesis/references} 
+  \begin{frame}[allowframebreaks]
+    \bibliographystyle{abbrv}
+    \bibliography{references} 
   \end{frame}
+  
+	\input{numerical-experiments}
 \end{document}
