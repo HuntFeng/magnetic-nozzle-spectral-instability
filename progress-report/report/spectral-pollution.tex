@@ -1,0 +1,29 @@
+\chapter{Spectral Pollution: Analysis of Numerical Spectrum}
+If we assume $v\sim \exp(ikx)$, and let $\beta\equiv kh/2$. Then in finite difference discretization scheme, the differential operators $\dv*[n]{z}$ are equivalent to the following factors \cite{llobet_spectral_1990},
+\begin{align}
+	&G_0 = 1 \nonumber \\
+	&G_1 = [\exp(2i\beta)-\exp(-2i\beta)]/2h = (i/h)\sin(2\beta) 
+	\label{G-operator}\\
+	&G_2 = [\exp(2i\beta)-2-\exp(-2i\beta)]/h^2 = (2/h^2)(\cos(2\beta)-1) \nonumber 
+\end{align}
+
+Using the G-operator, Eq.(\ref{G-operator}), the discretized equation of Eq.(\ref{eq:constant-v-problem-dirichlet}) is 
+\begin{equation} \label{eq:discretized-eq-G}
+    (\omega^2G_0 + \omega G_1 + G_2)\mathbf{\tilde{v}} = 0
+\end{equation}
+where $\mathbf{\tilde{v}}$ is the discretized vector of $\tilde{v}$.
+
+Solving Eq.(\ref{eq:discretized-eq-G}), we obtain the numerical dispersion relation,
+\begin{equation} \label{dispersion-relation-G}
+	\omega = \frac{2\sin(\beta)}{h}\left(v_0 \pm \sqrt{1 - v_0^2\sin[2](\beta)}\right)
+\end{equation}
+
+Given $h$ (fixed the mesh resolution), we see that
+\begin{itemize}
+	\item $\omega$ is real for all $k$ if $v_0 < 1$.
+	\item $\omega$ is complex for large $k$, more specifically $k>h/2\arcsin(1/v_0)$, if $v_0 > 1$.
+	\item For small $k$, meaning $k\to 0$, Eq.(\ref{dispersion-relation-G}) is a good representation for the analytical dispersion relation, Eq.(\ref{dispersion-relation}). 
+\end{itemize}
+This explains why the spurious unstable modes occur when $v_0>1$.
+
+One way to filter the spurious modes is to remove all modes with $k>h/2 \arcsin(1/v_0)$. However, this is not a good way to deal with general cases because it requires the solution to the discretized problem Eq.(\ref{eq:discretized-eq-G}). For general problem with non-constant velocity profile, it is hard to solve the discretized problem directly.

@@ -5,29 +5,21 @@
 \usepackage{float, subcaption, graphicx}
 \usepackage{hyperref}
 
-\theoremstyle{plain}
-\newtheorem{proposition}{Proposition}
-
-\theoremstyle{definition}
-\newtheorem{definition}{Definition}
-
-\newtheorem{theorem}{Theorem}
-
-\newtheorem*{remark}{Remark}
-
-\title{Instability In Magnetic Mirror Configuration}
+\title{Instability of Flow in Magnetic Nozzle}
 \author{Hunt Feng}
 \begin{document}
 	\maketitle
 	\tableofcontents
 	
 	\include{introduction}
-	\include{governing-equations}
-  \include{methodology}
-	\include{numerical-experiments}
+	\include{spectral-method}
+  \include{singular-perturbation}
 	\include{future-work}
   
 	\bibliographystyle{plain}
-	\bibliography{../../thesis/references} 
-
+	\bibliography{references}
+  
+  \appendix
+  \include{numerical-experiments}
+  \include{spectral-pollution}
 \end{document}
