@@ -15,56 +15,58 @@
 \headcommand {\beamer@framepages {6}{6}}
 \headcommand {\slideentry {1}{0}{5}{7/7}{}{0}}
 \headcommand {\beamer@framepages {7}{7}}
-\headcommand {\beamer@sectionpages {3}{7}}
-\headcommand {\beamer@subsectionpages {3}{7}}
-\headcommand {\sectionentry {2}{Spectral Method}{8}{Spectral Method}{0}}
-\headcommand {\slideentry {2}{0}{1}{8/8}{}{0}}
+\headcommand {\slideentry {1}{0}{6}{8/8}{}{0}}
 \headcommand {\beamer@framepages {8}{8}}
-\headcommand {\slideentry {2}{0}{2}{9/9}{}{0}}
+\headcommand {\beamer@sectionpages {3}{8}}
+\headcommand {\beamer@subsectionpages {3}{8}}
+\headcommand {\sectionentry {2}{Spectral Method}{9}{Spectral Method}{0}}
+\headcommand {\slideentry {2}{0}{1}{9/9}{}{0}}
 \headcommand {\beamer@framepages {9}{9}}
-\headcommand {\slideentry {2}{0}{3}{10/10}{}{0}}
+\headcommand {\slideentry {2}{0}{2}{10/10}{}{0}}
 \headcommand {\beamer@framepages {10}{10}}
-\headcommand {\slideentry {2}{0}{4}{11/11}{}{0}}
+\headcommand {\slideentry {2}{0}{3}{11/11}{}{0}}
 \headcommand {\beamer@framepages {11}{11}}
-\headcommand {\beamer@sectionpages {8}{11}}
-\headcommand {\beamer@subsectionpages {8}{11}}
-\headcommand {\sectionentry {3}{Singular Perturbation}{12}{Singular Perturbation}{0}}
-\headcommand {\slideentry {3}{0}{1}{12/12}{}{0}}
+\headcommand {\slideentry {2}{0}{4}{12/12}{}{0}}
 \headcommand {\beamer@framepages {12}{12}}
-\headcommand {\slideentry {3}{0}{2}{13/13}{}{0}}
+\headcommand {\beamer@sectionpages {9}{12}}
+\headcommand {\beamer@subsectionpages {9}{12}}
+\headcommand {\sectionentry {3}{Singular Perturbation}{13}{Singular Perturbation}{0}}
+\headcommand {\slideentry {3}{0}{1}{13/13}{}{0}}
 \headcommand {\beamer@framepages {13}{13}}
-\headcommand {\slideentry {3}{0}{3}{14/14}{}{0}}
+\headcommand {\slideentry {3}{0}{2}{14/14}{}{0}}
 \headcommand {\beamer@framepages {14}{14}}
-\headcommand {\slideentry {3}{0}{4}{15/15}{}{0}}
+\headcommand {\slideentry {3}{0}{3}{15/15}{}{0}}
 \headcommand {\beamer@framepages {15}{15}}
-\headcommand {\beamer@sectionpages {12}{15}}
-\headcommand {\beamer@subsectionpages {12}{15}}
-\headcommand {\sectionentry {4}{Future Work}{16}{Future Work}{0}}
-\headcommand {\slideentry {4}{0}{1}{16/16}{}{0}}
+\headcommand {\slideentry {3}{0}{4}{16/16}{}{0}}
 \headcommand {\beamer@framepages {16}{16}}
-\headcommand {\slideentry {4}{0}{2}{17/17}{}{0}}
+\headcommand {\beamer@sectionpages {13}{16}}
+\headcommand {\beamer@subsectionpages {13}{16}}
+\headcommand {\sectionentry {4}{Future Work}{17}{Future Work}{0}}
+\headcommand {\slideentry {4}{0}{1}{17/17}{}{0}}
 \headcommand {\beamer@framepages {17}{17}}
-\headcommand {\slideentry {4}{0}{3}{18/18}{}{0}}
+\headcommand {\slideentry {4}{0}{2}{18/18}{}{0}}
 \headcommand {\beamer@framepages {18}{18}}
-\headcommand {\slideentry {4}{0}{3}{18/19}{}{0}}
-\headcommand {\beamer@framepages {18}{19}}
-\headcommand {\beamer@sectionpages {16}{19}}
-\headcommand {\beamer@subsectionpages {16}{19}}
-\headcommand {\sectionentry {5}{Appendix: Numerical Experiments}{20}{Appendix: Numerical Experiments}{0}}
-\headcommand {\slideentry {5}{0}{1}{20/20}{}{0}}
-\headcommand {\beamer@framepages {20}{20}}
-\headcommand {\slideentry {5}{0}{2}{21/21}{}{0}}
+\headcommand {\slideentry {4}{0}{3}{19/19}{}{0}}
+\headcommand {\beamer@framepages {19}{19}}
+\headcommand {\slideentry {4}{0}{3}{19/20}{}{0}}
+\headcommand {\beamer@framepages {19}{20}}
+\headcommand {\beamer@sectionpages {17}{20}}
+\headcommand {\beamer@subsectionpages {17}{20}}
+\headcommand {\sectionentry {5}{Appendix: Numerical Experiments}{21}{Appendix: Numerical Experiments}{0}}
+\headcommand {\slideentry {5}{0}{1}{21/21}{}{0}}
 \headcommand {\beamer@framepages {21}{21}}
-\headcommand {\slideentry {5}{0}{3}{22/22}{}{0}}
+\headcommand {\slideentry {5}{0}{2}{22/22}{}{0}}
 \headcommand {\beamer@framepages {22}{22}}
-\headcommand {\slideentry {5}{0}{4}{23/23}{}{0}}
+\headcommand {\slideentry {5}{0}{3}{23/23}{}{0}}
 \headcommand {\beamer@framepages {23}{23}}
-\headcommand {\slideentry {5}{0}{5}{24/24}{}{0}}
+\headcommand {\slideentry {5}{0}{4}{24/24}{}{0}}
 \headcommand {\beamer@framepages {24}{24}}
-\headcommand {\slideentry {5}{0}{6}{25/25}{}{0}}
+\headcommand {\slideentry {5}{0}{5}{25/25}{}{0}}
 \headcommand {\beamer@framepages {25}{25}}
-\headcommand {\beamer@partpages {1}{25}}
-\headcommand {\beamer@subsectionpages {20}{25}}
-\headcommand {\beamer@sectionpages {20}{25}}
-\headcommand {\beamer@documentpages {25}}
-\headcommand {\gdef \inserttotalframenumber {25}}
+\headcommand {\slideentry {5}{0}{6}{26/26}{}{0}}
+\headcommand {\beamer@framepages {26}{26}}
+\headcommand {\beamer@partpages {1}{26}}
+\headcommand {\beamer@subsectionpages {21}{26}}
+\headcommand {\beamer@sectionpages {21}{26}}
+\headcommand {\beamer@documentpages {26}}
+\headcommand {\gdef \inserttotalframenumber {26}}
