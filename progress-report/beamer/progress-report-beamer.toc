@@ -1,5 +1,0 @@
-\beamer@sectionintoc {1}{Introduction}{3}{0}{1}
-\beamer@sectionintoc {2}{Spectral Method}{9}{0}{2}
-\beamer@sectionintoc {3}{Singular Perturbation}{13}{0}{3}
-\beamer@sectionintoc {4}{Future Work}{17}{0}{4}
-\beamer@sectionintoc {5}{Appendix: Numerical Experiments}{21}{0}{5}
