@@ -1,13 +1,15 @@
 \section{Introduction}
-\begin{frame}{Instability of Plasma Flow}
+\begin{frame}{Linear Instability of Plasma Flow}
   \begin{itemize}
     \item The instability of plasma flow refers to the tendency of a plasma system to deviate from a stable, equilibrium state and exhibit perturbations or fluctuations in its behavior. \cite{chen_introduction_2016}
+    \item To investigate linear instability, we assume oscillating perturbed quantities, $\tilde{n}, \tilde{v} \sim \exp(-i\omega t)$.
+    \begin{enumerate}
+      \item If $\Im(\omega) > 0$, then it is unstable flow since the perturbations grow exponential in time, $\exp(\Im(\omega) t)$. 
+      \item If $\Im(\omega) <=0$, then it is stable flow since the perturbations decay/unchanged in time.
+    \end{enumerate}
+
+    \item In this research we will focus on the linear instability only.
   \end{itemize}  
-  To investigate instability, we assume oscillating perturbed quantities , $\tilde{n}, \tilde{v} \sim \exp(-i\omega t)$.
-  \begin{enumerate}
-    \item If $\Im(\omega) > 0$, then it is unstable flow since the perturbations grow exponential in time, $\exp(\Im(\omega) t)$. 
-    \item If $\Im(\omega) <=0$, then it is stable flow since the perturbations decay/unchanged in time.
-  \end{enumerate}
 \end{frame}
 
 \begin{frame}{Magnetic Nozzle}
@@ -64,7 +66,7 @@
     \begin{aligned}
       &\omega^2 \tilde{v} \\ 
       +& 2i\omega\left(v_0\pdv{}{z} + \pdv{v_0}{z}\right) \tilde{v} \\
-      +& \left[ (1-v_0^2)\pdv[2]{}{z} 
+      +& \left[ \textcolor{red}{(1-v_0^2)\pdv[2]{}{z}} 
         -\left(3v_0 + \frac{1}{v_0}\right)\pdv{v_0}{z}\pdv{}{z} \right. \\
         &- \left. \left(1-\frac{1}{v_0^2}\right)\left(\pdv{v_0}{z}\right)^2 
       - \left(v_0+\frac{1}{v_0}\right)\pdv[2]{v_0}{z} \right]\tilde{v}

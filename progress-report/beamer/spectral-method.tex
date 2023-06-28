@@ -17,32 +17,42 @@ where the operators $\hat{M}$ and $\hat{N}$ are defined as
 
 \begin{frame}{Spectral Pollution}
   \begin{itemize}
-    \item All modes of Eq.(\ref{eq:polynomial_eigenvalue_problem}) with $v_0=\text{const}$ are stable.
-    \item Yet all discretization show unstable modes.
+    \item Analytical result shows all modes of Eq.(\ref{eq:polynomial_eigenvalue_problem}) with $v_0=\text{const}$ are stable.
+    \item Finite-difference, finite-element, and spectral element discretization all show spurious unstable modes.
   \end{itemize}
   \begin{figure}[htbp]	
     \centering
-    \begin{subfigure}[b]{0.5\linewidth}
-      \includegraphics[width=0.9\linewidth]{figures/eigvals-bad} 
+    \begin{subfigure}[b]{0.4\linewidth}
+      \includegraphics[width=\linewidth]{figures/eigvals-bad} 
       \caption{Unfiltered eigenvalues.}
     \end{subfigure}%
-    \begin{subfigure}[b]{0.5\linewidth}
-      \includegraphics[width=0.9\linewidth]{figures/eigvecs-bad} 
+    \begin{subfigure}[b]{0.6\linewidth}
+      \includegraphics[width=\linewidth]{figures/eigvecs-bad} 
       \caption{First few unfiltered eigenfunctions.}
     \end{subfigure}
     \caption{Finite difference discretization was used. Spurious modes occurs regardless of the resolution.}
     \label{fig:results-bad}
   \end{figure}
+\end{frame} 
+
+\begin{frame}{Convergence Test}
+  \begin{figure}
+    \begin{center}
+      \includegraphics[width=0.9\textwidth]{figures/convergence-test.png}
+    \end{center}
+    \caption{Pickup the convergent eigenvalues using convergence test.}
+  \end{figure}
+  
 \end{frame}
 
 \begin{frame}{Filtering Spurious Modes}
   \begin{figure}[htbp]
     \centering
-    \begin{subfigure}[b]{0.5\linewidth}
+    \begin{subfigure}[b]{0.4\linewidth}
       \includegraphics[width=\linewidth]{figures/eigvals-good} 
       \caption{Filtered eigenvalues.}
     \end{subfigure}%
-    \begin{subfigure}[b]{0.5\linewidth}
+    \begin{subfigure}[b]{0.6\linewidth}
       \includegraphics[width=\linewidth]{figures/eigvecs-good} 
       \caption{First few filtered eigenfunctions.}
     \end{subfigure}

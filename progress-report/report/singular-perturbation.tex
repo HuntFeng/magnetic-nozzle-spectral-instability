@@ -13,7 +13,7 @@ Initially, we thought we can investigate the accelerating case using the same te
 After some investigation, we realized that there is a regular singular point at $z=0$. It is easy to see that from Eq.(\ref{eq:polynomial-eigenvalue-problem}) since the second order derivative term vanishes at $z=0$ due to the fact that $1-v_0^2=0$ at the sonic point.
 
 \subsection{Singularity and Black hole}
-Interesting enough, the acoustic perturbations of the gas fluid flow in the de Laval nozzle are proved to coincide with the quasi-normal modes of black holes solutions deformed by the 5D Weyl fluid. \cite{da_rocha_black_2017, furuhashi_simulation_2006} 
+Interesting enough, the acoustic perturbations of the gas fluid flow in the de Laval nozzle are proved to coincide with the quasi-normal modes of black holes solutions deformed by the 5D Weyl fluid. \cite{da_rocha_black_2017, furuhashi_simulation_2006} Moreover, the sonic horizon is an exact sonic analogue of black hole horizon. \cite{unruh_sonic_1995}
 
 A quasi-1D fluid flow is ruled by the Euler-Lagrange equations and the continuity relation in fluid mechanics, given by
 \begin{align} \label{eq:euler-lagrange}
@@ -23,9 +23,9 @@ A quasi-1D fluid flow is ruled by the Euler-Lagrange equations and the continuit
   \pdv{x}\left[ \left(\frac{\rho v^2}{2} - \frac{\gamma}{1-\gamma}A\right)Av \right] &= 0
 \end{align}
 
-In \cite{da_rocha_black_2017, furuhashi_simulation_2006}, the so-called tortoise coordinate is introduced,
+In \cite{da_rocha_black_2017, furuhashi_simulation_2006}, the acoustic analogue of tortoise coordinate is introduced,
 \[ x^* = c_{s0}\int [c_s(x)(1-M(x)^2)]^{-1} dx \]
-where $c_{s0}$ denotes the stagnation speed of sound, $c_s = \dv*{p}{\rho}$ is the local speed of sound and $M(x)= v(x)/c_s(x)$ is the Mach number. Using the tortoise coordinate, the singularity is removed.
+where $c_{s0}$ denotes the stagnation speed of sound, $c_s = \dv*{p}{\rho}$ is the local speed of sound and $M(x)= v(x)/c_s(x)$ is the Mach number. Using the tortoise coordinate, the problem can be transformed to a Schr{\"o}dinger-type equation. 
 
 However, there are a few drawbacks in this method.
 \begin{itemize}
@@ -92,7 +92,7 @@ u' &= \frac{-1}{1-v_0^2}\left[
     \omega^2v + 2i\omega(v_0+v_0'v) - \left(3v_0 - \frac{1}{v_0}\right)v_0'u - \left(1-\frac{1}{v_0}^2\right)(v_0')^2v - \left(v_0+\frac{1}{v_0}v_0'' v\right)
 \right]
 \end{align*}
-Since the singularity acts as a boundary condition, we can find the eigenvalues using the so-called shooting method. Starting from the singularity, we "shoot" the solution to the left using the technique for IVP (initial value problem). By matching the end point value to the left boundary condition, we can determine the eigenvalues. 
+Since the singularity acts as a boundary condition, we can find the eigenvalues using the so-called shooting method. Starting from the singularity, we "shoot" the regular solution, found by using Frobenius method, to the left using the technique for IVP (initial value problem). By matching the end point value to the left boundary condition, we can determine the eigenvalues. 
 
 In order to get initially value for cases with transonic velocity profiles, we need the derivatives of $\tilde{v}$ at $z=0$. Since we already have the power series expansion of $\tilde{v}$ near singularity. Thus, we can obtain the initial conditions from the coefficients,
 \begin{align*}
