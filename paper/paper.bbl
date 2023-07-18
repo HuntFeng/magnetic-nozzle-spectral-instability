@@ -1,8 +1,145 @@
-\begin{thebibliography}{1}
+\begin{thebibliography}{10}
+
+\bibitem{aikawa_stability_1979}
+Toshiki Aikawa.
+\newblock The stability of spherically symmetric accretion flows.
+\newblock {\em Astrophys Space Sci}, 66(2):277--285, December 1979.
+
+\bibitem{andersen_continuous_1969}
+S.~A. Andersen.
+\newblock Continuous {Supersonic} {Plasma} {Wind} {Tunnel}.
+\newblock {\em Phys. Fluids}, 12(3):557, 1969.
+
+\bibitem{bondi_spherically_1952}
+H.~Bondi.
+\newblock On {Spherically} {Symmetrical} {Accretion}.
+\newblock {\em Monthly Notices of the Royal Astronomical Society}, 112(2):195--204, April 1952.
+
+\bibitem{boswell_experimental_2004}
+R.~W. Boswell, O.~Sutherland, C.~Charles, J.~P. Squire, F.~R. Chang~Díaz, T.~W. Glover, V.~T. Jacobson, D.~G. Chavers, R.~D. Bengtson, E.~A. Bering, R.~H. Goulding, and M.~Light.
+\newblock Experimental evidence of parametric decay processes in the variable specific impulse magnetoplasma rocket ({VASIMR}) helicon plasma source.
+\newblock {\em Physics of Plasmas}, 11(11):5125--5129, November 2004.
+
+\bibitem{boulton_spectral_2016}
+Lyonell Boulton.
+\newblock Spectral pollution and eigenvalue bounds.
+\newblock {\em Applied Numerical Mathematics}, 99:1--23, January 2016.
+
+\bibitem{chen_introduction_2016}
+Francis~F. Chen.
+\newblock {\em Introduction to {Plasma} {Physics} and {Controlled} {Fusion}}.
+\newblock Springer International Publishing, Cham, 2016.
+
+\bibitem{cranmer_new_2004}
+Steven~R. Cranmer.
+\newblock New views of the solar wind with the {Lambert} {W} function.
+\newblock {\em American Journal of Physics}, 72(11):1397--1403, November 2004.
+
+\bibitem{da_rocha_black_2017}
+Rold{\~ a}o da~Rocha.
+\newblock Black hole acoustics in the minimal geometric deformation of a de { Laval} nozzle.
+\newblock {\em The European Physical Journal C}, 77(5):355, 5 2017.
+\newblock [Online; accessed 2023-03-02].
+
+\bibitem{furuhashi_simulation_2006}
+Hironobu Furuhashi, Yasusada Nambu, and Hiromi Saida.
+\newblock Simulation of an acoustic black hole in a {Laval} nozzle.
+\newblock {\em Class. Quantum Grav.}, 23(17):5417--5438, September 2006.
+
+\bibitem{ha_nonlinear_2011}
+Seung-Yeal Ha, Taeyoung Ha, Chi-Ok Hwang, and Ho~Lee.
+\newblock Nonlinear instability of the one-dimensional {Vlasov}-{Yukawa} system.
+\newblock {\em Journal of Mathematical Physics}, 52(3):033301, March 2011.
+
+\bibitem{jockers_stability_1968}
+Klaus Jockers.
+\newblock On the stability of the solar wind.
+\newblock {\em Sol Phys}, 3(4):603--610, April 1968.
+
+\bibitem{kaganovich_2020_physics}
+Igor~D. Kaganovich, Andrei Smolyakov, Yevgeny Raitses, Eduardo Ahedo, Ioannis~G. Mikellides, Benjamin Jorns, Francesco Taccogna, Renaud Gueroult, Sedina Tsikata, Anne Bourdon, Jean-Pierre Boeuf, Michael Keidar, Andrew~Tasman Powis, Mario Merino, Mark Cappelli, Kentaro Hara, Johan~A. Carlsson, Nathaniel~J. Fisch, Pascal Chabert, Irina Schweigert, Trevor Lafleur, Konstantin Matyash, Alexander~V. Khrabrov, Rod~W. Boswell, and Amnon Fruchtman.
+\newblock Physics of {E} \textbf{\texttimes{}} {B} discharges relevant to plasma propulsion and similar technologies.
+\newblock {\em Physics of Plasmas}, 27(12):120601, 12 2020.
+
+\bibitem{keto_stability_2020}
+Eric Keto.
+\newblock Stability and solution of the time-dependent {Bondi}–{Parker} flow.
+\newblock {\em Monthly Notices of the Royal Astronomical Society}, 493(2):2834--2840, April 2020.
+
+\bibitem{kolman_b-spline_2017}
+R.~Kolman, M.~Okrouhlík, A.~Berezovski, D.~Gabriel, J.~Kopačka, and J.~Plešek.
+\newblock B-spline based finite element method in one-dimensional discontinuous elastic wave propagation.
+\newblock {\em Applied Mathematical Modelling}, 46:382--395, June 2017.
+
+\bibitem{koshkarov_ion_2015}
+O.~Koshkarov, A.~I. Smolyakov, I.~D. Kaganovich, and V.~I. Ilgisonis.
+\newblock Ion sound instability driven by the ion flows.
+\newblock {\em Phys. Plasmas}, 22(5):052113, May 2015.
+
+\bibitem{kreyszig_introductory_1978}
+Erwin Kreyszig.
+\newblock {\em Introductory functional analysis with applications}.
+\newblock Wiley, New York, 1978.
+
+\bibitem{little_performance_2015}
+Justin~M Little.
+\newblock Performance scaling of magnetic nozzles for electric propulsion, 2015.
+\newblock ISBN: 9781321565317.
+
+\bibitem{litvak_rayleigh_2004}
+Andrei~A. Litvak and Nathaniel~J. Fisch.
+\newblock Rayleigh instability in {Hall} thrusters.
+\newblock {\em Physics of Plasmas}, 11(4):1379--1383, April 2004.
+
+\bibitem{llobet_spectral_1990}
+X.~Llobet, K.~Appert, A.~Bondeson, and J.~Vaclavik.
+\newblock On spectral pollution.
+\newblock {\em Computer Physics Communications}, 59(2):199--216, June 1990.
+
+\bibitem{mazouffre_electric_2016}
+Stéphane Mazouffre.
+\newblock Electric propulsion for satellites and spacecraft: established technologies and novel approaches.
+\newblock {\em Plasma Sources Sci. Technol.}, 25(3):033002, June 2016.
+
+\bibitem{romadanov_structure_2016}
+Ivan Romadanov, Andrei Smolyakov, Yevgeny Raitses, Igor Kaganovich, Tang Tian, and Sergei Ryzhkov.
+\newblock Structure of nonlocal gradient-drift instabilities in {Hall} {E} × {B } discharges.
+\newblock {\em Physics of Plasmas}, 23(12):122111, December 2016.
+
+\bibitem{ryutov_divertor_2016}
+D.~D. Ryutov, P.~N. Yushmanov, D.~C. Barnes, and S.~V. Putvinski.
+\newblock {Divertor for a linear fusion device}.
+\newblock {\em AIP Conference Proceedings}, 1721(1):060003, 03 2016.
 
 \bibitem{smolyakov_quasineutral_2021}
 A.~I. Smolyakov, A.~Sabo, P.~Yushmanov, and S.~Putvinskii.
 \newblock On quasineutral plasma flow in the magnetic nozzle.
 \newblock {\em Physics of Plasmas}, 28(6):060701, June 2021.
+
+\bibitem{stellingwerf_stability_1978}
+R.~F. Stellingwerf and J.~Buff.
+\newblock Stability of astrophysical gas flow. {I} - {Isothermal} accretion.
+\newblock {\em ApJ}, 221:661, April 1978.
+
+\bibitem{togo_characteristics_2019}
+Satoshi Togo, Tomonori Takizuka, Dirk Reiser, Mizuki Sakamoto, Yuichi Ogawa, Naomichi Ezumi, Kenzo Ibano, Kunpei Nojiri, Yue Li, and Yousuke Nakashima.
+\newblock Characteristics of plasma flow profiles in a super-{X}-divertor-like configuration.
+\newblock {\em Nuclear Materials and Energy}, 19:149--154, May 2019.
+
+\bibitem{trefethen_spectral_2000}
+Lloyd N. (Lloyd~Nicholas) Trefethen.
+\newblock {\em Spectral methods in MATLAB}.
+\newblock Software, environments, tools. Society for Industrial and Applied Mathematics, Philadelphia, PA, 2000.
+
+\bibitem{unruh_sonic_1995}
+WG~Unruh.
+\newblock Sonic analogue of black holes and the effects of high frequencies on black hole evaporation.
+\newblock {\em Physical review. D, Particles and fields}, 51(6):2827--2838, 1995.
+
+\bibitem{williams_fusion_2003}
+Craig~H. Williams.
+\newblock Fusion {Propulsion} {Through} a {Magnetic} {Nozzle} and {Open} { Divertor}.
+\newblock In {\em {AIP} {Conference} {Proceedings}}, volume 654, pages 510--515, Albuquerque, New Mexico (USA), 2003. AIP.
+\newblock ISSN: 0094243X.
 
 \end{thebibliography}

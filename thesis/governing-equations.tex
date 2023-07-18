@@ -2,21 +2,41 @@
 \section{Fluid Description for Flow}
 In this section, we will derive the governing equations of the flow in magnetic nozzle, starting from the fluid description for plasma.
 
-In magnetic nozzle, the magnetic field is along the nozzle, which we denote as z-axis. Due to Lorentz force, the charged particles gyrates about the magnetic field lines. Because the magnetic moment is invariant in such situation. \cite{chen_introduction_2016} The fluid velocity of particles can be written as $\mathbf{v} = v\mathbf{B}/B$, meaning that the particles move along the magnetic field lines. Therefore the conservation of density 
-\[ 
-\pdv{n}{t} + \div(n\mathbf{v}) = 0 
-\Rightarrow 
-\pdv{n}{t} + B\pdv{z}(\frac{nv}{B}) = 0  
-\]
-In the derivation, the divergence-free condition for magnetic field, $\div{\mathbf{B}} = 0$, is used.
+We start by deriving the usefule form of the conservation of density,
+\[ \pdv{n}{t} + \div(n\mathbf{v}) = 0 \]
+where $\mathbf{v}$ here denotes the fluid velocity of the plasma flow.
 
-To derive the second governing equation, we start from the conservation of momentum, 
-\[ \pdv{v}{t} + v\pdv{v}{z} = -\frac{1}{\rho}\grad{p} \]
-Let $\grad{p} = k_BT\pdv*{n}{z}$, we have
-\[ \pdv{v}{t} + v\pdv{v}{z} = -c_s^2\frac{1}{n}\pdv{n}{z} \]
+We can get the fluid velocity by taking the integral
+\[ \mathbf{v} = \frac{1}{n}\int_{\mathbb{R}^3} \mathbf{v}_p f(\mathbf{x}, \mathbf{v}_p, t) d^3\mathbf{v}_p \] 
+
+Denote the particle velcity as $\mathbf{v}_p$, we can decompose the particle velocity vector as $\mathbf{v}_p = (v_\parallel,v_\perp)$, where $v_\parallel$ and $v_\perp$ are the magnitudes of components that are parallel to and perpendicular to the magnetic field line, respectively. Due to the Lorentz force, the charged particles gyrates about the magnetic field lines, see Fig.\ref{fig:gyrate-along-b-field}. Hence, the $v_\perp$ will be averaged to zero the expression for plasma fluid velocity can be simplied as 
+\[\mathbf{v} = v\mathbf{B}/B\]
+where $v$ is the fluid speed along the magnetic field lines. This makes sence because the charged particles flows along $\mathbf{B}$.
+
+By expanding the divergence term, and using the divergence free condition $\div B=0$, we have 
+\[ \pdv{n}{t} + \mathbf{B}\cdot \grad(\frac{nv}{B}) = 0 \]
+Since the magnetic field lines are aligned with the central axis of the nozzle, which we denote as z-axis, so $\mathbf{B} = B\hat{z}$. Now we obtain the conservation of density for the magnetic nozzle, 
+\begin{equation}
+	\pdv{n}{t} + B\pdv{z}(\frac{nv}{B}) = 0 
+\end{equation}
+
+The second governing equation is the conservation of momentum, 
+\[ mn\pdv{\mathbf{v}}{t} + mn\mathbf{v}\cdot\grad\mathbf{v} = -\grad p \]
+where $m$ is the ion mass. This equation tells us the plasma flow is driven by pressure.
+
+The equation of state is given by the isothermal condition,
+\begin{equation} \label{eq:eos}
+	p = nk_BT
+\end{equation}
+There are two main reasons. First the plasma particles are confined to the magnetic field lines. This reduces the particle collisions and energy exchanges. Moreover, the electrons have high mobility, they will quickly fill up any charge cavities and thus maintaing a constant temperature. Hence we can safely assume the plasma flow is isothermal.
+
+Therefore, we have
+\begin{equation}
+	\pdv{v}{t} + v\pdv{v}{z} = -c_s^2\frac{1}{n}\pdv{n}{z} 
+\end{equation}
 where $c_s^2 = k_BT/m$ is the square of sound speed.
 
-Therefore the dynamics of the flow in magnetic nozzle can be characterized by the conservation of density and momentum,
+Therefore the dynamics of the plasma flow in magnetic nozzle can be characterized by the conservation of density and momentum,
 \begin{align*}
 	&\pdv{n}{t} + B\pdv{z}(\frac{nv}{B}) = 0\\
 	&\pdv{v}{t} + v\pdv{v}{z} = -c_s^2\frac{1}{n}\pdv{n}{z}
@@ -28,7 +48,7 @@ The magnetic field profile was discussed in Sec.\ref{sec:magnetic-field-in-nozzl
 For convenience, we nondimensionalize the governing equations by normalizing the velocity to $c_s$, $v\mapsto v/c_s$, $z$ to system length $L$, $z \mapsto z/L$ and time $t\mapsto c_s t/L$. The governing equations become
 \begin{align}
     &\pdv{n}{t} + n\pdv{v}{z} + v\pdv{n}{z} - nv\frac{\partial_z B}{B} = 0 
-	\label{eq:conservation-of-mass}
+	\label{eq:conservation-of-density}
 	\\
     &n\pdv{v}{t} + nv\pdv{v}{z} = -\pdv{n}{z}
 	\label{eq:conservation-of-momentum}
@@ -44,7 +64,7 @@ As illustrated in Sec.\ref{sec:two-stream-instability}, it is essential to linea
 
 Let $n = n_0(z) + \tilde{n}(z,t)$ and $v = v_0(z) + \tilde{v}(z,t)$, where $\tilde{n}$ and $\tilde{v}$ are small perturbed quantities.
 
-We first linearize Eq.(\ref{eq:conservation-of-mass}) by setting $n=n_0+\tilde{n}$ and $v=v_0+\tilde{v}$,
+We first linearize Eq.(\ref{eq:conservation-of-density}) by setting $n=n_0+\tilde{n}$ and $v=v_0+\tilde{v}$,
 \[    \pdv{(n_0+\tilde{n})}{t} 
 	+ (n_0+\tilde{n})\pdv{(v_0+\tilde{v})}{z} 
 	+ (v_0+\tilde{v})\pdv{(n_0+\tilde{n})}{z} 
@@ -61,7 +81,7 @@ By ignoring the second order perturbations, we obtain
 Using the equilibrium condition Eq.(\ref{eq:equilibrium-convervation-of-mass}), some of the terms are canceled. Moreover, the last term can be written as 
 \[ \tilde{n}\frac{v_0}{n_0}\frac{\partial_z B}{B} = \frac{\tilde{n}}{n_0}\left( \frac{\partial_z n_0}{n_0}v_0 + \pdv{v_0}{z} \right) \]
 Now, we get the linearized conservation of mass,
-\begin{equation} \label{eq:linearized-conservation-of-mass}
+\begin{equation} \label{eq:linearized-conservation-of-density}
 	\frac{1}{n_0}\pdv{\tilde{n}}{t} 
         + \pdv{\tilde{v}}{z} + v_0\tilde{Y} + \tilde{v}\frac{\partial_z n_0}{n_0} - \tilde{v}\frac{\partial_z B}{B} = 0 
 \end{equation}
@@ -80,7 +100,7 @@ Using the equilibrium condition Eq.(\ref{eq:equilibrium-convervation-of-momentum
 \end{equation}
 
 \section{Polynomial Eigenvalue Problem}
-We can further simplify the problem by combining Eq.(\ref{eq:linearized-conservation-of-mass}) and Eq.(\ref{eq:linearized-conservation-of-momentum}) into a single equation. We can substitute Eq.(\ref{eq:linearized-conservation-of-momentum}) into Eq.(\ref{eq:linearized-conservation-of-mass}) to eliminate $\tilde{Y}$,
+We can further simplify the problem by combining Eq.(\ref{eq:linearized-conservation-of-density}) and Eq.(\ref{eq:linearized-conservation-of-momentum}) into a single equation. We can substitute Eq.(\ref{eq:linearized-conservation-of-momentum}) into Eq.(\ref{eq:linearized-conservation-of-density}) to eliminate $\tilde{Y}$,
 
 \begin{equation} \label{eq:single-governing-equation}
 	\pdv{t}\frac{\tilde{n}}{n_0} 
@@ -147,4 +167,4 @@ Expand the RHS and collect terms, we get
 	\end{aligned}
 \end{equation}
 
-Eq.(\ref{eq:polynomial-eigenvalue-problem}) is an polynomial eigenvalue problem. In Chap.(\ref{chap:methodology}) we will discuss the methods to tackle this problem.
+In mathematical terms, Eq.(\ref{eq:polynomial-eigenvalue-problem}) is an polynomial eigenvalue problem, where $\omega$ is an eigenvalue to the problem, and the velocity perturbation $\tilde{v}$ is an eigenfunction associated with the eigenvalue $\omega$. In Chap.(\ref{chap:methodology}) we will discuss the methods to tackle this problem.

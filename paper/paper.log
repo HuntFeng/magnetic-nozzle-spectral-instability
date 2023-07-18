@@ -1,15 +1,15 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.24 (TeX Live 2022) (preloaded format=pdflatex 2022.8.18)  18 OCT 2022 18:30
+This is pdfTeX, Version 3.141592653-2.6-1.40.25 (TeX Live 2023) (preloaded format=pdflatex 2023.5.9)  29 JUN 2023 16:32
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
  %&-line parsing enabled.
-**/home/huntfeng/research/magnetic-nozzle/paper/paper
-(/home/huntfeng/research/magnetic-nozzle/paper/paper.tex
-LaTeX2e <2022-06-01> patch level 5
-L3 programming layer <2022-08-05> (/home/huntfeng/texlive/texmf-dist/tex/latex/base/article.cls
-Document Class: article 2021/10/04 v1.4n Standard LaTeX document class
-(/home/huntfeng/texlive/texmf-dist/tex/latex/base/size10.clo
-File: size10.clo 2021/10/04 v1.4n Standard LaTeX file (size option)
+**paper.tex
+(./paper.tex
+LaTeX2e <2022-11-01> patch level 1
+L3 programming layer <2023-05-05> (/home/huntfeng/texlive/2023/texmf-dist/tex/latex/base/article.cls
+Document Class: article 2022/07/02 v1.4n Standard LaTeX document class
+(/home/huntfeng/texlive/2023/texmf-dist/tex/latex/base/size10.clo
+File: size10.clo 2022/07/02 v1.4n Standard LaTeX file (size option)
 )
 \c@part=\count185
 \c@section=\count186
@@ -19,24 +19,24 @@ File: size10.clo 2021/10/04 v1.4n Standard LaTeX file (size option)
 \c@subparagraph=\count190
 \c@figure=\count191
 \c@table=\count192
-\abovecaptionskip=\skip47
-\belowcaptionskip=\skip48
-\bibindent=\dimen138
-) (/home/huntfeng/texlive/texmf-dist/tex/latex/amsmath/amsmath.sty
+\abovecaptionskip=\skip48
+\belowcaptionskip=\skip49
+\bibindent=\dimen140
+) (/home/huntfeng/texlive/2023/texmf-dist/tex/latex/amsmath/amsmath.sty
 Package: amsmath 2022/04/08 v2.17n AMS math features
-\@mathmargin=\skip49
+\@mathmargin=\skip50
 
 For additional information on amsmath, use the `?' option.
-(/home/huntfeng/texlive/texmf-dist/tex/latex/amsmath/amstext.sty
+(/home/huntfeng/texlive/2023/texmf-dist/tex/latex/amsmath/amstext.sty
 Package: amstext 2021/08/26 v2.01 AMS text
- (/home/huntfeng/texlive/texmf-dist/tex/latex/amsmath/amsgen.sty
+ (/home/huntfeng/texlive/2023/texmf-dist/tex/latex/amsmath/amsgen.sty
 File: amsgen.sty 1999/11/30 v2.0 generic functions
 \@emptytoks=\toks16
-\ex@=\dimen139
-)) (/home/huntfeng/texlive/texmf-dist/tex/latex/amsmath/amsbsy.sty
+\ex@=\dimen141
+)) (/home/huntfeng/texlive/2023/texmf-dist/tex/latex/amsmath/amsbsy.sty
 Package: amsbsy 1999/11/29 v1.2d Bold Symbols
-\pmbraise@=\dimen140
-) (/home/huntfeng/texlive/texmf-dist/tex/latex/amsmath/amsopn.sty
+\pmbraise@=\dimen142
+) (/home/huntfeng/texlive/2023/texmf-dist/tex/latex/amsmath/amsopn.sty
 Package: amsopn 2022/04/08 v2.04 operator names
 )
 \inf@bad=\count193
@@ -56,7 +56,7 @@ LaTeX Info: Redefining \big on input line 722.
 LaTeX Info: Redefining \Big on input line 723.
 LaTeX Info: Redefining \bigg on input line 724.
 LaTeX Info: Redefining \Bigg on input line 725.
-\big@size=\dimen141
+\big@size=\dimen143
 LaTeX Font Info:    Redeclaring font encoding OML on input line 743.
 LaTeX Font Info:    Redeclaring font encoding OMS on input line 744.
 \macc@depth=\count198
@@ -74,96 +74,98 @@ LaTeX Info: Redefining \Relbar on input line 971.
 \column@=\count269
 \maxfields@=\count270
 \andhelp@=\toks18
-\eqnshift@=\dimen142
-\alignsep@=\dimen143
-\tagshift@=\dimen144
-\tagwidth@=\dimen145
-\totwidth@=\dimen146
-\lineht@=\dimen147
+\eqnshift@=\dimen144
+\alignsep@=\dimen145
+\tagshift@=\dimen146
+\tagwidth@=\dimen147
+\totwidth@=\dimen148
+\lineht@=\dimen149
 \@envbody=\toks19
-\multlinegap=\skip50
-\multlinetaggap=\skip51
+\multlinegap=\skip51
+\multlinetaggap=\skip52
 \mathdisplay@stack=\toks20
 LaTeX Info: Redefining \[ on input line 2953.
 LaTeX Info: Redefining \] on input line 2954.
-) (/home/huntfeng/texlive/texmf-dist/tex/latex/amsfonts/amssymb.sty
+) (/home/huntfeng/texlive/2023/texmf-dist/tex/latex/amsfonts/amssymb.sty
 Package: amssymb 2013/01/14 v3.01 AMS font symbols
- (/home/huntfeng/texlive/texmf-dist/tex/latex/amsfonts/amsfonts.sty
+ (/home/huntfeng/texlive/2023/texmf-dist/tex/latex/amsfonts/amsfonts.sty
 Package: amsfonts 2013/01/14 v3.01 Basic AMSFonts support
 \symAMSa=\mathgroup4
 \symAMSb=\mathgroup5
 LaTeX Font Info:    Redeclaring math symbol \hbar on input line 98.
 LaTeX Font Info:    Overwriting math alphabet `\mathfrak' in version `bold'
 (Font)                  U/euf/m/n --> U/euf/b/n on input line 106.
-)) (/home/huntfeng/texlive/texmf-dist/tex/latex/amscls/amsthm.sty
+)) (/home/huntfeng/texlive/2023/texmf-dist/tex/latex/amscls/amsthm.sty
 Package: amsthm 2020/05/29 v2.20.6
 \thm@style=\toks21
 \thm@bodyfont=\toks22
 \thm@headfont=\toks23
 \thm@notefont=\toks24
 \thm@headpunct=\toks25
-\thm@preskip=\skip52
-\thm@postskip=\skip53
-\thm@headsep=\skip54
+\thm@preskip=\skip53
+\thm@postskip=\skip54
+\thm@headsep=\skip55
 \dth@everypar=\toks26
-) (/home/huntfeng/texlive/texmf-dist/tex/latex/physics/physics.sty
+) (/home/huntfeng/texlive/2023/texmf-dist/tex/latex/physics/physics.sty
 Package: physics 
- (/home/huntfeng/texlive/texmf-dist/tex/latex/l3packages/xparse/xparse.sty (/home/huntfeng/texlive/texmf-dist/tex/latex/l3kernel/expl3.sty
-Package: expl3 2022-08-05 L3 programming layer (loader) 
- (/home/huntfeng/texlive/texmf-dist/tex/latex/l3backend/l3backend-pdftex.def
-File: l3backend-pdftex.def 2022-08-05 L3 backend support: PDF output (pdfTeX)
+ (/home/huntfeng/texlive/2023/texmf-dist/tex/latex/l3packages/xparse/xparse.sty (/home/huntfeng/texlive/2023/texmf-dist/tex/latex/l3kernel/expl3.sty
+Package: expl3 2023-05-05 L3 programming layer (loader) 
+ (/home/huntfeng/texlive/2023/texmf-dist/tex/latex/l3backend/l3backend-pdftex.def
+File: l3backend-pdftex.def 2023-04-19 L3 backend support: PDF output (pdfTeX)
 \l__color_backend_stack_int=\count271
 \l__pdf_internal_box=\box53
 ))
-Package: xparse 2022-06-22 L3 Experimental document command parser
-)) (/home/huntfeng/texlive/texmf-dist/tex/latex/float/float.sty
+Package: xparse 2023-02-02 L3 Experimental document command parser
+)) (/home/huntfeng/texlive/2023/texmf-dist/tex/latex/float/float.sty
 Package: float 2001/11/08 v1.3d Float enhancements (AL)
 \c@float@type=\count272
 \float@exts=\toks27
 \float@box=\box54
 \@float@everytoks=\toks28
 \@floatcapt=\box55
-) (/home/huntfeng/texlive/texmf-dist/tex/latex/caption/subcaption.sty
-Package: subcaption 2022/01/07 v1.5 Sub-captions (AR)
- (/home/huntfeng/texlive/texmf-dist/tex/latex/caption/caption.sty
-Package: caption 2022/03/01 v3.6b Customizing captions (AR)
- (/home/huntfeng/texlive/texmf-dist/tex/latex/caption/caption3.sty
-Package: caption3 2022/03/17 v2.3b caption3 kernel (AR)
- (/home/huntfeng/texlive/texmf-dist/tex/latex/graphics/keyval.sty
+) (/home/huntfeng/texlive/2023/texmf-dist/tex/latex/caption/subcaption.sty
+Package: subcaption 2023/02/19 v1.6 Sub-captions (AR)
+ (/home/huntfeng/texlive/2023/texmf-dist/tex/latex/caption/caption.sty
+Package: caption 2023/03/12 v3.6j Customizing captions (AR)
+ (/home/huntfeng/texlive/2023/texmf-dist/tex/latex/caption/caption3.sty
+Package: caption3 2023/03/12 v2.4 caption3 kernel (AR)
+ (/home/huntfeng/texlive/2023/texmf-dist/tex/latex/graphics/keyval.sty
 Package: keyval 2022/05/29 v1.15 key=value parser (DPC)
 \KV@toks@=\toks29
 )
-\caption@tempdima=\dimen148
-\captionmargin=\dimen149
-\caption@leftmargin=\dimen150
-\caption@rightmargin=\dimen151
-\caption@width=\dimen152
-\caption@indent=\dimen153
-\caption@parindent=\dimen154
-\caption@hangindent=\dimen155
+\caption@tempdima=\dimen150
+\captionmargin=\dimen151
+\caption@leftmargin=\dimen152
+\caption@rightmargin=\dimen153
+\caption@width=\dimen154
+\caption@indent=\dimen155
+\caption@parindent=\dimen156
+\caption@hangindent=\dimen157
 Package caption Info: Standard document class detected.
 )
 \c@caption@flags=\count273
 \c@continuedfloat=\count274
 Package caption Info: float package is loaded.
 )
+Package caption Info: New subtype `subfigure' on input line 239.
 \c@subfigure=\count275
+Package caption Info: New subtype `subtable' on input line 239.
 \c@subtable=\count276
-) (/home/huntfeng/texlive/texmf-dist/tex/latex/graphics/graphicx.sty
+) (/home/huntfeng/texlive/2023/texmf-dist/tex/latex/graphics/graphicx.sty
 Package: graphicx 2021/09/16 v1.2d Enhanced LaTeX Graphics (DPC,SPQR)
- (/home/huntfeng/texlive/texmf-dist/tex/latex/graphics/graphics.sty
+ (/home/huntfeng/texlive/2023/texmf-dist/tex/latex/graphics/graphics.sty
 Package: graphics 2022/03/10 v1.4e Standard LaTeX Graphics (DPC,SPQR)
- (/home/huntfeng/texlive/texmf-dist/tex/latex/graphics/trig.sty
+ (/home/huntfeng/texlive/2023/texmf-dist/tex/latex/graphics/trig.sty
 Package: trig 2021/08/11 v1.11 sin cos tan (DPC)
-) (/home/huntfeng/texlive/texmf-dist/tex/latex/graphics-cfg/graphics.cfg
+) (/home/huntfeng/texlive/2023/texmf-dist/tex/latex/graphics-cfg/graphics.cfg
 File: graphics.cfg 2016/06/04 v1.11 sample graphics configuration
 )
 Package graphics Info: Driver file: pdftex.def on input line 107.
- (/home/huntfeng/texlive/texmf-dist/tex/latex/graphics-def/pdftex.def
-File: pdftex.def 2020/10/05 v1.2a Graphics/color driver for pdftex
+ (/home/huntfeng/texlive/2023/texmf-dist/tex/latex/graphics-def/pdftex.def
+File: pdftex.def 2022/09/22 v1.2b Graphics/color driver for pdftex
 ))
-\Gin@req@height=\dimen156
-\Gin@req@width=\dimen157
+\Gin@req@height=\dimen158
+\Gin@req@width=\dimen159
 ) (./paper.aux)
 \openout1 = `paper.aux'.
 
@@ -183,59 +185,48 @@ LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 10.
 LaTeX Font Info:    ... okay on input line 10.
 Package caption Info: Begin \AtBeginDocument code.
 Package caption Info: End \AtBeginDocument code.
- (/home/huntfeng/texlive/texmf-dist/tex/context/base/mkii/supp-pdf.mkii
+ (/home/huntfeng/texlive/2023/texmf-dist/tex/context/base/mkii/supp-pdf.mkii
 [Loading MPS to PDF converter (version 2006.09.02).]
 \scratchcounter=\count277
-\scratchdimen=\dimen158
+\scratchdimen=\dimen160
 \scratchbox=\box56
 \nofMPsegments=\count278
 \nofMParguments=\count279
 \everyMPshowfont=\toks30
 \MPscratchCnt=\count280
-\MPscratchDim=\dimen159
+\MPscratchDim=\dimen161
 \MPnumerator=\count281
 \makeMPintoPDFobject=\count282
 \everyMPtoPDFconversion=\toks31
-) (/home/huntfeng/texlive/texmf-dist/tex/latex/epstopdf-pkg/epstopdf-base.sty
+) (/home/huntfeng/texlive/2023/texmf-dist/tex/latex/epstopdf-pkg/epstopdf-base.sty
 Package: epstopdf-base 2020-01-24 v2.11 Base part for package epstopdf
 Package epstopdf-base Info: Redefining graphics rule for `.eps' on input line 485.
- (/home/huntfeng/texlive/texmf-dist/tex/latex/latexconfig/epstopdf-sys.cfg
+ (/home/huntfeng/texlive/2023/texmf-dist/tex/latex/latexconfig/epstopdf-sys.cfg
 File: epstopdf-sys.cfg 2010/07/13 v1.3 Configuration of (r)epstopdf for TeX Live
 ))
 LaTeX Font Info:    Trying to load font information for U+msa on input line 11.
- (/home/huntfeng/texlive/texmf-dist/tex/latex/amsfonts/umsa.fd
+ (/home/huntfeng/texlive/2023/texmf-dist/tex/latex/amsfonts/umsa.fd
 File: umsa.fd 2013/01/14 v3.01 AMS symbols A
 )
 LaTeX Font Info:    Trying to load font information for U+msb on input line 11.
- (/home/huntfeng/texlive/texmf-dist/tex/latex/amsfonts/umsb.fd
+ (/home/huntfeng/texlive/2023/texmf-dist/tex/latex/amsfonts/umsb.fd
 File: umsb.fd 2013/01/14 v3.01 AMS symbols B
-)
-<img/constant-v-Mm=0.5.png, id=1, 714.7503pt x 357.7365pt>
-File: img/constant-v-Mm=0.5.png Graphic file (type png)
-<use img/constant-v-Mm=0.5.png>
-Package pdftex.def Info: img/constant-v-Mm=0.5.png  used on input line 20.
-(pdftex.def)             Requested size: 345.0pt x 172.67773pt.
-<img/constant-v-Mm=1.5.png, id=3, 714.7503pt x 357.7365pt>
-File: img/constant-v-Mm=1.5.png Graphic file (type png)
-<use img/constant-v-Mm=1.5.png>
-Package pdftex.def Info: img/constant-v-Mm=1.5.png  used on input line 25.
-(pdftex.def)             Requested size: 345.0pt x 172.67773pt.
- [1
+) (./paper.bbl [1
 
-{/home/huntfeng/texlive/texmf-var/fonts/map/pdftex/updmap/pdftex.map}] (./paper.bbl) [2 <./img/constant-v-Mm=0.5.png> <./img/constant-v-Mm=1.5.png>] (./paper.aux) ) 
+{/home/huntfeng/texlive/2023/texmf-var/fonts/map/pdftex/updmap/pdftex.map}{/home/huntfeng/texlive/2023/texmf-dist/fonts/enc/dvips/cm-super/cm-super-ts1.enc}] [2] [3]) [4] (./paper.aux) ) 
 Here is how much of TeX's memory you used:
- 4816 strings out of 479638
- 76083 string characters out of 5878498
- 366370 words of memory out of 5000000
- 23327 multiletter control sequences out of 15000+600000
- 475761 words of font info for 52 fonts, out of 8000000 for 9000
+ 4865 strings out of 478007
+ 77020 string characters out of 5838867
+ 1859248 words of memory out of 5000000
+ 25007 multiletter control sequences out of 15000+600000
+ 521471 words of font info for 67 fonts, out of 8000000 for 9000
  14 hyphenation exceptions out of 8191
- 72i,8n,77p,644b,471s stack positions out of 10000i,1000n,20000p,200000b,200000s
-</home/huntfeng/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx12.pfb></home/huntfeng/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx9.pfb></home/huntfeng/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb></home/huntfeng/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr12.pfb></home/huntfeng/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr17.pfb></home/huntfeng/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr9.pfb></home/huntfeng/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmti10.pfb>
-Output written on paper.pdf (2 pages, 177401 bytes).
+ 72i,6n,77p,607b,226s stack positions out of 10000i,1000n,20000p,200000b,200000s
+</home/huntfeng/texlive/2023/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx12.pfb></home/huntfeng/texlive/2023/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx9.pfb></home/huntfeng/texlive/2023/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi10.pfb></home/huntfeng/texlive/2023/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb></home/huntfeng/texlive/2023/texmf-dist/fonts/type1/public/amsfonts/cm/cmr12.pfb></home/huntfeng/texlive/2023/texmf-dist/fonts/type1/public/amsfonts/cm/cmr17.pfb></home/huntfeng/texlive/2023/texmf-dist/fonts/type1/public/amsfonts/cm/cmr9.pfb></home/huntfeng/texlive/2023/texmf-dist/fonts/type1/public/amsfonts/cm/cmti10.pfb></home/huntfeng/texlive/2023/texmf-dist/fonts/type1/public/cm-super/sfbx1000.pfb></home/huntfeng/texlive/2023/texmf-dist/fonts/type1/public/cm-super/sfrm1000.pfb>
+Output written on paper.pdf (4 pages, 130125 bytes).
 PDF statistics:
- 51 PDF objects out of 1000 (max. 8388607)
- 28 compressed objects within 1 object stream
+ 68 PDF objects out of 1000 (max. 8388607)
+ 41 compressed objects within 1 object stream
  0 named destinations out of 1000 (max. 500000)
- 11 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 1 words of extra memory for PDF output out of 10000 (max. 10000000)
 

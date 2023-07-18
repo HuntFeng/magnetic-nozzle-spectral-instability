@@ -4,33 +4,42 @@
 \usepackage{float, subcaption, graphicx}
 
 \title{On the Instability of Magnetic Nozzle}
-\author{Hunt Feng}
+\author{Andrei Smolyakov, Hunt Feng}
 \date{\today}
 
 \begin{document}
-    \maketitle
-    \begin{abstract}
-        Spectral theory is a common technique for analyzing the instability of a dynamical system. By discretizing the linearized equations motion of magnetic nozzle, the instability problem becomes an algebraic eigenvalue problem. Given Dirichlet boundary condition, we found that the flow in magnetic nozzle is stable. Different discretizations, such as finite difference, finite element and DVR method agree with each other. By studying the convergence of different modes, we successfully eliminated the spurious unstable modes occur in supersonic and transonic cases. 
-    \end{abstract}
-    
+  \maketitle
+  \begin{abstract}
+    Linear instability of plasma flow in paraxial magnetic nozzle is studied under the framework of polynomial eigenvalue problem. The linear instability for subsonic and supersonic case are found using spectral method. Spectral pollution is filtered using convergence test. The linear stability for transonic velocity profile is investigaed by employing shooting method. The regular solution to the polynomial eigenvalue problem near the singularity is picked up through Frobenius method. Solutions that are crossing the sonic point smoothly were obtained for transonic case. 
+  \end{abstract}
 
-    \begin{figure}[H]
-        \begin{subfigure}[b]{\textwidth}
-            \centering
-            \includegraphics[width=\textwidth]{img/constant-v-Mm=0.5.png}    
-            \caption{For subsonic case, the flow in magnetic nozzle is stable. The figure shows the first few modes.}
-        \end{subfigure}
-        \begin{subfigure}[b]{\textwidth}
-            \centering
-            \includegraphics[width=\textwidth]{img/constant-v-Mm=1.5.png}
-            \caption{For supersonic case, the flow in magnetic nozzle is also stable. The figure shows the first few modes after removing the spurious unstable modes.}
-        \end{subfigure}
-        \caption{The above figures show the first few modes for the flow in magnetic nozzle assuming constant velocity profile.}
-    \end{figure}
+  \section{Introduction}
+  \begin{itemize}
+    \item Mangetic nozzle.
+    \item Magnetic mirror configuration.
+    \item Relavent research.
+  \end{itemize}
+  
+  \section{Polynomial Eigenvalue Problem}
+  \begin{itemize}
+    \item Fluid description.
+    \item Equilibrium velocity profile.
+    \item Results for subsonic and supersonic case?
+  \end{itemize}
 
-    Other cases are pretty much the same. The flow in magnetic nozzle is stable.
+  \section{Singular Perturbation}
+  \begin{itemize}
+    \item Expansion of $\tilde{v}$ near singularity. 
+    \item Results for transonic cases.
+  \end{itemize}
 
-    \bibliography{references}
-    \bibliographystyle{plain}
-    \nocite{smolyakov_quasineutral_2021}
+  \section{Conclusion}
+  \begin{itemize}
+    \item Breifly talk about the result.
+    \item Obtained smooth slutions crossing sonic point.
+  \end{itemize}
+
+  \bibliography{references}
+  \bibliographystyle{plain}
+  \nocite{*}
 \end{document}
