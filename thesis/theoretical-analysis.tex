@@ -1,5 +1,218 @@
 \chapter{Theoretical Analysis} \label{chap:theoretical-analysis}
-\section{Constant Velocity}
+In order to determine the best tool to tackle the problem. We need to first simplify the problem.
+
+\section{Fluid Description for Flow}
+In this section, we will derive the governing equations of the flow in magnetic nozzle, starting from the fluid description for plasma.
+
+We start by deriving the usefule form of the conservation of density,
+\[ \pdv{n}{t} + \div(n\mathbf{v}) = 0 \]
+where $\mathbf{v}$ here denotes the fluid velocity of the plasma flow.
+
+We can get the fluid velocity by taking the integral
+\[ \mathbf{v} = \frac{1}{n}\int_{\mathbb{R}^3} \mathbf{v}_p f(\mathbf{x}, \mathbf{v}_p, t) d^3\mathbf{v}_p \]
+
+Denote the particle velcity as $\mathbf{v}_p$, we can decompose the particle velocity vector as $\mathbf{v}_p = (v_\parallel,v_\perp)$, where $v_\parallel$ and $v_\perp$ are the magnitudes of components that are parallel to and perpendicular to the magnetic field line, respectively. Due to the Lorentz force, the charged particles gyrates about the magnetic field lines, see Fig.\ref{fig:gyrate-along-b-field}. Hence, the $v_\perp$ will be averaged to zero the expression for plasma fluid velocity can be simplied as
+\[\mathbf{v} = v\mathbf{B}/B\]
+where $v$ is the fluid speed along the magnetic field lines. This makes sence because the charged particles flows along $\mathbf{B}$.
+
+By expanding the divergence term, and using the divergence free condition $\div B=0$, we have
+\[ \pdv{n}{t} + \mathbf{B}\cdot \grad(\frac{nv}{B}) = 0 \]
+Since the magnetic field lines are aligned with the central axis of the nozzle, which we denote as z-axis, so $\mathbf{B} = B\hat{z}$. Now we obtain the conservation of density for the magnetic nozzle,
+\begin{equation}
+    \pdv{n}{t} + B\pdv{z}(\frac{nv}{B}) = 0
+\end{equation}
+
+The second governing equation is the conservation of momentum,
+\[ mn\pdv{\mathbf{v}}{t} + mn\mathbf{v}\cdot\grad\mathbf{v} = -\grad p \]
+where $m$ is the ion mass. This equation tells us the plasma flow is driven by pressure.
+
+The equation of state is given by the isothermal condition,
+\begin{equation} \label{eq:eos}
+    p = nk_BT
+\end{equation}
+There are two main reasons. First the plasma particles are confined to the magnetic field lines. This reduces the particle collisions and energy exchanges. Moreover, the electrons have high mobility, they will quickly fill up any charge cavities and thus maintain a constant temperature. Hence, we can safely assume the plasma flow is isothermal.
+
+Therefore, we have
+\begin{equation}
+    \pdv{v}{t} + v\pdv{v}{z} = -c_s^2\frac{1}{n}\pdv{n}{z}
+\end{equation}
+where $c_s^2 = k_BT/m$ is the square of sound speed.
+
+Therefore, the dynamics of the plasma flow in magnetic nozzle can be characterized by the conservation of density and momentum,
+\begin{align*}
+     & \pdv{n}{t} + B\pdv{z}(\frac{nv}{B}) = 0                \\
+     & \pdv{v}{t} + v\pdv{v}{z} = -c_s^2\frac{1}{n}\pdv{n}{z}
+\end{align*}
+The magnetic field profile was discussed in Sec.\ref{sec:magnetic-field-in-nozzle}.
+
+In this research, we are interested in the stability of the equilibrium flow in the nozzle. Let's denote $n_0$ and $v_0$ as equilibrium density and equilibrium velocity, respectively. Since they are stationary (time independent) solutions to the above set of equations, so they satisfy the so-called equilibrium condition,
+\begin{align*}
+     & B\pdv{z}(\frac{n_0v_0}{B})  = 0                   \\
+     & v_0\pdv{v_0}{z} = -c_s^2\frac{1}{n_0}\pdv{n_0}{z}
+\end{align*}
+
+\section{Non-dimensionalization}
+For convenience, we nondimensionalize the governing equations by normalizing the velocity to $c_s$, $v\mapsto v/c_s$, $z$ to system length $L$, $z \mapsto z/L$ and time $t\mapsto c_s t/L$. The governing equations become
+\begin{align}
+     & \pdv{n}{t} + n\pdv{v}{z} + v\pdv{n}{z} - nv\frac{\partial_z B}{B} = 0
+    \label{eq:conservation-of-density}
+    \\
+     & n\pdv{v}{t} + nv\pdv{v}{z} = -\pdv{n}{z}
+    \label{eq:conservation-of-momentum}
+\end{align}
+and the nondimensionalized equilibrium condition is
+\begin{align}
+     & \pdv{z}(\frac{n_0v_0}{B}) = 0 \label{eq:equilibrium-convervation-of-mass}                    \\
+     & v_0\pdv{v_0}{z} = -\frac{1}{n_0}\pdv{n_0}{z} \label{eq:equilibrium-convervation-of-momentum}
+\end{align}
+
+\section{Velocity Profile at Equilibrium}
+Let $n_0$ and $v_0$ be the density and velocity at equilibrium, we know that $\pdv*{n_0}{t}=0$ and $\pdv*{v_0}{t}=0$ for the solution is stationary, in other words time independent. Therefore $n_0$ and $v_0$ satisfy the so-called equilibrium condition,
+\begin{align*}
+     & \pdv{z}(\frac{n_0v_0}{B}) = 0                     \\
+     & v_0\pdv{v_0}{z} = -c_s^2\frac{1}{n_0}\pdv{n_0}{z}
+\end{align*}
+
+Let $M(z) = v_0(z)/c_s$ be the mach number (nondimensionalized velocity). The equations of motion become
+\begin{align*}
+     & B\pdv{z}(\frac{n_0M}{B}) = 0             \\
+     & M\pdv{M}{z} = -\frac{1}{n_0}\pdv{n_0}{z}
+\end{align*}
+Substitute $\frac{1}{n_0}\pdv*{n_0}{z}$ using first equation, the conservation of momentum becomes
+\[ (M^2-1)\pdv{M}{z} = -\frac{M}{B}\pdv{B}{z} \]
+
+Notice that there is a singularity at $M=1$, the sonic speed.
+
+This is a separable equation, integrate it and use the conditions at midpoint $B(0)=B_m, M(0)=M_m$ we get
+\[ M^2e^{-M^2} = \frac{B^2}{B_m^2}M_m^2e^{-M_m^2} \]
+We can now express $M$ using the Lambert W function,
+\[ M(z) = \left[ -W_k\left(-\frac{B(z)^2}{B_m^2}M_m^2e^{-M_m^2}\right) \right]^{1/2} \]
+where the subscript $k$ of $W$ stands for branch of Lambert W function. When $k=0$, it is the subsonic branch; When $k=-1$, it is the supersonic branch. Below shows a few cases of the solution.
+\begin{itemize}
+    \item $M_m < 1, k=0$, subsonic velocity profile.
+    \item $M_m = 1$, $k=0$ for $x<0$ and $k=-1$ for $x>0$, accelerating profile
+    \item $M_m = 1$, $k=-1$ for $x<0$ and $k=0$ for $x>0$, decelerating profile
+    \item $M_m > 1, k=-1$, supersonic velocity profile
+\end{itemize}
+Fig.(\ref{fig:velocity-profiles}) shows some cases of the solution.
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.7\linewidth]{img/velocity-profiles}
+    \caption{The velocity profile in the magnetic nozzle is completely determined by $M_m$, the velocity at the midpoint, $z=0$. For the transonic velocity profiles, $M_m$ alone is not enough to determine the profile, we need to specify the branch of Lambert W function to determine whether it is accelerating or decelerating.}
+    \label{fig:velocity-profiles}
+\end{figure}
+
+\section{Linearized Governing Equations}
+As illustrated in Sec.\ref{sec:two-stream-instability}, it is essential to linearize the governing equations in order to investigate the instability of plasma. Now we are going to derive the linearized governing equations with the equilibrium conditions given in above.
+
+Let $n = n_0(z) + \tilde{n}(z,t)$ and $v = v_0(z) + \tilde{v}(z,t)$, where $\tilde{n}$ and $\tilde{v}$ are small perturbed quantities.
+
+We first linearize Eq.(\ref{eq:conservation-of-density}) by setting $n=n_0+\tilde{n}$ and $v=v_0+\tilde{v}$,
+\[    \pdv{(n_0+\tilde{n})}{t}
+    + (n_0+\tilde{n})\pdv{(v_0+\tilde{v})}{z}
+    + (v_0+\tilde{v})\pdv{(n_0+\tilde{n})}{z}
+    - (n_0+\tilde{n})(v_0+\tilde{v})\frac{\partial_z B}{B} = 0
+\]
+By ignoring the second order perturbations, we obtain
+\[ \frac{1}{n_0}\pdv{\tilde{n}}{t}
+    + \pdv{v_0}{z} + \frac{\tilde{n}}{n_0}\pdv{v_0}{z} + \pdv{\tilde{v}}{z}
+    + \frac{v_0}{n_0}\pdv{n_0}{z} + \frac{\tilde{v}}{n_0}\pdv{n_0}{z} + \frac{v_0}{n_0}\pdv{\tilde{n}}{z}
+    - v_0\frac{\partial_z B}{B} - \tilde{v}\frac{\partial_z B}{B} - \tilde{n}\frac{v_0}{n_0}\frac{\partial_z B}{B} = 0
+\]
+
+
+Using the equilibrium condition Eq.(\ref{eq:equilibrium-convervation-of-mass}), some of the terms are canceled. Moreover, the last term can be written as
+\[ \tilde{n}\frac{v_0}{n_0}\frac{\partial_z B}{B} = \frac{\tilde{n}}{n_0}\left( \frac{\partial_z n_0}{n_0}v_0 + \pdv{v_0}{z} \right) \]
+Now, we get the linearized conservation of mass,
+\begin{equation} \label{eq:linearized-conservation-of-density}
+    \frac{1}{n_0}\pdv{\tilde{n}}{t}
+    + \pdv{\tilde{v}}{z} + v_0\tilde{Y} + \tilde{v}\frac{\partial_z n_0}{n_0} - \tilde{v}\frac{\partial_z B}{B} = 0
+\end{equation}
+where
+\[ \tilde{Y} \equiv \frac{1}{n_0}\pdv{\tilde{n}}{z} - \frac{\partial_z n_0}{n_0^2}\tilde{n} = \pdv{z}(\frac{\tilde{n}}{n_0}) \]
+
+To linearize the conservation of momentum, we follow the same logic by substituting $n=n_0+\tilde{n}$, and $v=v_0+\tilde{v}$ in Eq.(\ref{eq:conservation-of-momentum}),
+\[ (n_0+\tilde{n})\pdv{(v_0+\tilde{v})}{t} + (n_0+\tilde{n})(v_0+\tilde{v})\pdv{(v_0+\tilde{v})}{z} = -\pdv{n}{z} \]
+
+Again, ignore second order perturbations and rearange terms, we have
+\[ \pdv{v_0}{t} + v_0\pdv{v_0}{z} + \tilde{v}\pdv{v_0}{z}
+    = -\frac{1}{n_0}\pdv{n_0}{z} -\frac{1}{n_0}\pdv{\tilde{n}}{z} -v_0\frac{v_0}{z} - \frac{\tilde{n}}{n_0}v_0\pdv{v_0}{z} \]
+Using the equilibrium condition Eq.(\ref{eq:equilibrium-convervation-of-momentum}) on the RHS, we get the linearized conservation of momentum,
+\begin{equation} \label{eq:linearized-conservation-of-momentum}
+    \pdv{\tilde{v}}{t} + \pdv{(v_0\tilde{v})}{z} = -\tilde{Y}
+\end{equation}
+
+\section{Polynomial Eigenvalue Problem}
+We can further simplify the problem by combining Eq.(\ref{eq:linearized-conservation-of-density}) and Eq.(\ref{eq:linearized-conservation-of-momentum}) into a single equation. We can substitute Eq.(\ref{eq:linearized-conservation-of-momentum}) into Eq.(\ref{eq:linearized-conservation-of-density}) to eliminate $\tilde{Y}$,
+
+\begin{equation} \label{eq:single-governing-equation}
+    \pdv{t}\frac{\tilde{n}}{n_0}
+    + \pdv{\tilde{v}}{z} - v_0\left(\pdv{t}\tilde{v}
+    + \pdv{(v_0\tilde{v})}{z}\right)
+    + \tilde{v}\frac{\partial_z n_0}{n_0}
+    - \tilde{v}\frac{\partial_z B}{B}
+    = 0
+\end{equation}
+
+In order to investigate the instability of the flow, we need formulate it as an eigenvalue problem. To do that, we assume the perturbed density and velocity are oscillatory, i.e. $\tilde{n}, \tilde{v} \sim \exp(-i\omega t)$, where $\omega$ is the oscillation frequency of the perturbed quantities. This frequency can be a complex number.
+
+As illustrated in Sec.\ref{sec:two-stream-instability}, the flow can be stable or unstable depending on the imaginary part of the frequency. If $\Im(\omega) > 0$, then the perturbed quantities $\tilde{n} \sim \exp(\Im(\omega) t)$, which means it grows exponentially with time, hence unstable. If $\Im(\omega) \leq 0$, then the amplitude of the perturbed quanties are either unchanged or exponentially decreasing, hence the flow is stable.
+
+By assuming oscillatory perturbed quantities, Eq.(\ref{eq:single-governing-equation}) becomes,
+\begin{equation}
+    -i\omega\frac{\tilde{n}}{n_0}
+    + \pdv{\tilde{v}}{z} - v_0\left(-i\omega\tilde{v}
+    + \pdv{(v_0\tilde{v})}{z}\right)
+    + \tilde{v}\frac{\partial_z n_0}{n_0}
+    - \tilde{v}\frac{\partial_z B}{B}
+    = 0
+\end{equation}
+
+Using the equilibrium condition Eq.(\ref{eq:equilibrium-convervation-of-mass}), we can eliminate the term $\partial_z B/B$,
+\[
+    -i\omega\frac{\tilde{n}}{n_0}
+    + \pdv{\tilde{v}}{z}
+    + v_0\left(i\omega \tilde{v} - v_0\pdv{\tilde{v}}{z} - \tilde{v}\pdv{v_0}{z} \right)
+    - \tilde{v}\frac{\partial_z v_0}{v_0}
+    = 0
+\]
+
+Rearrange terms, we have
+\[
+    -i\omega\frac{\tilde{n}}{n_0}
+    + i\omega v_0\tilde{v}
+    + (1-v_0^2)\pdv{\tilde{v}}{z}
+    - \left(v_0+\frac{1}{v_0}\right)\pdv{v_0}{z}\tilde{v} = 0
+\]
+
+Now we take $\pdv*{t}$ on Eq.(\ref{eq:linearized-conservation-of-momentum}). Recall the fact that $\tilde{Y} = \partial_z(\tilde{n}/n_0)$, we have
+\[
+    \omega^2\tilde{v} + i\omega\left(v_0\pdv{\tilde{v}}{z} + \tilde{v}\pdv{v_0}{z}\right)
+    = \pdv{t}\pdv{z}(\frac{\tilde{n}}{n_0})
+\]
+Apply $\partial_t$ operator first, we get
+\[
+    \omega^2\tilde{v} + i\omega\left(v_0\pdv{\tilde{v}}{z} + \tilde{v}\pdv{v_0}{fz}\right)
+    = \pdv{z}(-i\omega v_0\tilde{v}
+    - (1-v_0^2)\pdv{\tilde{v}}{z}
+    + \left(v_0+\frac{1}{v_0}\right)\pdv{v_0}{z}\tilde{v})
+\]
+Expand the RHS and collect terms, we get
+\begin{equation} \label{eq:polynomial-eigenvalue-problem}
+    \begin{aligned}
+         & \omega^2 \tilde{v}                                          \\
+         & +2i\omega\left(v_0\pdv{}{z} + \pdv{v_0}{z}\right) \tilde{v} \\
+         & +\left[ (1-v_0^2)\pdv[2]{}{z}
+            -\left(3v_0 + \frac{1}{v_0}\right)\pdv{v_0}{z}\pdv{}{z}
+            - \left(1-\frac{1}{v_0^2}\right)\left(\pdv{v_0}{z}\right)^2
+            - \left(v_0+\frac{1}{v_0}\right)\pdv[2]{v_0}{z} \right]\tilde{v}
+        = 0
+    \end{aligned}
+\end{equation}
+
+In mathematical terms, Eq.(\ref{eq:polynomial-eigenvalue-problem}) is a polynomial eigenvalue problem, where $\omega$ is an eigenvalue to the problem, and the velocity perturbation $\tilde{v}$ is an eigenfunction associated with the eigenvalue $\omega$. In this chapter we will discuss the methods to tackle this problem.
+
+\section{Analytical Solution to Constant Velocity Case}
 \subsection{Dirichlet Boundary}
 If we set the velocity profile of the equilibrium flow to constant $v_0=\text{const}$, then Eq.(\ref{eq:polynomial-eigenvalue-problem}) becomes a simple boundary value problem with second order constant coefficients differential equation.
 
@@ -13,137 +226,62 @@ The solution to this problem is
 \begin{equation} \label{eq:constant-v-solution-dirichlet}
     \tilde{v} = C\left[ \exp\left(i\omega\frac{z+1}{v_0+1}\right) - \exp\left(i\omega\frac{z+1}{v_0-1}\right) \right]
 \end{equation}
-where $C\in\mathbb{C}$ is a complex constant, and the frequencies are $\omega=n\pi(1-v_0^2)/2$ with $n\in\mathbb{Z}$. 
+where $C\in\mathbb{C}$ is a complex constant, and the frequencies are $\omega=n\pi(1-v_0^2)/2$ with $n\in\mathbb{Z}$.
 
 This result tells us for constant velocity case, the flow in magnetic nozzle is stable regardless the velocity $v_0$. It is worth to mention $v_0=1$ is a singular point of this problem.
 
-We will use this to benchmark the simulation results. 
+We will use this to benchmark the simulation results.
 
 \begin{figure}[H]
-	\centering
-	\begin{subfigure}{0.5\textwidth}
-		\includegraphics[width=\linewidth]{img/theoretical-analysis/exact-fixed-fixed-v0=0.5}
-		\caption{Subsonic}
-	\end{subfigure}%
-	\begin{subfigure}{0.5\textwidth}
-		\includegraphics[width=\linewidth]{img/theoretical-analysis/exact-fixed-fixed-v0=1.5}
-		\caption{Supersonic}
-	\end{subfigure}
-	\caption{The plots show the first three non-zero exact solutions to Eq.(\ref{eq:constant-v-problem-dirichlet}) for both subsonic and supersonic case. These solutions are stable.}
-	\label{fig:exact-v-dirichlet}
+    \centering
+    \begin{subfigure}{0.5\textwidth}
+        \includegraphics[width=\linewidth]{img/exact-fixed-fixed-v0=0.5}
+        \caption{Subsonic}
+    \end{subfigure}%
+    \begin{subfigure}{0.5\textwidth}
+        \includegraphics[width=\linewidth]{img/exact-fixed-fixed-v0=1.5}
+        \caption{Supersonic}
+    \end{subfigure}
+    \caption{The plots show the first three non-zero exact solutions to Eq.(\ref{eq:constant-v-problem-dirichlet}) for both subsonic and supersonic case. These solutions are stable.}
+    \label{fig:exact-v-dirichlet}
 \end{figure}
 
 \subsection{Fixed-Open Boundary}
 
 \begin{equation} \label{eq:constant-v-problem-fixed-open}
-	\omega^2\tilde{v} + 2i\omega v_0\pdv{\tilde{v}}{z} + (1-v_0^2)\pdv[2]{\tilde{v}}{z} = 0
-	\quad
-	\tilde{v}(-1) = \pdv{\tilde{v}}{z}\,(1) = 0
+    \omega^2\tilde{v} + 2i\omega v_0\pdv{\tilde{v}}{z} + (1-v_0^2)\pdv[2]{\tilde{v}}{z} = 0
+    \quad
+    \tilde{v}(-1) = \pdv{\tilde{v}}{z}\,(1) = 0
 \end{equation}
 
 The solution to this problem is
 \begin{equation} \label{eq:constant-v-solution-fixed-open}
-	\tilde{v} = C \left[\exp\left(i\omega\frac{z+1}{v_0+1}\right) 
-  - \exp\left(i\omega\frac{z+1}{v_0-1}\right) \right]
+    \tilde{v} = C \left[\exp\left(i\omega\frac{z+1}{v_0+1}\right)
+        - \exp\left(i\omega\frac{z+1}{v_0-1}\right) \right]
 \end{equation}
 where $C\in\mathbb{C}$, and $\omega = (v_0^2 - 1) \left[\frac{n\pi}{2} - \frac{1}{4}i\ln(\frac{v_0-1}{v_0+1})\right]$ with $n\in\mathbb{Z}$. The term $i\ln((v_0-1)/(v_0+1))\in\mathbb{C}$ and its imaginary part is positive for any $v_0\neq 1$. Therefore,
 \begin{itemize}
-	\item If $v_0<1$, then $\Im(\omega)<0$, it's damped oscillation, hence stable.
-	\item If $v_0>1$, then $\Im(\omega)>0$, it's unstable.
+    \item If $v_0<1$, then $\Im(\omega)<0$, it's damped oscillation, hence stable.
+    \item If $v_0>1$, then $\Im(\omega)>0$, it's unstable.
 \end{itemize}
 
 Worth to mention, this is a very interesting solution with the following properties,
 \begin{enumerate}
-	\item The growth rate is independent the mode number $n$.
-	\item The ground mode $n=0$ for subsonic case has non-zero real part and imaginary part.
+    \item The growth rate is independent the mode number $n$.
+    \item The ground mode $n=0$ for subsonic case has non-zero real part and imaginary part.
 \end{enumerate}
 
 \begin{figure}[H]
-	\centering
-	\begin{subfigure}{0.5\textwidth}
-		\includegraphics[width=\linewidth]{img/theoretical-analysis/exact-fixed-open-v0=0.5}
-		\caption{Subsonic, stable flow.}
-	\end{subfigure}%
-	\begin{subfigure}{0.5\textwidth}
-		\includegraphics[width=\linewidth]{img/theoretical-analysis/exact-fixed-open-v0=1.5}
-		\caption{Supersonic, unstable flow.}
-	\end{subfigure}
-	\caption{The plots show the first three exact solutions to Eq.(\ref{eq:constant-v-problem-fixed-open}) for both subsonic and supersonic case. The flow is stable for subsonic case and unstable for supersonic case.}
-	\label{fig:exact-v-fixed-open}
+    \centering
+    \begin{subfigure}{0.5\textwidth}
+        \includegraphics[width=\linewidth]{img/exact-fixed-open-v0=0.5}
+        \caption{Subsonic, stable flow.}
+    \end{subfigure}%
+    \begin{subfigure}{0.5\textwidth}
+        \includegraphics[width=\linewidth]{img/exact-fixed-open-v0=1.5}
+        \caption{Supersonic, unstable flow.}
+    \end{subfigure}
+    \caption{The plots show the first three exact solutions to Eq.(\ref{eq:constant-v-problem-fixed-open}) for both subsonic and supersonic case. The flow is stable for subsonic case and unstable for supersonic case.}
+    \label{fig:exact-v-fixed-open}
 \end{figure}
 
-
-\section{Spectral Pollution and Spurious Modes}
-In this section, we will discuss an important phenomenon we observe throughout the numerical experiments. It is the phenomenon of spectral pollution. Then we will provide a method to filter these spurious modes.
-
-Spectral pollution refers to the phenomenon which some eigenvalues are not converging to the correct value when the mesh density is increased. When solving eigenvalue problems using spectral methods with finite difference or finite element approximations, spectral pollution might occur. \cite{llobet_spectral_1990}
-
-\subsection{Finite Difference Discretization of Operators}
-In this section, we are going to investigate the spectral pollution phenomenon when solving Eq.(\ref{eq:constant-v-problem-dirichlet}) using spectral method.
-
-The dispersion relation can be obtained by substituting $\tilde{v} = \exp(-i\omega t + kx)$ into Eq.(\ref{eq:constant-v-problem-dirichlet}),
-\begin{equation} \label{dispersion-relation}
-	\omega = k(v_0 \pm 1) 
-\end{equation}
-
-If we assume $v\sim \exp(ikx)$, and let $\beta\equiv kh/2$. Then in finite difference discretization scheme, the differential operators $\dv*[n]{z}$ are equivalent to the following factors \cite{llobet_spectral_1990},
-\begin{align}
-	&G_0 = 1 \nonumber \\
-	&G_1 = [\exp(2i\beta)-\exp(-2i\beta)]/2h = (i/h)\sin(2\beta) 
-	\label{G-operator}\\
-	&G_2 = [\exp(2i\beta)-2-\exp(-2i\beta)]/h^2 = (2/h^2)(\cos(2\beta)-1) \nonumber 
-\end{align}
-
-
-\subsection{Analysis of Numerical Spectrum}
-\subsubsection{Discretize on the Same Grid}
-Using the G-operator, Eq.(\ref{G-operator}), the discretized equation of Eq.(\ref{eq:constant-v-problem-dirichlet}) is 
-\begin{equation} \label{eq:discretized-eq-G}
-    (\omega^2G_0 + \omega G_1 + G_2)\mathbf{\tilde{v}} = 0
-\end{equation}
-where $\mathbf{\tilde{v}}$ is the discretized vector of $\tilde{v}$.
-
-Solving Eq.(\ref{eq:discretized-eq-G}), we obtain the numerical dispersion relation,
-\begin{equation} \label{dispersion-relation-G}
-	\omega = \frac{2\sin(\beta)}{h}\left(v_0 \pm \sqrt{1 - v_0^2\sin[2](\beta)}\right)
-\end{equation}
-
-Given $h$ (fixed the mesh resolution), we see that
-\begin{itemize}
-	\item $\omega$ is real for all $k$ if $v_0 < 1$.
-	\item $\omega$ is complex for large $k$, more specifically $k>h/2\arcsin(1/v_0)$, if $v_0 > 1$.
-	\item For small $k$, meaning $k\to 0$, Eq.(\ref{dispersion-relation-G}) is a good representation for the analytical dispersion relation, Eq.(\ref{dispersion-relation}). 
-\end{itemize}
-This explains why the spurious unstable modes occur when $v_0>1$.
-
-\begin{figure}[H]
-	\centering
-	\begin{subfigure}[b]{0.5\linewidth}
-		\includegraphics[width=\linewidth]{img/theoretical-analysis/eigvals-bad} 
-		\caption{Bad eigenvalues}
-	\end{subfigure}%
-	\begin{subfigure}[b]{0.5\linewidth}
-		\includegraphics[width=\linewidth]{img/theoretical-analysis/eigvecs-bad} 
-		\caption{Bad eigenfunctions}
-	\end{subfigure}
-	\caption{Spurious modes.}
-	\label{fig:results-bad}
-\end{figure}
-
-One way to filter the spurious modes is to remove all modes with $k>h/2 \arcsin(1/v_0)$, see Fig.\ref{fig:results-filter-k}. However, this is not a good way to deal with general cases because it requires the solution to the discretized problem Eq.(\ref{eq:discretized-eq-G}). For general problem with non-constant velocity profile, it is hard to solve the discretized problem directly.
-
-\begin{figure}[H]
-	\centering
-	\begin{subfigure}[b]{0.5\linewidth}
-		\includegraphics[width=\linewidth]{img/theoretical-analysis/eigvals-good} 
-		\caption{Good eigenvalues}
-	\end{subfigure}%
-	\begin{subfigure}[b]{0.5\linewidth}
-		\includegraphics[width=\linewidth]{img/theoretical-analysis/eigvecs-good} 
-		\caption{Good eigenfunctions}
-	\end{subfigure}
-	\caption{Filter out the spurious modes with $k>h/2\arcsin(1/v_0)$.}
-	\label{fig:results-filter-k}
-\end{figure}
-
-A better way to filter the spurious modes is by doing a "convergence test". Since the frequency Eq.(\ref{dispersion-relation-G}) is changing with mesh resolution $h$. We can simply solve the discretized problem using spectral method under different mesh resolution. Then filter out the eigenmodes that are changing dramatically.

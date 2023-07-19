@@ -1,9 +1,12 @@
-\documentclass{report}
+\documentclass[12pt]{report}
 \usepackage[margin=2.5cm]{geometry}
 \usepackage{amsmath, amssymb, amsthm}
 \usepackage{physics}
 \usepackage{float, subcaption, graphicx}
 \usepackage{hyperref} % comment this in school template
+\usepackage{setspace}
+
+\onehalfspacing
 
 \theoremstyle{plain}
 \newtheorem{proposition}{Proposition}
@@ -29,21 +32,21 @@
 \tableofcontents % remove this when using school template
 % move abstract before the document in school template
 \abstract{
-    Spectral theory is a common technique for analyzing the instability of a dynamical system. By discretizing the linearized equations motion of magnetic nozzle, the instability problem becomes an algebraic eigenvalue problem. Given Dirichlet boundary condition, we found that the flow in magnetic nozzle is stable. Different discretizations, such as finite difference, finite element and spectral element method agree with each other. By studying the convergence of different modes, we successfully eliminated the spurious unstable modes occur in supersonic and transonic cases. 
+    Spectral theory is a common technique for analyzing the instability of a dynamical system. By discretizing the linearized equations motion of magnetic nozzle, the instability problem becomes an algebraic eigenvalue problem. Given Dirichlet boundary condition, we found that the flow in magnetic nozzle is stable. Different discretizations, such as finite difference, finite element and spectral element method agree with each other. By studying the convergence of different modes, we successfully eliminated the spurious unstable modes occur in supersonic and transonic cases.
 }
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % FIRST CHAPTER OF THESIS BEGINS HERE
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \include{introduction}
-\include{governing-equations}
-\include{methodology}
 \include{theoretical-analysis}
+\include{spectral-method}
+\include{singular-perturbation}
 \include{numerical-experiments}
-\include{conclusion}
+\include{discussion}
 
 \bibliographystyle{plain}
-\bibliography{references} 
+\bibliography{references}
 
 \include{appendix}
 
