@@ -1,0 +1,63 @@
+\contentsline {chapter}{\numberline {1}Introduction}{2}{chapter.1}%
+\contentsline {section}{\numberline {1.1}Plasma}{2}{section.1.1}%
+\contentsline {subsection}{\numberline {1.1.1}Single Particle Motion Along Magnetic Field Line}{3}{subsection.1.1.1}%
+\contentsline {subsection}{\numberline {1.1.2}From Kinetic Theory to Fluid Description}{4}{subsection.1.1.2}%
+\contentsline {section}{\numberline {1.2}Instability of Plasma Flow}{5}{section.1.2}%
+\contentsline {subsection}{\numberline {1.2.1}Overview}{5}{subsection.1.2.1}%
+\contentsline {subsection}{\numberline {1.2.2}Illustration: Two-Stream Instability}{7}{subsection.1.2.2}%
+\contentsline {section}{\numberline {1.3}Magnetic Nozzle}{9}{section.1.3}%
+\contentsline {subsection}{\numberline {1.3.1}Magnetic Field in Magnetic Nozzle}{10}{subsection.1.3.1}%
+\contentsline {subsection}{\numberline {1.3.2}Governing Equations and Velocity Profiles}{11}{subsection.1.3.2}%
+\contentsline {section}{\numberline {1.4}Flow in Similar Configuration: Bondi-Parker Flow}{11}{section.1.4}%
+\contentsline {subsection}{\numberline {1.4.1}Governing Equations and Velocity Profiles}{12}{subsection.1.4.1}%
+\contentsline {subsection}{\numberline {1.4.2}The Stability of Bondi-Parker Flow}{12}{subsection.1.4.2}%
+\contentsline {section}{\numberline {1.5}Goals of this Thesis}{13}{section.1.5}%
+\contentsline {chapter}{\numberline {2}Theoretical Analysis}{15}{chapter.2}%
+\contentsline {section}{\numberline {2.1}Fluid Description for Flow}{15}{section.2.1}%
+\contentsline {section}{\numberline {2.2}Non-dimensionalization}{17}{section.2.2}%
+\contentsline {section}{\numberline {2.3}Velocity Profiles at Equilibrium}{17}{section.2.3}%
+\contentsline {section}{\numberline {2.4}Linearized Governing Equations}{19}{section.2.4}%
+\contentsline {section}{\numberline {2.5}Polynomial Eigenvalue Problem}{20}{section.2.5}%
+\contentsline {section}{\numberline {2.6}Analytical Solutions to Constant Velocity Case}{22}{section.2.6}%
+\contentsline {subsection}{\numberline {2.6.1}Dirichlet Boundary}{22}{subsection.2.6.1}%
+\contentsline {subsection}{\numberline {2.6.2}Fixed-Open Boundary}{23}{subsection.2.6.2}%
+\contentsline {chapter}{\numberline {3}Spectral Method}{25}{chapter.3}%
+\contentsline {section}{\numberline {3.1}Spectral Theory in Finite-Dimensional Normed Spaces}{25}{section.3.1}%
+\contentsline {section}{\numberline {3.2}Spectral Theory in Normed Spaces of Any Dimension}{26}{section.3.2}%
+\contentsline {section}{\numberline {3.3}Different Discretizations}{27}{section.3.3}%
+\contentsline {subsection}{\numberline {3.3.1}Finite Difference}{27}{subsection.3.3.1}%
+\contentsline {subsubsection}{Boundary Condition}{28}{section*.12}%
+\contentsline {subsection}{\numberline {3.3.2}Spectral Element}{28}{subsection.3.3.2}%
+\contentsline {subsubsection}{Boundary Conditions and Basis Function}{29}{section*.13}%
+\contentsline {subsection}{\numberline {3.3.3}Finite Element}{29}{subsection.3.3.3}%
+\contentsline {subsubsection}{Boundary Conditions and B-Spline}{30}{section*.14}%
+\contentsline {section}{\numberline {3.4}Spectral Pollution and Spurious Modes}{31}{section.3.4}%
+\contentsline {subsection}{\numberline {3.4.1}Finite Difference Discretization of Operators}{31}{subsection.3.4.1}%
+\contentsline {subsection}{\numberline {3.4.2}Analysis of Numerical Spectrum}{32}{subsection.3.4.2}%
+\contentsline {subsubsection}{Discretize on the Same Grid}{32}{section*.16}%
+\contentsline {chapter}{\numberline {4}Singular Perturbation}{34}{chapter.4}%
+\contentsline {section}{\numberline {4.1}Presence of Singularity in Transonic cases}{34}{section.4.1}%
+\contentsline {section}{\numberline {4.2}Connection of Singularity to Black Hole}{35}{section.4.2}%
+\contentsline {subsection}{\numberline {4.2.1}Acoustic Analog to Tortoise Coordinate}{35}{subsection.4.2.1}%
+\contentsline {section}{\numberline {4.3}Singular Perturbation Problem}{35}{section.4.3}%
+\contentsline {section}{\numberline {4.4}Expansion at Singularity}{36}{section.4.4}%
+\contentsline {section}{\numberline {4.5}Shooting Method}{38}{section.4.5}%
+\contentsline {chapter}{\numberline {5}Numerical Experiments}{39}{chapter.5}%
+\contentsline {section}{\numberline {5.1}Constant Velocity Case}{40}{section.5.1}%
+\contentsline {subsection}{\numberline {5.1.1}Dirichlet Boundary}{40}{subsection.5.1.1}%
+\contentsline {subsection}{\numberline {5.1.2}Fixed-Open Boundary}{41}{subsection.5.1.2}%
+\contentsline {section}{\numberline {5.2}Subsonic Case}{41}{section.5.2}%
+\contentsline {subsection}{\numberline {5.2.1}Dirichlet Boundary}{41}{subsection.5.2.1}%
+\contentsline {subsection}{\numberline {5.2.2}Fixed-Open Boundary}{42}{subsection.5.2.2}%
+\contentsline {section}{\numberline {5.3}Supersonic Case}{43}{section.5.3}%
+\contentsline {subsection}{\numberline {5.3.1}Dirichlet Boundary}{43}{subsection.5.3.1}%
+\contentsline {subsection}{\numberline {5.3.2}Fixed-Open Boundary}{44}{subsection.5.3.2}%
+\contentsline {section}{\numberline {5.4}Accelerating Case}{44}{section.5.4}%
+\contentsline {chapter}{\numberline {6}Discussion}{46}{chapter.6}%
+\contentsline {section}{\numberline {6.1}Implications of the Results}{46}{section.6.1}%
+\contentsline {section}{\numberline {6.2}Limitations of the methods}{46}{section.6.2}%
+\contentsline {subsection}{\numberline {6.2.1}Spectral Method}{46}{subsection.6.2.1}%
+\contentsline {subsection}{\numberline {6.2.2}Shooting Method}{46}{subsection.6.2.2}%
+\contentsline {section}{\numberline {6.3}Conclusion}{47}{section.6.3}%
+\contentsline {chapter}{\numberline {A}Lambert $W$ Function}{50}{appendix.A}%
+\contentsline {chapter}{\numberline {B}Verification of Analytical Solutions}{51}{appendix.B}%

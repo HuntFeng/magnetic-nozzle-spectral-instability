@@ -1,91 +1,82 @@
-\chapter{Singular Perturbation}
-\section{What is a singular perturbation problem}
+\chapter{Singular Perturbation} \label{chap:singular-perturbation}
+This chapter is dedicated to analyze the polynomial eigenvalue problem with transonic velocity profiles. We will first show the existence of the singularity of Eq.(\ref{eq:polynomial-eigenvalue-problem}), then we will discuss the concept of singular perturbation and the way we solve the problem.
 
-\section{Spectral Method Fails with Transonic Velocity Profiles}
+\section{Presence of Singularity in Transonic cases} \label{sec:presence-of-singularity}
+In order to see the existence of the singularity, we rearrange the terms the polynomial eigenvalue problem, Eq.(\ref{eq:polynomial-eigenvalue-problem}),
+\begin{equation} \label{eq:singular-perturbation-problem}
+	\begin{aligned}
+		  & (1-v_0^2)\pdv[2]{\tilde{v}}{z}                                                                                                                             \\
+		+ & \left(2i\omega v_0 - \left(3v_0 + \frac{1}{v_0}\right)\pdv{v_0}{z}\right)\pdv{\tilde{v}}{z}                                                                \\
+		+ & \left[2i\omega\pdv{v_0}{z} -\left(1 - \frac{1}{v_0^2}\right)\left(\pdv{v_0}{z}\right)^2 - \left(v_0 + \frac{1}{v_0}\right)\pdv[2]{v_0}{z} \right]\tilde{v} \\
+		= & 0
+	\end{aligned}
+\end{equation}
+This is a second order ordinary differential equation defined on region $[-1,1]$.
+
+For transonic (accelerating and decelerating) velocity profiles (Fig.\ref{fig:velocity-profiles}), the plasma flow is at sonic point at the throat of the nozzle, $v_0(0)=1$. Therefore, the highest order term vanishes at $z=0$. This causes the failure of spectral method, see Fig.(\ref{chap:discussion}). It can be proved that $z=0$ is a regular singular point.
+
+\begin{figure} [htbp]
+	\centering
+	\includegraphics[width=0.7\textwidth]{img/results-bad-accelerating-v}
+	\caption{An attempt to solve the polynomial eigenvalue problem, Eq.(\ref{eq:polynomial-eigenvalue-problem}) using finite-difference. Eigenfunctions are squeezed to the center of the nozzle due to the existence of the singularity at $z=0$.}
+	\label{fig:failure-of-spectral-method}
+\end{figure}
 
 \section{Connection of Singularity to Black Hole}
 \subsection{Acoustic Analog to Tortoise Coordinate}
 
-\section{Linearization at the Singularity}
+\section{Singular Perturbation Problem}
+Consider Eq.(\ref{eq:polynomial-eigenvalue-problem}) as a boundary value problem by fixing the value of $\omega$,
+The boundary value problem Eq.(\ref{eq:singular-perturbation-problem}) is defined on region $[-1,1]$, but the boundary values are defined on $z=-1$ and $z=0$. This is because to extract a regular solution near the singularity, we need to assume the solution is finite at the throat of the nozzle, $z=0$. This condition serves as a boundary value to the problem. Together with the boundary condition at the entrance of the nozzle, $\tilde{v}(-1) = 0$, the solutions to the boundary value problem, Eq.(\ref{eq:singular-perturbation-problem}) is fully determined up to a set of eigenvalues.
 
-\section{Shooting Method}
-Shooting method can be used to solve eigenvalue problem with specified boundary values,
-\begin{equation} \label{eq:boundary-eigenvalue-problem}
-    g(\tilde{v}(z);\omega) = 0,
-    \quad
-    z_l \leq z \leq z_r,
-    \quad
-    \tilde{v}(z_l) = \tilde{v}_l, \tilde{v}(z_r) = \tilde{v}_r
-\end{equation}
-where $\omega$ is the eigenvalue to be solved.
-
-Suppose an eigenvalue problem can be formulated as
-\[ \dv{z}\mathbf{u} = \mathbf{f}(\mathbf{u},z;\omega),
-    \quad
-    z_l<z<z_r,
-    \quad
-    \mathbf{u}(z_l) = \mathbf{u}_l
+As we discuss in the earlier section, Sec.\ref{sec:presence-of-singularity}, $(1-v_0^2)$ is 0 at the nozzle throat $z=0$ since $v_0(z)$ is now a transonic velocity profile. This makes the problem a first order ordinary differential equation,
+\[
+	\left( 2i\omega - 4\eval{\pdv{v_0}{z}}_{z=0} \right)\pdv{\tilde{v}}{z}
+	+ \left[2i\omega\eval{\pdv{v_0}{z}}_{z=0} - 2\eval{\pdv[2]{v_0}{z}}_{z=0} \right]\tilde{v}  = 0
 \]
-where $\mathbf{u}\in\mathbb{R}^2$. Fixed an $\omega$, we can approximate $\mathbf{u}(z_r)$ by applying algorithms such as Runge-Kutta or Leap-frog.
+It is clear that the solution to this first order ODE has a totally different characteristics than the solution in the neighborhood of $z=0$. That means we cannot simply set $(1-v_0^2)$ to 0 and get an asymptotic approximation to the solution of Eq.(\ref{eq:singular-perturbation-problem}) near $z=0$. This is exactly the characteristics of singular perturbation problem.
 
-Define $F$ by $F(\mathbf{u}_l;\omega)=\tilde{v}(z_r;\omega)$. This function $F$ takes in the initial value $\mathbf{u}_l$ and a fixed $\omega$, and outputs the "landing point" $\tilde{v}(z_r;\omega)$. If $\omega$ is an eigenvalue of Eq.(\ref{eq:boundary-eigenvalue-problem}), then $\tilde{v}(z_r;\omega) = \tilde{v}_r$. Now we can find eigenvalues to Eq.(\ref{eq:boundary-eigenvalue-problem}) by solving the roots to the scalar equation
-\[h(\omega) = F(\mathbf{u}_l;\omega) - \tilde{v}_r\]
+\section{Expansion at Singularity}
+The singularity is a regular singular point, we are able to extract finite solution near the singularity. In order to do so, we need to expand terms in Eq.(\ref{eq:singular-perturbation-problem}) about the singularity.
 
-Having this higher view of shooting method in mind, we first transform Eq.(\ref{eq:polynomial-eigenvalue-problem}) to a IVP,
-\begin{align*}
-    v' & = u                        \\
-    u' & = \frac{-1}{1-v_0^2}\left[
-        \omega^2v + 2i\omega(v_0+v_0'v) - \left(3v_0 - \frac{1}{v_0}\right)v_0'u - \left(1-\frac{1}{v_0}^2\right)(v_0')^2v - \left(v_0+\frac{1}{v_0}v_0'' v\right)
-        \right]
-\end{align*}
-and $v(0)=c_0=1,u(0)=c_1=(2i\omega v_0'-2v_0'')/2v_0'$. Moreover, $u'(0)=c_2=-((v_0')^4+(2i\omega v_0' + (v_0')^2 - v_0'')(i\omega v_0' - v_0''))/(v_0'(2i\omega-6v_0'))$.
-
-In order to get initially value for cases with transonic velocity profiles, we need to expand the solution at the singularity.
-
-\subsection{Expansion at Singularity}
-If the equilibrium velocity profile $v_0$ is a transonic profile, then $v_0(0) = 1$ at the throat of the magnetic mirror configuration. This is a singularity. More specifically, it is a regular singular point.
-
-In order to supply initial values to shooting method, we need to expand Eq.(\ref{eq:polynomial-eigenvalue-problem}) at the singularity.
-
-Since
+The first task is to linearize the terms with $v_0$ about the singularity. The linearization of $v_0(z) = 1 + v_0'(0)z$ is a good approximation to the original function $v_0(z)$ because the transonic velocity profiles are straight in the neighborhood of $z=0$, as we can see from Fig.\ref{fig:velocity-profiles}. Therefore, through some simple algebra we obtain,
 \begin{equation}
-    \begin{aligned}
-        1-v_0^2              & = -2v_0'(0)z    \\
-        3v_0 + \frac{1}{v_0} & = 4 + 2v_0'(0)z \\
-        1-\frac{1}{v_0^2}    & = 2v_0'(0)z     \\
-        v_0 + \frac{1}{v_0}  & = 2
-    \end{aligned}
+	\begin{aligned}
+		1-v_0^2              & = -2v_0'(0)z    \\
+		3v_0 + \frac{1}{v_0} & = 4 + 2v_0'(0)z \\
+		1-\frac{1}{v_0^2}    & = 2v_0'(0)z     \\
+		v_0 + \frac{1}{v_0}  & = 2
+	\end{aligned}
 \end{equation}
 
-Then Eq.(\ref{eq:polynomial-eigenvalue-problem}) becomes
-\begin{equation}
-    \begin{aligned}
-        - & 2v_0'(0)z\pdv[2]{\tilde{v}}{z}                                              \\
-        + & [2i\omega - 4v_0'(0) + (2i\omega - 2v_0'(0))z]\pdv{\tilde{v}}{z}            \\
-        + & \left[\omega^2 + 2i\omega v_0'(0) - 2v_0''(0) - 2v_0'(0)^3z\right]\tilde{v}
-        = 0
-    \end{aligned}
-    \label{eq:perturbed-equation-full}
+Then Eq.(\ref{eq:singular-perturbation-problem}) becomes
+\begin{equation} \label{eq:perturbed-equation-full}
+	\begin{aligned}
+		- & 2v_0'(0)z\pdv[2]{\tilde{v}}{z}                                              \\
+		+ & [2i\omega - 4v_0'(0) + (2i\omega - 2v_0'(0))z]\pdv{\tilde{v}}{z}            \\
+		+ & \left[\omega^2 + 2i\omega v_0'(0) - 2v_0''(0) - 2v_0'(0)^3z\right]\tilde{v}
+		= 0
+	\end{aligned}
 \end{equation}
 
-Since we are expanding at $z=0$, we drop all $z$ terms except the first term (second-order derivative term).
+In fact, we can further simply the equation by dropping all $z$ terms except the first term (second-order derivative term). It can be shown that dropping the $z$ terms in Eq.(\ref{eq:perturbed-equation-full}) does not affect the first order correction ($\tilde{v}$ is the same up to $z$ term), it is an acceptable approximation.
 
 \[ - 2v_0'(0)z\pdv[2]{\tilde{v}}{z}
-    + (2i\omega - 4v_0'(0))\pdv{\tilde{v}}{z}
-    + (\omega^2 + 2i\omega v_0'(0) - 2v_0''(0))\tilde{v}
-    = 0 \]
+	+ (2i\omega - 4v_0'(0))\pdv{\tilde{v}}{z}
+	+ (\omega^2 + 2i\omega v_0'(0) - 2v_0''(0))\tilde{v}
+	= 0 \]
 
 Dividing by the first coefficient, we have
 \begin{equation}
-    z\pdv[2]{\tilde{v}}{z} + a\pdv{\tilde{v}}{z} + b\tilde{v} = 0
-    \label{eq:perturbed-equation}
+	z\pdv[2]{\tilde{v}}{z} + a\pdv{\tilde{v}}{z} + b\tilde{v} = 0
+	\label{eq:perturbed-equation}
 \end{equation}
 where
 \[ a = \frac{2i\omega - 4v_0'(0)}{-2v_0'(0)}; \quad
-    b = \frac{\omega^2 + 2i\omega v_0'(0) - 2v_0''(0)}{-2v_0'(0)}
+	b = \frac{\omega^2 + 2i\omega v_0'(0) - 2v_0''(0)}{-2v_0'(0)}
 \]
 
-Use Frobenius method, we assume $\tilde{v} = \sum_{n\geq 0}c_nz^{n+r}$, plug Eq.(\ref{eq:perturbed-equation}) we have
+Use Frobenius method, we assume the velocity perturbation can be written as a power series in $z$,  $\tilde{v} = \sum_{n\geq 0}c_nz^{n+r}$. By substituting the power series into Eq.(\ref{eq:perturbed-equation}) we have
 \[ \sum_{n \geq 0} (n+r)(n+r+1) c_n z^{n+r-1} + a(n+r)c_nz^{n+r-1} + bc_nz^{n+r} = 0\]
 Shift the power of the last term we get
 \[ \sum_{n \geq 0} (n+r)(n+r+1) c_n z^{n+r-1} + a(n+r)c_nz^{n+r-1} + \sum_{n \geq 1} bc_{n-1}z^{n+r-1} = 0\]
@@ -96,21 +87,61 @@ We get two different roots, $r=0$ and $r=1-a$. They correspond to finite solutio
 
 The coefficients are given by recurrence relation
 \[ (n+r)(n+r-1)c_n + a(n+r)c_n + bc_{n-1} = 0
-    \Rightarrow
-    c_n = \frac{-bc_{n-1}}{(n+r)(n+r-1+a)}
+	\Rightarrow
+	c_n = \frac{-bc_{n-1}}{(n+r)(n+r-1+a)}
 \]
-Solving this relation we get explicit expression for $c_n$,
+Solving this relation we get explicit expression for $c_n$, $n\in\mathbb{N}$,
 \begin{equation}
-    \begin{aligned}
-        c_n & = \frac{(-1)^n b^n c_0}{\prod_{k=0}^{n-1} (n+r-k)(n+r-1+a-k)}              \\
-            & = (-1)^n b^n c_0 \frac{\Gamma(r+1)\Gamma(r+a)}{\Gamma(n+r+1)\Gamma(n+r+a)}
-    \end{aligned}
-    \label{eq:coefficient}
+	\begin{aligned}
+		c_n & = \frac{(-1)^n b^n c_0}{\prod_{k=0}^{n-1} (n+r-k)(n+r-1+a-k)}              \\
+		    & = (-1)^n b^n c_0 \frac{\Gamma(r+1)\Gamma(r+a)}{\Gamma(n+r+1)\Gamma(n+r+a)}
+	\end{aligned}
+	\label{eq:coefficient}
 \end{equation}
 
-\begin{itemize}
-    \item Worth to mention that the diverging solution goes like
-          \[ \tilde{v}(z) \sim z^{1-a} = z^{-1-\omega_i/v_0'(0)}z^{i\omega_r/v_0'(0)}  \]
-          where $\omega = \omega_r + i\omega_i$. Meaning that the solution will be divergent iff $\omega_i > -v'(0)$.
-    \item Dropping the $z$ terms in Eq.(\ref{eq:perturbed-equation-full}) has no effect on the first order correction ($\tilde{v}$ is the same up to $z$ term).
-\end{itemize}
+Therefore, we successfully extracted the regular solution (corresponding to the root $r=0$) in the form of power series,
+\begin{equation} \label{eq:regular-solution}
+	\begin{aligned}
+		\tilde{v} & = c_0 + c_1z + c_2z^2 + \cdots                               \\
+		          & = c_0 - c_0\frac{b}{a}z + c_0\frac{b^2}{2a(1+a)}z^2 + \cdots
+	\end{aligned}
+\end{equation}
+
+It is worth to mention that the diverging solution (corresponding to the root $r=a$) goes like
+\[ \tilde{v}(z) \sim z^{1-a} = z^{-1-\omega_i/v_0'(0)}z^{i\omega_r/v_0'(0)}  \]
+where $\omega = \omega_r + i\omega_i$. Meaning that the solution will be divergent if and only if $\omega_i > -v'(0)$.
+
+\section{Shooting Method}
+Shooting method can be used to solve eigenvalue problem with specified boundary values,
+\begin{equation} \label{eq:boundary-eigenvalue-problem}
+	g(\tilde{v}(z);\omega) = 0,
+	\quad
+	z_l \leq z \leq z_r,
+	\quad
+	\tilde{v}(z_l) = \tilde{v}_l, \tilde{v}(z_r) = \tilde{v}_r
+\end{equation}
+where $\omega$ is the eigenvalue to be solved.
+
+Suppose an eigenvalue problem can be formulated as
+\[ \dv{z}\mathbf{u} = \mathbf{f}(\mathbf{u},z;\omega),
+	\quad
+	z_l<z<z_r,
+	\quad
+	\mathbf{u}(z_l) = \mathbf{u}_l
+\]
+where $\mathbf{u}\in\mathbb{R}^2$. Fixed an $\omega$, we can approximate $\mathbf{u}(z_r)$ by applying algorithms such as Runge-Kutta or Leap-frog.
+
+Define $F$ by $F(\mathbf{u}_l;\omega)=\tilde{v}(z_r;\omega)$. This function $F$ takes in the initial value $\mathbf{u}_l$ and a fixed $\omega$, and outputs the "landing point" $\tilde{v}(z_r;\omega)$. If $\omega$ is an eigenvalue of Eq.(\ref{eq:boundary-eigenvalue-problem}), then $\tilde{v}(z_r;\omega) = \tilde{v}_r$. Now we can find eigenvalues to Eq.(\ref{eq:boundary-eigenvalue-problem}) by solving the roots to the scalar equation
+\[h(\omega) = F(\mathbf{u}_l;\omega) - \tilde{v}_r\]
+
+Having this higher view of shooting method in mind, we first transform Eq.(\ref{eq:polynomial-eigenvalue-problem}) to a IVP,
+\begin{align*}
+	v' & = u                        \\
+	u' & = \frac{-1}{1-v_0^2}\left[
+		\omega^2v + 2i\omega(v_0+v_0'v) - \left(3v_0 - \frac{1}{v_0}\right)v_0'u - \left(1-\frac{1}{v_0}^2\right)(v_0')^2v - \left(v_0+\frac{1}{v_0}v_0'' v\right)
+		\right]
+\end{align*}
+and $v(0)=c_0=1,u(0)=c_1=(2i\omega v_0'-2v_0'')/2v_0'$. Moreover, $u'(0)=c_2=-((v_0')^4+(2i\omega v_0' + (v_0')^2 - v_0'')(i\omega v_0' - v_0''))/(v_0'(2i\omega-6v_0'))$.
+
+In order to get initially value for cases with transonic velocity profiles, we need to expand the solution at the singularity.
+

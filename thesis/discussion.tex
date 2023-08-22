@@ -1,7 +1,13 @@
 \chapter{Discussion} \label{chap:discussion}
 \section{Implications of the Results}
+The results tell us the subsonic and accelerating plasma flow is stable.
 
 \section{Limitations of the methods}
+\subsection{Spectral Method}
+The spectral method suffers the spectral pollution. For now there is no automatic ways to filter spurious modes other than doing convergence test and pick up the convergent eigenvalues manually by ourselves. We believe there is a discretization scheme that is spectral pollution free. In fact, we made optimistic guess based on the fact that normal form of Eq.(\ref{eq:polynomial-eigenvalue-problem}) with constant velocity profile is pollution free.
+
+\subsection{Shooting Method}
+The shooting method is not exhaustive due to the nature of root finding algorithm. A root can only be found if the initial guess of the root is close enough to the actual root. To work around this issue, we have to perform a grid search on the complex plane. This way we can only survey the low frequency region due to the finiteness of computing resources. The conclusion for cases with transonic velocity profiles is true only for low frequency region.
 
 \section{Conclusion}
 In chapter 3, we derived the linearized equations of motion of the flow in one dimensional magnetic nozzle. Furthermore, we rewrite the linearized governing equations as an eigenvalue problem. Using the spectral methods introduced in chapter 2, we discretized the operators of the problem. Hence, transforming it into an algebraic eigenvalue problem.

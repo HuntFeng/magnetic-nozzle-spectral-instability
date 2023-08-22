@@ -1,0 +1,72 @@
+\chapter{Verification of Analytical Solutions}
+\begin{theorem}
+    The general solution to
+    \[
+        \omega^2\tilde{v} + 2i\omega\pdv{\tilde{v}}{z} + (1-v_0^2)\pdv[2]{\tilde{v}}{z} = 0
+    \]
+    is
+    \[
+        \tilde{v} = \exp(-\frac{i\omega}{v_0+1})
+        \left[ \exp(i\omega\frac{z+1}{v_0+1})
+            - \exp(i\omega\frac{z+1}{v_0-1}) \right]
+    \]
+\end{theorem}
+\begin{proof}
+    The derivatives of $\tilde{v}$ are
+    \begin{align*}
+        \tilde{v}             & = \exp(-\frac{i\omega}{v_0+1})
+        \left[ \exp(i\omega\frac{z+1}{v_0+1})
+        - \exp(i\omega\frac{z+1}{v_0-1}) \right]                                                                     \\
+        \pdv{\tilde{v}}{z}    & = i\omega\exp(-\frac{i\omega}{v_0+1})
+        \left[ \frac{1}{v_0+1}\exp(i\omega\frac{z+1}{v_0+1}) - \frac{1}{v_0-1}\exp(i\omega\frac{z+1}{v_0-1}) \right] \\
+        \pdv[2]{\tilde{v}}{z} & = -\omega^2\exp(-\frac{i\omega}{v_0+1})
+        \left[ \frac{1}{(v_0+1)^2}\exp(i\omega\frac{z+1}{v_0+1}) - \frac{1}{(v_0-1)^2}\exp(i\omega\frac{z+1}{v_0-1}) \right]
+    \end{align*}
+    Then the rest is easy,
+    \begin{align*}
+          & \omega^2\tilde{v} + 2i\omega\pdv{\tilde{v}}{z} + (1-v_0^2)\pdv[2]{\tilde{v}}{z}                                            \\
+        = & \exp(-\frac{i\omega}{v_0+1})
+        \left(1-\frac{2v_0}{v_0+1} + \frac{(1-v_0^2)}{(v_0+1)^2}\right)\exp(i\omega\frac{z+1}{v_0+1})
+        \\
+          & -\exp(-\frac{i\omega}{v_0+1})\left(1-\frac{2v_0}{v_0-1} + \frac{(1-v_0^2)}{(v_0-1)^2}\right)\exp(i\omega\frac{z+1}{v_0-1}) \\
+        \\
+        = & 0
+    \end{align*}
+\end{proof}
+
+\begin{theorem}
+    If $\omega = n\pi(1-v_0^2)/2$, then $\tilde{v}(\pm 1) = 0$.
+\end{theorem}
+\begin{proof}
+    It is easy to see that $v(-1)=0$. As for $z=1$, we have
+    \begin{align*}
+        \tilde{v}(1) & \propto
+        \exp(\frac{2i\omega}{v_0+1}) - \exp(\frac{2i\omega}{v_0-1}) \\
+                     & =
+        \exp(in\pi(1-v_0)) - \exp(-in\pi(1+v_0))                    \\
+                     & =
+        (-1)^n\exp(-in\pi v_0) - (-1)^n\exp(-in\pi v_0)             \\
+                     & = 0
+    \end{align*}
+\end{proof}
+
+\begin{theorem}
+    If
+    \[\omega = (v_0^2-1) \left[ \frac{n\pi}{2} - \frac{1}{4}i\ln\left(\frac{v_0-1}{v_0+1}\right) \right]\]
+    then $\tilde{v}(-1) = 0$ and $\partial_z\tilde{v}(1) = 0$.
+\end{theorem}
+\begin{proof}
+    It is easy to see that $v(-1)=0$. The derivative at $z=1$ is
+    \begin{align*}
+        \eval{\pdv{\tilde{v}}{z}}_{z=1} \propto &
+        \frac{1}{v_0+1}\exp(\frac{2i\omega}{v_0+1}) - \frac{1}{v_0-1}\exp(\frac{2i\omega}{v_0-1})                                   \\
+        =                                       & \frac{1}{v_0+1}\exp(in\pi(v_0-1) + \frac{v_0-1}{2}\ln(\frac{v_0-1}{v_0+1}))       \\
+                                                & - \frac{1}{v_0-1}\exp(in\pi(v_0+1) + \frac{v_0+1}{2}\ln(\frac{v_0-1}{v_0+1}))     \\
+        =                                       & \frac{(-1)^n}{v_0+1}\exp(in\pi v_0)\left(\frac{v_0-1}{v_0+1}\right)^{(v_0-1)/2}   \\
+                                                & - \frac{(-1)^n}{v_0-1}\exp(in\pi v_0)\left(\frac{v_0-1}{v_0+1}\right)^{(v_0+1)/2} \\
+        =                                       & 0
+    \end{align*}
+    The last equality holds because
+    \[ \frac{1}{v_0-1}\left(\frac{v_0-1}{v_0+1}\right)^{(v_0+1)/2}
+        = \frac{1}{v_0+1}\left(\frac{v_0-1}{v_0+1}\right)^{(v_0-1)/2}  \]
+\end{proof}

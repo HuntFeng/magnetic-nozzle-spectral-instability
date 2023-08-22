@@ -1,0 +1,61 @@
+This is BibTeX, Version 0.99d (TeX Live 2023)
+Capacity: max_strings=200000, hash_size=200000, hash_prime=170003
+The top-level auxiliary file: thesis.aux
+A level-1 auxiliary file: introduction.aux
+A level-1 auxiliary file: theoretical-analysis.aux
+A level-1 auxiliary file: spectral-method.aux
+A level-1 auxiliary file: singular-perturbation.aux
+A level-1 auxiliary file: numerical-experiments.aux
+A level-1 auxiliary file: discussion.aux
+The style file: plain.bst
+A level-1 auxiliary file: lambert-w-function.aux
+A level-1 auxiliary file: verification-of-analytical-solutions.aux
+Database file #1: references.bib
+Warning--empty journal in del_dynamical_1998
+Warning--empty year in del_dynamical_1998
+Warning--empty journal in velli_from_1994
+Warning--empty year in velli_from_1994
+Warning--empty journal in velli_hydrodynamics_2001
+Warning--empty year in velli_hydrodynamics_2001
+You've used 12 entries,
+            2118 wiz_defined-function locations,
+            579 strings with 5909 characters,
+and the built_in function-call counts, 3392 in all, are:
+= -- 328
+> -- 127
+< -- 0
++ -- 53
+- -- 40
+* -- 242
+:= -- 583
+add.period$ -- 36
+call.type$ -- 12
+change.case$ -- 53
+chr.to.int$ -- 0
+cite$ -- 18
+duplicate$ -- 130
+empty$ -- 291
+format.name$ -- 40
+if$ -- 687
+int.to.chr$ -- 0
+int.to.str$ -- 12
+missing$ -- 14
+newline$ -- 62
+num.names$ -- 24
+pop$ -- 66
+preamble$ -- 1
+purify$ -- 44
+quote$ -- 0
+skip$ -- 77
+stack$ -- 0
+substring$ -- 219
+swap$ -- 9
+text.length$ -- 0
+text.prefix$ -- 0
+top$ -- 0
+type$ -- 42
+warning$ -- 6
+while$ -- 36
+width$ -- 14
+write$ -- 126
+(There were 6 warnings)

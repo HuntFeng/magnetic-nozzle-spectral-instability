@@ -47,7 +47,9 @@ where $\mathbf{v}_{\perp}$ is the velocity perpendicular to the magnetic field, 
 \end{figure}
 
 \subsection{From Kinetic Theory to Fluid Description}
-In kinetic theory, the charged particles in plasma obey a certain distribution function $f(\mathbf{x}, \mathbf{v}_p, t)$. This distribution function is affected by plasma temperature. Assuming there is only one species of particles in the plasma, the plasma temperature is just the sum of the kinetic energy of all particles. We expect at higher temperature, faster the particles will be.
+In kinetic theory, the charged particles in plasma obey a certain distribution function,
+\[f(\mathbf{x}, \mathbf{v}_p, t)\]
+This distribution function is affected by plasma temperature. Assuming there is only one species of particles in the plasma, the plasma temperature is just the sum of the kinetic energy of all particles. We expect at higher temperature, faster the particles will be.
 
 Suppose a collisionless plasma is at equilibrium, then the particles can be characterized by Maxwell-Boltzmann distribution
 \[ f_M(\mathbf{x}, \mathbf{v}_p, t) = \frac{1}{(\pi v_{th}^2)^{3/2}} \exp(-\left(\frac{v}{v_{th}}\right)^2) \]
@@ -170,25 +172,46 @@ An example of magnetic field is shown in Fig.(\ref{fig:magnetic-field}).
 	\label{fig:magnetic-field}
 \end{figure}
 
-\subsection{Flow in Similar Configuration: Bondi-Parker Flow}
-Bondi derived a steady-state solution for accretion flow which is governed by Bernoulli's equation in sperical symmetry around a point mass in 1952. Then Parker solved a similar problem but with outward wind in 1958. \cite{aikawa_stability_1979, bondi_spherically_1952,keto_stability_2020} The equilibrium velocity profiles in such configuration are shown in Fig.\ref{fig:BP-flow-velocity}.
+\subsection{Governing Equations and Velocity Profiles}
+
+\section{Flow in Similar Configuration: Bondi-Parker Flow}
+Consider a massive celestial object in the space. This celestial object will attract matter in the space because it is massive. Hence, creating an accretion flow. If the celestial object is a star, it can also eject matter into space. Solar wind is an example to this since it is a stream of charged particles, primarily electrons and protons, flowing outward from the Sun.
+
+Bondi derived a steady-state solution for accretion flow which is governed by Bernoulli's equation in spherical symmetry around a point mass in 1952. Then Parker solved a similar problem but with outward wind in 1958. \cite{aikawa_stability_1979,bondi_spherically_1952,keto_stability_2020}
+
+The Bondi-Parker flow is similar to that in magnetic nozzle. It is interesting to compare and contrast the two configurations.
+
+\subsection{Governing Equations and Velocity Profiles}
+The governing equations for one-dimensional, spherically symmetric, stationary isothermal flow neglecting self-gravity are \cite{velli_hydrodynamics_2001},
+\begin{align*} \label{eq:bondi-parker}
+	\pdv{r}(\rho vr^2) = 0, \quad p = c^\rho \\
+	v\pdv{v}{r} = -\frac{1}{\rho}\pdv{p}{r} - \frac{GM}{r^2}
+\end{align*}
+where $v,\rho,p$ are velocity, density, pressure, $c$ the constant sound speed, $M$ the mass of the star or other central object, and $GM/r^2$ the gravitational acceleration. For a static atmosphere, the pressure profile is given by $p=p_0\exp(-g/c^2 + g/rc^2)$. In terms of mach number $M=v/c$ the flow equations may be written as
+\[ \left(M - \frac{1}{M}\right)M' = \frac{2}{r} - \frac{g}{r^2c^2} \]
+
+It has a singular point at the sonic point, $r=\frac{g}{2c^2}, M=1$. The equilibrium velocity profiles in such configuration are shown in Fig.\ref{fig:BP-flow-velocity}. For the transonic flow in magnetic nozzle, there also exists a singularity and it is located at the throat of the nozzle, $z=0$, we will illustrate this in Chap.\ref{chap:singular-perturbation}.
+
+If we compare the velocity profiles for Bondi-Parker flow and the flow in magnetic nozzle. We found they are similar. The flow in magnetic nozzle can also be grouped into three different types: subsonic, supersonic, and transonic. See Fig.\ref{fig:velocity-profiles}. For subsonic profiles, every point on the curve is slower than sound speed. While every point on the supersonic velocity profile is faster than sound speed. Lastly, there are two different transonic profiles: accelerating profile and decelerating profile. The accelerating profile describes the accelerating plasma flow which is at subsonic speed at the entrance of the nozzle and is accelerated to supersonic speed at the exit of the nozzle. The decelerating profile is similar.
 
 \begin{figure}[htbp]
 	\centering
 	\includegraphics[width=0.7\textwidth]{img/steady-state-BP-flow}
-	\caption{Representative trajectories of the steady-state BP flow in non-dimensional units. \cite{keto_stability_2020} The upward pink line represents a outward wind, it accelerates from subsonic to supersonic. The downward pink line represents an accretion flow, it accelerates towards the mass point. The green lines below the pink lines represent subsonic flows, and the green lines above represent supersonic flows. Orange lines are physically impossible scenarios.}
+	\caption{Representative trajectories of the steady-state BP flow in non-dimensional units. \cite{keto_stability_2020} The upward pink line represents an outward wind, it accelerates from subsonic to supersonic. The downward pink line represents an accretion flow, it accelerates towards the mass point. The green lines below the pink lines represent subsonic flows, and the green lines above represent supersonic flows. Orange lines are physically impossible scenarios.}
 	\label{fig:BP-flow-velocity}
 \end{figure}
 
-Solar wind is an example of Bondi-Parker flow. The solar wind is a stream of charged particles, primarily electrons and protons, flowing outward from the Sun.
+\subsection{The Stability of Bondi-Parker Flow}
+In this subsection we will focus our attention to the outgoing flow because it is similar to the flow in magnetic nozzle. In the research \cite{velli_from_1994,del_dynamical_1998} of instabilities of Bondi-Parker flow, they are using Dirichlet boundary conditions, meaning that the perturbation is 0 at the surface of the celestial object and at infinity.
 
-In summary, the magnetic mirror configuration is a technique that uses magnetic fields to confine and control charged particles. It finds applications in plasma propulsion systems through the use of a magnetic nozzle. Moreover, the solar wind is another example of flows in magnetic mirror configuration. Its acceleration machanism is similar to that of magnetic nozzle.
+Under such boundary conditions, the decelerating outflow solution for Bondi-Parker flow is physically impossible because it is unstable. Moreover, the subsonic breeze is also unstable due the unfavorable stratification. Last but not least, the supersonic shocked wind and transonic flow are stable. \cite{velli_hydrodynamics_2001}
 
+In our research, all types of flows but decelerating flow are stable.
 
 \section{Goals of this Thesis}
 The major goal of this thesis is to study the instability of plasma flow in magnetic mirror configuration with different boundary conditions.
 
-Fluid model of plasma will be reviewed and linearized governing equations will be derived in chapter \ref{chap:governing-equations}. The problem will be then formulated as an eigenvalue problem.
+Fluid model of plasma will be reviewed and linearized governing equations will be derived in chapter \ref{chap:theoretical-analysis}. The problem will be then formulated as an eigenvalue problem.
 
 In chapter \ref{chap:spectral-method}, spectral method and shooting method for solving eigenvalue problem will be introduced.
 In the section of spectral method, different discretizations of the operators, such as finite difference and spectral method will be discussed.
@@ -199,4 +222,4 @@ By comparing the results from two different methods, the credibility of the resu
 
 In chapter \ref{chap:numerical-experiments}, we will use the method developed in chapter \ref{chap:spectral-method} to conduct numerical experiments. The goal is to extract the eigenvalues (frequency) of each oscillating mode.
 
-Conclusion will in chapter \ref{chap:conclusion}.
+Conclusion will in chapter \ref{chap:discussion}.

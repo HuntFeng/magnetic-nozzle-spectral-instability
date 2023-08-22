@@ -1,5 +1,5 @@
 \chapter{Spectral Method} \label{chap:spectral-method}
-\section{Spectral Theory in Finite Dimensional Normed Spaces}
+\section{Spectral Theory in Finite-Dimensional Normed Spaces}
 Let $X$ be a finite dimensional normed space and $\hat{T}: X \to X$ a linear operator. Since any linear operator can be represented by a matrix, the spectral theory of $\hat{T}$ is essentially matrix eigenvalue theory. \cite{kreyszig_introductory_1978} Let $A$ be a matrix representation of $\hat{T}$, then we have the definition.
 
 \begin{definition}
@@ -249,4 +249,3 @@ One way to filter the spurious modes is to remove all modes with $k>h/2 \arcsin(
 \end{figure}
 
 A better way to filter the spurious modes is by doing a "convergence test". Since the frequency Eq.(\ref{dispersion-relation-G}) is changing with mesh resolution $h$. We can simply solve the discretized problem using spectral method under different mesh resolution. Then filter out the eigenmodes that are changing dramatically.
-
