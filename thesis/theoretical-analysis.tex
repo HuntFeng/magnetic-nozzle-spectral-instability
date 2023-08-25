@@ -1,5 +1,6 @@
 \chapter{Theoretical Analysis} \label{chap:theoretical-analysis}
-In order to determine the best tool to tackle the problem. We need to first simplify the problem.
+
+In this chapter, we start from the fluid description of plasma, and derive the governing equations for the flow in magnetic nozzle. After this, we linearize the governing equations and reformulate the problem as a polynomial eigenvalue problem. Then a special case is discussed analytically.
 
 \section{Fluid Description for Flow}
 In this section, we will derive the governing equations of the flow in magnetic nozzle, starting from the fluid description for plasma.
@@ -213,30 +214,28 @@ In this section we are going to tackle the simplest case of the polynomial eigen
 
 The constant velocity profile can be viewed as the limit of $v_0(z)$ as the spread of magnetic field goes to infinity, $\delta\to\infty$. As the parameter $\delta$ approaches infinity, the width of the magnetic field enlarges and eventually becomes flat. In other words, a constant magnetic field. We can easily see that the velocity profile $v_0(z)$ becomes a constant as well.
 
-In the following subsections, we will solve Eq.(\ref{eq:polynomial-eigenvalue-problem}) with constant velocity under two sets of boundary conditions, Dirichlet and fixed-open boundary condition.
-
-\subsection{Dirichlet Boundary}
 If we set the velocity profile of the equilibrium flow to constant $v_0=\text{const}$, then Eq.(\ref{eq:polynomial-eigenvalue-problem}) becomes a simple boundary value problem with second order constant coefficients differential equation.
 
 \begin{equation} \label{eq:constant-v-problem-dirichlet}
 	\omega^2\tilde{v} + 2i\omega v_0\pdv{\tilde{v}}{z} + (1-v_0^2)\pdv[2]{\tilde{v}}{z} = 0
 \end{equation}
 
-We need two boundary values in order to uniquely determine the solution (up to a constant). In this subsection, the so-called Dirichlet boundary condition will be used. It has the name because the function values are fixed at the two ends of the nozzle,
+We need two boundary values in order to uniquely determine the solution (up to a constant). In the following subsections, we will solve Eq.(\ref{eq:polynomial-eigenvalue-problem}) with constant velocity under two sets of boundary conditions, Dirichlet and fixed-open boundary condition.
+
+\subsection{Dirichlet Boundary}
+In this subsection, the so-called Dirichlet boundary condition will be used. It has the name because the function values are fixed at the two ends of the nozzle,
 \[ \tilde{v}(-1) = \tilde{v}(1) = 0 \]
-Since the left end, $z=-1$, is the entrance of the nozzle, we assume there is no perturbation at the entrance. As for the right end (exit of the nozzle), $z=1$, setting the velocity perturbation to 0 might not be the best boundary condition to describe the physical process of the plasma flow in the nozzle, it nevertheless serves as a starting point to the problem.
+At the left end (entrance of the nozzle), $z=-1$, we assume there are no perturbations. As for the right end (exit of the nozzle), $z=1$, setting the velocity perturbation to 0 might not be the best boundary condition to describe the physical process of the plasma flow in the nozzle, it nevertheless serves as a starting point to the problem.
 
-Now the solution to this problem is
+With the two boundary conditions, we are able to determine the solution to this problem,
 \begin{equation} \label{eq:constant-v-solution-dirichlet}
-	\tilde{v} = C\left[ \exp\left(i\omega\frac{z+1}{v_0+1}\right) - \exp\left(i\omega\frac{z+1}{v_0-1}\right) \right]
+	\tilde{v}(z) = C\left[ \exp\left(i\omega\frac{z+1}{v_0+1}\right) - \exp\left(i\omega\frac{z+1}{v_0-1}\right) \right]
 \end{equation}
-where $C\in\mathbb{C}$ is a complex constant, and the frequencies are $\omega=n\pi(1-v_0^2)/2$ with $n\in\mathbb{Z}$.
+where $C\in\mathbb{C}$ is a complex constant, and the frequencies are $\omega=n\pi(1-v_0^2)/2$ with $n\in\mathbb{Z}$. The results are plotted in Fig.\ref{fig:exact-v-dirichlet} This result tells us that the flow in magnetic nozzle is stable regardless the velocity $v_0$ for constant velocity case. It is worth to mention $v_0=1$ is a singular point of this problem.
 
-This result tells us for constant velocity case, the flow in magnetic nozzle is stable regardless the velocity $v_0$. It is worth to mention $v_0=1$ is a singular point of this problem.
+This solution is exact, we will use this to benchmark the simulation results in later chapter.
 
-We will use this to benchmark the simulation results.
-
-\begin{figure}[H]
+\begin{figure}[htbp]
 	\centering
 	\begin{subfigure}{0.5\textwidth}
 		\includegraphics[width=\linewidth]{img/exact-fixed-fixed-v0=0.5}
@@ -251,6 +250,7 @@ We will use this to benchmark the simulation results.
 \end{figure}
 
 \subsection{Fixed-Open Boundary}
+Fixed-Open boundary condition assumes that there are no perturbations at the entrance of the nozzle, and it is free on the exit of the nozzle.
 
 \begin{equation} \label{eq:constant-v-problem-fixed-open}
 	\omega^2\tilde{v} + 2i\omega v_0\pdv{\tilde{v}}{z} + (1-v_0^2)\pdv[2]{\tilde{v}}{z} = 0
@@ -260,10 +260,10 @@ We will use this to benchmark the simulation results.
 
 The solution to this problem is
 \begin{equation} \label{eq:constant-v-solution-fixed-open}
-	\tilde{v} = \exp\left(i\omega\frac{z+1}{v_0+1}\right)
-	- \exp\left(i\omega\frac{z+1}{v_0-1}\right)
+	\tilde{v}(z) = C\left(\exp\left(i\omega\frac{z+1}{v_0+1}\right)
+	- \exp\left(i\omega\frac{z+1}{v_0-1}\right)\right)
 \end{equation}
-where $\omega = (v_0^2 - 1) \left[\frac{n\pi}{2} - \frac{1}{4}i\ln(\frac{v_0-1}{v_0+1})\right]$ with $n\in\mathbb{Z}$. The term $i\ln((v_0-1)/(v_0+1))\in\mathbb{C}$ and its imaginary part is positive for any $v_0\neq 1$. Therefore,
+where $C\in\mathbb{C}$ is a complex constant, and $\omega = (v_0^2 - 1) \left[\frac{n\pi}{2} - \frac{1}{4}i\ln(\frac{v_0-1}{v_0+1})\right]$ with $n\in\mathbb{Z}$. The term $i\ln((v_0-1)/(v_0+1))\in\mathbb{C}$ and its imaginary part is positive for any $v_0\neq 1$. Therefore,
 \begin{itemize}
 	\item If $v_0<1$, then $\Im(\omega)<0$, it's damped oscillation, hence stable.
 	\item If $v_0>1$, then $\Im(\omega)>0$, it's unstable.
@@ -275,7 +275,7 @@ Worth to mention, this is a very interesting solution with the following propert
 	\item The ground mode $n=0$ for subsonic case has non-zero real part and imaginary part.
 \end{enumerate}
 
-\begin{figure}[H]
+\begin{figure}[htbp]
 	\centering
 	\begin{subfigure}{0.5\textwidth}
 		\includegraphics[width=\linewidth]{img/exact-fixed-open-v0=0.5}

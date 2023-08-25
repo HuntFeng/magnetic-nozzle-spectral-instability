@@ -37,7 +37,7 @@ Consider a magnetic field pointing in z-direction, $\mathbf{B}=B\mathbf{\hat{z}}
 	q\mathbf{v_{\perp}\times B} = \frac{mv_{\perp}^2}{r}\mathbf{\hat{r}},
 	\quad
 	\mathbf{v}_{\parallel} = v_{\parallel} \mathbf{\hat{z}} \]
-where $\mathbf{v}_{\perp}$ is the velocity perpendicular to the magnetic field, and $\mathbf{v}_{\parallel}$ is the velocity parallel to the magnetic field, and $\mathbf{hat{r}}$ is a unit vector pointing from the central axis of the helical motion to the trajectory of the particle. In this way, we see that the charged particle gyrates about the magnetic field, doing helical motion along the magnetic field line.
+where $\mathbf{v}_{\perp}$ is the velocity perpendicular to the magnetic field, and $\mathbf{v}_{\parallel}$ is the velocity parallel to the magnetic field, and $\mathbf{\hat{r}}$ is a unit vector pointing from the central axis of the helical motion to the trajectory of the particle. In this way, we see that the charged particle is doing circular motion in the plane of $\mathbf{\hat{r}}$, gyrating about the magnetic field. On the other hand, the particle is flowing freely in the direction of $\mathbf{B}$ since there is no force in this direction. The charged particle is doing helical motion along the magnetic field line.
 
 \begin{figure}[htbp]
 	\centering
@@ -47,15 +47,16 @@ where $\mathbf{v}_{\perp}$ is the velocity perpendicular to the magnetic field, 
 \end{figure}
 
 \subsection{From Kinetic Theory to Fluid Description}
-In kinetic theory, the charged particles in plasma obey a certain distribution function,
+Although the previous treatment is useful for single particle, it is impossible to apply the same treatment for large amount of particles. To describe the collective behavior of a large amount of particles, we need to do that in the framework of kinetic theory. In kinetic theory, the charged particles in plasma obey a certain distribution function,
 \[f(\mathbf{x}, \mathbf{v}_p, t)\]
-This distribution function is affected by plasma temperature. Assuming there is only one species of particles in the plasma, the plasma temperature is just the sum of the kinetic energy of all particles. We expect at higher temperature, faster the particles will be.
+It describes the probability density of a particle at position $\mathbf{x}$ with velocity $\mathbf{v}$ at time $t$. As we can imagine, this distribution function is affected by plasma temperature. Assuming there is only one species of particles in the plasma, the plasma temperature is just the sum of the kinetic energy of all particles. We expect at higher temperature, faster the particles will be.
 
-Suppose a collisionless plasma is at equilibrium, then the particles can be characterized by Maxwell-Boltzmann distribution
+Suppose a collisionless plasma in 3-dimensional space is at equilibrium, then the particles can be characterized by Maxwell-Boltzmann distribution
 \[ f_M(\mathbf{x}, \mathbf{v}_p, t) = \frac{1}{(\pi v_{th}^2)^{3/2}} \exp(-\left(\frac{v}{v_{th}}\right)^2) \]
 where $v_{th} = \sqrt{2k_BT/m}$ is the thermal velocity.
 
-The moments of the distribution function are suitable macroscopic properties of the plasma. For example, the plasma density and plasma momentum can be viewed as
+The moments of the distribution function are suitable macroscopic properties of the plasma. For example, the plasma number density and momentum can be viewed as
+
 \[ n(\mathbf{x}, t) = \int_{\mathbb{R}^3} f(\mathbf{x}, \mathbf{v}_p, t) d^3\mathbf{v}_p \]
 \[ n\mathbf{v}(\mathbf{x}, t) = \int_{\mathbb{R}^3} \mathbf{v}_p f(\mathbf{x}, \mathbf{v}_p, t) d^3\mathbf{v}_p \]
 where $\mathbf{v}$ is the fluid velocity of the charged particle. It is the bulk velocity of the plasma. In magnetic nozzle, since the charged particles flow along the magnetic field line, it is intuitive to think of $\mathbf{v}$ as the plasma flow velocity along the magnetic field line.
@@ -160,12 +161,13 @@ A magnetic nozzle is a device that uses a magnetic field to shape and control th
 \end{figure}
 
 \subsection{Magnetic Field in Magnetic Nozzle} \label{sec:magnetic-field-in-nozzle}
-This thesis will treat the flow in magnetic nozzle as a 1D motion. Hence, the magnetic field can be modeled as
-\[ B(z) = B_0 \left[1 + R\exp(-\left(\frac{x}{\delta}\right)^2)\right] \]
-where $1+R$ is the magnetic mirror ratio, it is the ratio of the magnitude of magnetic field at the center of the nozzle to that at the end of the nozzle. Higher the magnetic mirror ratio, larger the difference between the magnitude of magnetic field at the center and at the end. On the other hand, $\delta$ determines the spread of the magnetic field. Larger the $\delta$, flatter the magnetic field.
+The magnetic nozzle by its nature is a 3-dimensional problem. We assume the magnetic field is axis-symmetric, then the radial magnetic field and axial magnetic field are constraint by divergence-free condition,
+\[ \div\mathbf{B} = \frac{1}{\rho}\pdv{\rho B_\rho}{\rho} + \pdv{B_z}{z} = 0 \]
+In this thesis we will treat the flow in magnetic nozzle as a 1-dimensional problem. The axial magnetic field is what we are interested in, and it is modeled as
+\[ B(z) = B_0 \left[1 + R\exp(-\left(\frac{z}{\delta}\right)^2)\right] \]
+where $1+R$ is the magnetic mirror ratio, it is the ratio of the magnitude of magnetic field at the center of the nozzle to that at the end of the nozzle. Higher the magnetic mirror ratio, larger the difference between the magnitude of magnetic field at the center and at the end. On the other hand, $\delta$ determines the spread of the magnetic field. Larger the $\delta$, flatter the magnetic field. An example of magnetic field is shown in Fig.(\ref{fig:magnetic-field}).
 
-An example of magnetic field is shown in Fig.(\ref{fig:magnetic-field}).
-\begin{figure}[H]
+\begin{figure}[htbp]
 	\centering
 	\includegraphics[width=0.7\linewidth]{img/magnetic-field}
 	\caption{This is the magnetic field in nozzle with mirror ratio $1+R=B_{max}/B_{min}=2.5$, and the spread of magnetic field, $\delta=0.1/0.3=0.\bar{3}$. }
@@ -173,6 +175,16 @@ An example of magnetic field is shown in Fig.(\ref{fig:magnetic-field}).
 \end{figure}
 
 \subsection{Governing Equations and Velocity Profiles}
+The motion of plasma flow in magnetic nozzle is governed by conservation of density and momentum,
+\begin{align}
+	 & \pdv{n}{t} + B\pdv{z}(\frac{nv}{B}) = 0                \\
+	 & \pdv{v}{t} + v\pdv{v}{z} = -c_s^2\frac{1}{n}\pdv{n}{z}
+\end{align}
+where $B$ is the axial component of $\mathbf{B}$, and $c_s$ is the speed of sound. The conservation of momentum tells us that the plasma is pushed by the pressure gradient after it enters the nozzle. Due to high mobility of electrons, we assume the flow is isothermal in the process. We will derive these equations in Chap.\ref{chap:theoretical-analysis}.
+
+We can solve the stationary solution. The stationary velocity can be expressed using Lambert-W function,
+\[ v_0(z) = \left[ -W_k\left(-\frac{B(z)^2}{B_m^2}v_m^2e^{-v_m^2}\right) \right]^{1/2} \]
+The Lambert-W function $W_k$ has two branches, $k=0$ and $k=-1$. These two branches gives subsonic and supersonic velocity profiles, respectively. The velocity profiles are shown in Fig.\ref{fig:velocity-profiles}. For more details discussion of the velocity profiles, see Chap.\ref{chap:theoretical-analysis} and Appendix.\ref{app:lambert-w}.
 
 \section{Flow in Similar Configuration: Bondi-Parker Flow}
 Consider a massive celestial object in the space. This celestial object will attract matter in the space because it is massive. Hence, creating an accretion flow. If the celestial object is a star, it can also eject matter into space. Solar wind is an example to this since it is a stream of charged particles, primarily electrons and protons, flowing outward from the Sun.

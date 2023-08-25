@@ -5,9 +5,9 @@ This chapter is dedicated to analyze the polynomial eigenvalue problem with tran
 In order to see the existence of the singularity, we rearrange the terms the polynomial eigenvalue problem, Eq.(\ref{eq:polynomial-eigenvalue-problem}),
 \begin{equation} \label{eq:singular-perturbation-problem}
 	\begin{aligned}
-		  & (1-v_0^2)\pdv[2]{\tilde{v}}{z}                                                                                                                             \\
-		+ & \left(2i\omega v_0 - \left(3v_0 + \frac{1}{v_0}\right)\pdv{v_0}{z}\right)\pdv{\tilde{v}}{z}                                                                \\
-		+ & \left[2i\omega\pdv{v_0}{z} -\left(1 - \frac{1}{v_0^2}\right)\left(\pdv{v_0}{z}\right)^2 - \left(v_0 + \frac{1}{v_0}\right)\pdv[2]{v_0}{z} \right]\tilde{v} \\
+		  & (1-v_0^2)\pdv[2]{\tilde{v}}{z}                                                                                                                                        \\
+		+ & \left[2i\omega v_0 - \left(3v_0 + \frac{1}{v_0}\right)\pdv{v_0}{z}\right]\pdv{\tilde{v}}{z}                                                                           \\
+		+ & \left[\omega^2 + 2i\omega\pdv{v_0}{z} -\left(1 - \frac{1}{v_0^2}\right)\left(\pdv{v_0}{z}\right)^2 - \left(v_0 + \frac{1}{v_0}\right)\pdv[2]{v_0}{z} \right]\tilde{v} \\
 		= & 0
 	\end{aligned}
 \end{equation}
@@ -109,7 +109,7 @@ Therefore, we successfully extracted the regular solution (corresponding to the 
 
 It is worth to mention that the diverging solution (corresponding to the root $r=a$) goes like
 \[ \tilde{v}(z) \sim z^{1-a} = z^{-1-\omega_i/v_0'(0)}z^{i\omega_r/v_0'(0)}  \]
-where $\omega = \omega_r + i\omega_i$. Meaning that the solution will be divergent if and only if $\omega_i > -v'(0)$.
+where $\omega = \omega_r + i\omega_i$. Meaning that the divergent solution will start to diverge when $\omega_i > -v'(0)$.
 
 \section{Shooting Method}
 Shooting method can be used to solve eigenvalue problem with specified boundary values,

@@ -1,6 +1,7 @@
 TODO:
 
 Thesis
+- [ ] explain the quasineutrality of plasma and then use that to justify the isothermal condition?
 - [ ] explain why to use dirichlet and fixed-open boundary condition in theoretical analysis 
 - [ ] expand singular perturbation chapter
     - [x] show the existence of singularity 

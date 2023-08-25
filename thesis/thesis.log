@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.25 (TeX Live 2023) (preloaded format=pdflatex 2023.5.9)  22 AUG 2023 12:14
+This is pdfTeX, Version 3.141592653-2.6-1.40.25 (TeX Live 2023) (preloaded format=pdflatex 2023.5.9)  23 AUG 2023 13:04
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -406,7 +406,7 @@ l.28 ...1}Finite Difference}{27}{subsection.3.3.1}
 pdfTeX warning (ext4): destination with the same identifier (name{page.1}) has been already used, duplicate ignored
 <to be read again> 
                    \relax 
-l.41 \include{introduction}
+l.43 \include{introduction}
                             [1]
 \openout2 = `introduction.aux'.
 
@@ -425,42 +425,43 @@ l.32 ..._p}{t} = q\mathbf{v}_p\times \mathbf{B} \]
                                                    [2
 
 
-]
-<img/gyrate-along-b-field.png, id=324, 1445.4pt x 813.0375pt>
+] [3 <./img/plasma-properties.jpg>]
+<img/gyrate-along-b-field.png, id=333, 1445.4pt x 813.0375pt>
 File: img/gyrate-along-b-field.png Graphic file (type png)
 <use img/gyrate-along-b-field.png>
 Package pdftex.def Info: img/gyrate-along-b-field.png  used on input line 44.
 (pdftex.def)             Requested size: 330.42041pt x 185.85335pt.
- [3 <./img/plasma-properties.jpg>] [4 <./img/gyrate-along-b-field.png>]
-<img/stability-visualization.png, id=346, 701.62125pt x 770.88pt>
+ [4 <./img/gyrate-along-b-field.png>] [5]
+<img/stability-visualization.png, id=352, 701.62125pt x 770.88pt>
 File: img/stability-visualization.png Graphic file (type png)
 <use img/stability-visualization.png>
-Package pdftex.def Info: img/stability-visualization.png  used on input line 88.
+Package pdftex.def Info: img/stability-visualization.png  used on input line 89.
 (pdftex.def)             Requested size: 330.42041pt x 363.04294pt.
- [5] [6 <./img/stability-visualization.png>] [7] [8]
-<img/two-stream-instability.png, id=382, 722.7pt x 557.08125pt>
+ [6 <./img/stability-visualization.png>] [7]
+<img/two-stream-instability.png, id=378, 722.7pt x 557.08125pt>
 File: img/two-stream-instability.png Graphic file (type png)
 <use img/two-stream-instability.png>
-Package pdftex.def Info: img/two-stream-instability.png  used on input line 143.
+Package pdftex.def Info: img/two-stream-instability.png  used on input line 144.
 (pdftex.def)             Requested size: 330.42041pt x 254.69641pt.
- [9 <./img/two-stream-instability.png (PNG copy)>]
-<img/magnetic-nozzle.png, id=392, 442.2924pt x 282.5757pt>
+ [8]
+<img/magnetic-nozzle.png, id=386, 442.2924pt x 282.5757pt>
 File: img/magnetic-nozzle.png Graphic file (type png)
 <use img/magnetic-nozzle.png>
-Package pdftex.def Info: img/magnetic-nozzle.png  used on input line 157.
+Package pdftex.def Info: img/magnetic-nozzle.png  used on input line 158.
 (pdftex.def)             Requested size: 330.42041pt x 211.10338pt.
-<img/magnetic-field.png, id=396, 441.5697pt x 326.6604pt>
+ [9 <./img/two-stream-instability.png (PNG copy)>]
+<img/magnetic-field.png, id=397, 443.0151pt x 326.6604pt>
 File: img/magnetic-field.png Graphic file (type png)
 <use img/magnetic-field.png>
-Package pdftex.def Info: img/magnetic-field.png  used on input line 170.
-(pdftex.def)             Requested size: 330.42041pt x 244.43643pt.
- [10 <./img/magnetic-nozzle.png>] [11 <./img/magnetic-field.png>]
-<img/steady-state-BP-flow.png, id=421, 671.50874pt x 478.78876pt>
+Package pdftex.def Info: img/magnetic-field.png  used on input line 172.
+(pdftex.def)             Requested size: 330.42041pt x 243.6439pt.
+ [10 <./img/magnetic-nozzle.png>] [11 <./img/magnetic-field.png>] [12]
+<img/steady-state-BP-flow.png, id=435, 671.50874pt x 478.78876pt>
 File: img/steady-state-BP-flow.png Graphic file (type png)
 <use img/steady-state-BP-flow.png>
-Package pdftex.def Info: img/steady-state-BP-flow.png  used on input line 199.
+Package pdftex.def Info: img/steady-state-BP-flow.png  used on input line 211.
 (pdftex.def)             Requested size: 330.42041pt x 235.58751pt.
- [12] [13 <./img/steady-state-BP-flow.png>]) [14]
+ [13 <./img/steady-state-BP-flow.png>]) [14]
 \openout2 = `theoretical-analysis.aux'.
 
  (./theoretical-analysis.tex
@@ -471,29 +472,29 @@ Chapter 2.
 
 
 ] [16] [17]
-<img/velocity-profiles.png, id=480, 430.0065pt x 349.0641pt>
+<img/velocity-profiles.png, id=486, 430.0065pt x 349.0641pt>
 File: img/velocity-profiles.png Graphic file (type png)
 <use img/velocity-profiles.png>
-Package pdftex.def Info: img/velocity-profiles.png  used on input line 96.
+Package pdftex.def Info: img/velocity-profiles.png  used on input line 97.
 (pdftex.def)             Requested size: 330.42041pt x 268.22626pt.
  [18] [19 <./img/velocity-profiles.png>] [20] [21]
-<img/exact-fixed-fixed-v0=0.5.png, id=520, 474.8139pt x 350.5095pt>
+<img/exact-fixed-fixed-v0=0.5.png, id=527, 474.8139pt x 350.5095pt>
 File: img/exact-fixed-fixed-v0=0.5.png Graphic file (type png)
 <use img/exact-fixed-fixed-v0=0.5.png>
-Package pdftex.def Info: img/exact-fixed-fixed-v0=0.5.png  used on input line 242.
+Package pdftex.def Info: img/exact-fixed-fixed-v0=0.5.png  used on input line 241.
 (pdftex.def)             Requested size: 236.01561pt x 174.22743pt.
-<img/exact-fixed-fixed-v0=1.5.png, id=521, 474.8139pt x 350.5095pt>
+<img/exact-fixed-fixed-v0=1.5.png, id=528, 474.8139pt x 350.5095pt>
 File: img/exact-fixed-fixed-v0=1.5.png Graphic file (type png)
 <use img/exact-fixed-fixed-v0=1.5.png>
-Package pdftex.def Info: img/exact-fixed-fixed-v0=1.5.png  used on input line 246.
+Package pdftex.def Info: img/exact-fixed-fixed-v0=1.5.png  used on input line 245.
 (pdftex.def)             Requested size: 236.01561pt x 174.22743pt.
  [22]
-<img/exact-fixed-open-v0=0.5.png, id=531, 477.7047pt x 350.5095pt>
+<img/exact-fixed-open-v0=0.5.png, id=539, 477.7047pt x 350.5095pt>
 File: img/exact-fixed-open-v0=0.5.png Graphic file (type png)
 <use img/exact-fixed-open-v0=0.5.png>
 Package pdftex.def Info: img/exact-fixed-open-v0=0.5.png  used on input line 281.
 (pdftex.def)             Requested size: 236.01561pt x 173.16847pt.
-<img/exact-fixed-open-v0=1.5.png, id=532, 477.7047pt x 350.5095pt>
+<img/exact-fixed-open-v0=1.5.png, id=540, 477.7047pt x 350.5095pt>
 File: img/exact-fixed-open-v0=1.5.png Graphic file (type png)
 <use img/exact-fixed-open-v0=1.5.png>
 Package pdftex.def Info: img/exact-fixed-open-v0=1.5.png  used on input line 285.
@@ -519,7 +520,7 @@ Overfull \hbox (32.04147pt too wide) detected at line 134
  []
 
 [29]
-<img/bspline.png, id=595, 430.0065pt x 326.6604pt>
+<img/bspline.png, id=602, 430.0065pt x 326.6604pt>
 File: img/bspline.png Graphic file (type png)
 <use img/bspline.png>
 Package pdftex.def Info: img/bspline.png  used on input line 171.
@@ -530,23 +531,23 @@ Overfull \hbox (3.12445pt too wide) in paragraph at lines 186--187
  []
 
 [31 <./img/bspline.png>]
-<img/eigvals-bad.png, id=620, 440.1243pt x 351.2322pt>
+<img/eigvals-bad.png, id=627, 440.1243pt x 351.2322pt>
 File: img/eigvals-bad.png Graphic file (type png)
 <use img/eigvals-bad.png>
 Package pdftex.def Info: img/eigvals-bad.png  used on input line 224.
 (pdftex.def)             Requested size: 236.01561pt x 188.34952pt.
-<img/eigvecs-bad.png, id=621, 445.9059pt x 349.7868pt>
+<img/eigvecs-bad.png, id=628, 445.9059pt x 349.7868pt>
 File: img/eigvecs-bad.png Graphic file (type png)
 <use img/eigvecs-bad.png>
 Package pdftex.def Info: img/eigvecs-bad.png  used on input line 228.
 (pdftex.def)             Requested size: 236.01561pt x 185.14594pt.
  [32]
-<img/eigvals-good.png, id=632, 448.7967pt x 351.2322pt>
+<img/eigvals-good.png, id=639, 448.7967pt x 351.2322pt>
 File: img/eigvals-good.png Graphic file (type png)
 <use img/eigvals-good.png>
 Package pdftex.def Info: img/eigvals-good.png  used on input line 240.
 (pdftex.def)             Requested size: 236.01561pt x 184.71051pt.
-<img/eigvecs-good.png, id=633, 445.9059pt x 349.7868pt>
+<img/eigvecs-good.png, id=640, 445.9059pt x 349.7868pt>
 File: img/eigvecs-good.png Graphic file (type png)
 <use img/eigvecs-good.png>
 Package pdftex.def Info: img/eigvecs-good.png  used on input line 244.
@@ -556,7 +557,7 @@ Package pdftex.def Info: img/eigvecs-good.png  used on input line 244.
 
  (./singular-perturbation.tex
 Chapter 4.
-<img/results-bad-accelerating-v.png, id=649, 652.5981pt x 349.7868pt>
+<img/results-bad-accelerating-v.png, id=656, 652.5981pt x 349.7868pt>
 File: img/results-bad-accelerating-v.png Graphic file (type png)
 <use img/results-bad-accelerating-v.png>
 Package pdftex.def Info: img/results-bad-accelerating-v.png  used on input line 20.
@@ -577,51 +578,51 @@ Chapter 5.
 
 
 ]
-<img/fixed-fixed-constant-v-v0=0.5.png, id=706, 429.2838pt x 351.2322pt>
+<img/fixed-fixed-constant-v-v0=0.5.png, id=713, 429.2838pt x 351.2322pt>
 File: img/fixed-fixed-constant-v-v0=0.5.png Graphic file (type png)
 <use img/fixed-fixed-constant-v-v0=0.5.png>
 Package pdftex.def Info: img/fixed-fixed-constant-v-v0=0.5.png  used on input line 76.
 (pdftex.def)             Requested size: 236.01561pt x 193.10327pt.
-<img/fixed-fixed-constant-v-v0=1.5.png, id=707, 414.1071pt x 351.2322pt>
+<img/fixed-fixed-constant-v-v0=1.5.png, id=714, 414.1071pt x 351.2322pt>
 File: img/fixed-fixed-constant-v-v0=1.5.png Graphic file (type png)
 <use img/fixed-fixed-constant-v-v0=1.5.png>
 Package pdftex.def Info: img/fixed-fixed-constant-v-v0=1.5.png  used on input line 80.
 (pdftex.def)             Requested size: 236.01561pt x 200.18298pt.
  [40 <./img/fixed-fixed-constant-v-v0=0.5.png> <./img/fixed-fixed-constant-v-v0=1.5.png>]
-<img/fixed-open-constant-v-v0=0.5.png, id=717, 469.755pt x 351.2322pt>
+<img/fixed-open-constant-v-v0=0.5.png, id=724, 469.755pt x 351.2322pt>
 File: img/fixed-open-constant-v-v0=0.5.png Graphic file (type png)
 <use img/fixed-open-constant-v-v0=0.5.png>
 Package pdftex.def Info: img/fixed-open-constant-v-v0=0.5.png  used on input line 115.
 (pdftex.def)             Requested size: 236.01561pt x 176.4678pt.
-<img/fixed-open-constant-v-v0=1.5.png, id=718, 465.4188pt x 351.2322pt>
+<img/fixed-open-constant-v-v0=1.5.png, id=725, 465.4188pt x 351.2322pt>
 File: img/fixed-open-constant-v-v0=1.5.png Graphic file (type png)
 <use img/fixed-open-constant-v-v0=1.5.png>
 Package pdftex.def Info: img/fixed-open-constant-v-v0=1.5.png  used on input line 119.
 (pdftex.def)             Requested size: 236.01561pt x 178.11313pt.
-<img/fixed-fixed-subsonic-v.png, id=721, 452.4102pt x 351.2322pt>
+<img/fixed-fixed-subsonic-v.png, id=728, 452.4102pt x 351.2322pt>
 File: img/fixed-fixed-subsonic-v.png Graphic file (type png)
 <use img/fixed-fixed-subsonic-v.png>
 Package pdftex.def Info: img/fixed-fixed-subsonic-v.png  used on input line 134.
 (pdftex.def)             Requested size: 330.42041pt x 256.526pt.
  [41 <./img/fixed-open-constant-v-v0=0.5.png> <./img/fixed-open-constant-v-v0=1.5.png>]
-<img/fixed-open-subsonic-v.png, id=731, 458.1918pt x 351.2322pt>
+<img/fixed-open-subsonic-v.png, id=738, 458.1918pt x 351.2322pt>
 File: img/fixed-open-subsonic-v.png Graphic file (type png)
 <use img/fixed-open-subsonic-v.png>
 Package pdftex.def Info: img/fixed-open-subsonic-v.png  used on input line 142.
 (pdftex.def)             Requested size: 330.42041pt x 253.28894pt.
-<img/fixed-fixed-supersonic-v.png, id=735, 442.2924pt x 351.2322pt>
+<img/fixed-fixed-supersonic-v.png, id=742, 442.2924pt x 351.2322pt>
 File: img/fixed-fixed-supersonic-v.png Graphic file (type png)
 <use img/fixed-fixed-supersonic-v.png>
 Package pdftex.def Info: img/fixed-fixed-supersonic-v.png  used on input line 153.
 (pdftex.def)             Requested size: 330.42041pt x 262.3945pt.
  [42 <./img/fixed-fixed-subsonic-v.png> <./img/fixed-open-subsonic-v.png>]
-<img/fixed-open-supersonic-v.png, id=743, 443.0151pt x 351.2322pt>
+<img/fixed-open-supersonic-v.png, id=750, 443.0151pt x 351.2322pt>
 File: img/fixed-open-supersonic-v.png Graphic file (type png)
 <use img/fixed-open-supersonic-v.png>
 Package pdftex.def Info: img/fixed-open-supersonic-v.png  used on input line 161.
 (pdftex.def)             Requested size: 330.42041pt x 261.97112pt.
  [43 <./img/fixed-fixed-supersonic-v.png>]
-<img/accelerating-v.png, id=750, 447.3513pt x 328.1058pt>
+<img/accelerating-v.png, id=757, 447.3513pt x 328.1058pt>
 File: img/accelerating-v.png Graphic file (type png)
 <use img/accelerating-v.png>
 Package pdftex.def Info: img/accelerating-v.png  used on input line 171.
@@ -653,7 +654,7 @@ Package hyperref Warning: Token not allowed in a PDF string (Unicode):
 Package hyperref Warning: Token not allowed in a PDF string (Unicode):
 (hyperref)                removing `math shift' on input line 1.
 
-<img/lambert-w.png, id=783, 433.62pt x 289.08pt>
+<img/lambert-w.png, id=790, 433.62pt x 289.08pt>
 File: img/lambert-w.png Graphic file (type png)
 <use img/lambert-w.png>
 Package pdftex.def Info: img/lambert-w.png  used on input line 9.
@@ -676,18 +677,18 @@ Package rerunfilecheck Info: File `thesis.out' has not changed.
 (rerunfilecheck)             Checksum: 08AC11ADCBDE22C345AE68E44D0D2048;11279.
  ) 
 Here is how much of TeX's memory you used:
- 13379 strings out of 478007
- 220510 string characters out of 5838867
+ 13381 strings out of 478007
+ 220538 string characters out of 5838867
  1871248 words of memory out of 5000000
  33095 multiletter control sequences out of 15000+600000
  529150 words of font info for 95 fonts, out of 8000000 for 9000
  14 hyphenation exceptions out of 8191
  75i,13n,77p,854b,554s stack positions out of 10000i,1000n,20000p,200000b,200000s
 </home/huntfeng/texlive/2023/texmf-dist/fonts/type1/public/amsfonts/cm/cmbsy10.pfb></home/huntfeng/texlive/2023/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx12.pfb></home/huntfeng/texlive/2023/texmf-dist/fonts/type1/public/amsfonts/cm/cmex10.pfb></home/huntfeng/texlive/2023/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi12.pfb></home/huntfeng/texlive/2023/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi6.pfb></home/huntfeng/texlive/2023/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi8.pfb></home/huntfeng/texlive/2023/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb></home/huntfeng/texlive/2023/texmf-dist/fonts/type1/public/amsfonts/cm/cmr12.pfb></home/huntfeng/texlive/2023/texmf-dist/fonts/type1/public/amsfonts/cm/cmr17.pfb></home/huntfeng/texlive/2023/texmf-dist/fonts/type1/public/amsfonts/cm/cmr6.pfb></home/huntfeng/texlive/2023/texmf-dist/fonts/type1/public/amsfonts/cm/cmr8.pfb></home/huntfeng/texlive/2023/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb></home/huntfeng/texlive/2023/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy6.pfb></home/huntfeng/texlive/2023/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy8.pfb></home/huntfeng/texlive/2023/texmf-dist/fonts/type1/public/amsfonts/cm/cmti12.pfb></home/huntfeng/texlive/2023/texmf-dist/fonts/type1/public/amsfonts/symbols/msbm10.pfb></home/huntfeng/texlive/2023/texmf-dist/fonts/type1/public/cm-super/sfrm1200.pfb>
-Output written on thesis.pdf (55 pages, 1978214 bytes).
+Output written on thesis.pdf (55 pages, 1982115 bytes).
 PDF statistics:
- 922 PDF objects out of 1000 (max. 8388607)
- 763 compressed objects within 8 object streams
- 207 named destinations out of 1000 (max. 500000)
+ 929 PDF objects out of 1000 (max. 8388607)
+ 770 compressed objects within 8 object streams
+ 209 named destinations out of 1000 (max. 500000)
  613 words of extra memory for PDF output out of 10000 (max. 10000000)
 
