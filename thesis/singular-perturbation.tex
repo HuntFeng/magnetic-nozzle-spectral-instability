@@ -22,10 +22,43 @@ For transonic (accelerating and decelerating) velocity profiles (Fig.\ref{fig:ve
 	\label{fig:failure-of-spectral-method}
 \end{figure}
 
-\section{Connection of Singularity to Black Hole}
-\subsection{Acoustic Analog to Tortoise Coordinate}
+\section{Connection of Transonic fluid Flow to Black Hole}
+Consider a transonic fluid flow, the sound waves can propagate from the subsonic region into the supersonic region, while propagating in the opposite direction is not allowed. This process is similar to masses falling into the black hole. Therefore, the sonic point of a transonic flow is an acoustic equivalent of event horizon of a black hole. Hence, a transonic flow is sometimes called an acoustic black hole. \cite{okuzumi_sakagami_quasinormal_2007}
+
+\subsection{The Schr{\"o}dinger-Type Wave Equation}
+In de Labal nozzle, the governing equations for quasi-one-dimensional flow of a perfect fluid are
+\begin{align}
+	\pdv{\rho A}{t}	+ \pdv{\rho vA}{z} & = 0            \label{eq:fluid-continuity} \\
+	\rho\pdv{v}{t}	+ \rho\pdv{v}{z}    & = -\pdv{p}{z}  \label{eq:fluid-momentum}   \\
+	p                                  & = \rho^\gamma \label{eq:fluid-energy}
+\end{align}
+where $\rho$ is the density, $v$ is the velocity, $p$ is the pressure, $A$ is the cross section of the nozzle, and $\gamma=1.4$ is the heat capacity ratio for air. The governing equations, Eq.(\ref{eq:fluid-continuity}), (\ref{eq:fluid-momentum}), and (\ref{eq:fluid-energy}) above are conservation of density, momentum and energy, respectively.
+
+We can reduce Eq.(\ref{eq:fluid-momentum}) to Bernoulli's equation
+\begin{equation} \label{eq:bernoulli}
+	\pdv{\Phi}{t} + \frac{1}{2}\left(\pdv{\Phi}{z}\right)^2 + h(\rho) = 0
+\end{equation}
+where $h(\rho)=\int \rho^{-1}dp$ is the specific enthalpy and $\Phi=\int vdz$ is the velocity potential.
+
+Now, we introduce the acoustic analogy of tortoise coordinate and a new function $H_\omega(z)$,
+\[ z^* = c_{s0} \int \frac{dz}{c_s(1-M^2)} \]
+\[ H_\omega(z) = g^{1/2} \int dt e^{i\omega [t-f(z)]} \phi(t,x) \]
+where $c_s = \sqrt{\gamma p/\rho}$, $c_{s0}$ is the stagnation sound speed, it is a constant over isentropic region, $M = v/c_s$ is the Mach number, $g=\rho A/c_s$ and
+\[ f(x) = \int \frac{\abs{v} dz}{c_s^2 - v^2} \]
+
+If we perturb the density and the velocity potential by $\delta\rho$ and $\phi$, respectively. Then employ the acoustic analogy of tortoise coordinate, the linearized wave equation for sounds can be transformed to a Schr{\"o}dinger-type wave equation,
+\[ \left[\dv[2]{{z^*}} + \kappa^2 - V(z^*)\right] H_{\omega} = 0 \]
+where $\omega$ is the oscillating frequency of the perturbation, $\kappa = \omega/c_{s0}$ is the normalized frequency, and the effective potential
+\[ V(z^*) = \frac{1}{g^2} \left[ \frac{g}{2}\dv[2]{g}{{z^*}} - \frac{1}{4}\left(\dv{g}{z^*}\right)^2 \right] \]
+The effective potential $V(z^*)$ has dimension of $(\text{length})^{-2}$ and characterizes the "curvature scattering" of sound waves on the acoustic black hole. \cite{okuzumi_sakagami_quasinormal_2007} By employing the acoustic tortoise coordinate, the singularity at the sonic point is pushed to infinity. When doing numerical simulations, we can solve the Schr{\"o}dinger-type equation separately in subsonic and supersonic region of the nozzle.
+
+It turns out, scalar field perturbations in the minimally geometric deformed brane-world black hole background yields a very similar wave-like equation, \cite{da_rocha_black_2017}
+\[ \left[ \dv[2]{{r^*}} + \omega^2 - V(r^*) \right] \Psi(r^*) = 0 \]
+where $r^*$ is the tortoise coordinate.
 
 \section{Singular Perturbation Problem}
+In the previous section, we introduced transonic fluid flow as an acoustic analogy of black hole and transformed the Eq.\ref{eq:bernoulli} to a Schr{\"o}dinger-type wave equation. This is an overkill for our problem. In this section, we will introduce a simpler way to deal with the singularity.
+
 Consider Eq.(\ref{eq:polynomial-eigenvalue-problem}) as a boundary value problem by fixing the value of $\omega$,
 The boundary value problem Eq.(\ref{eq:singular-perturbation-problem}) is defined on region $[-1,1]$, but the boundary values are defined on $z=-1$ and $z=0$. This is because to extract a regular solution near the singularity, we need to assume the solution is finite at the throat of the nozzle, $z=0$. This condition serves as a boundary value to the problem. Together with the boundary condition at the entrance of the nozzle, $\tilde{v}(-1) = 0$, the solutions to the boundary value problem, Eq.(\ref{eq:singular-perturbation-problem}) is fully determined up to a set of eigenvalues.
 
