@@ -1,0 +1,55 @@
+%! TeX program = lualatex
+
+\documentclass{beamer}
+\usepackage[size=custom, width=244,height=122, scale=1.4]{beamerposter}
+\usetheme{gemini}
+\usecolortheme{msu}
+\usepackage{graphicx}
+
+% If you have N columns, choose \sepwidth and \colwidth such that
+% (N+1)*\sepwidth + N*\colwidth = \paperwidth
+\newlength{\sepwidth}
+\newlength{\colwidth}
+\setlength{\sepwidth}{0.025\paperwidth}
+\setlength{\colwidth}{0.3\paperwidth}
+
+\newcommand{\separatorcolumn}{\begin{column}{\sepwidth}\end{column}}
+
+\title{Stability of the transonic plasma flow in the magnetic nozzle}
+\author{Hunt Feng}
+\institute{University of Saskatchewan}
+
+\footercontent{
+	\href{mailto:hunt.feng@usask.ca}{hunt.feng@usask.ca} \hfill
+	\hfill
+	\href{mailto:hunt.feng@usask.ca}{hunt.feng@usask.ca}
+}
+
+\logoright{\includegraphics[height=7cm]{imgs/usask_usask_colour_reverse.png}}
+
+\begin{document}
+\begin{frame}
+	\begin{columns}
+		\separatorcolumn
+
+		\begin{column}{\colwidth}
+			column1
+		\end{column}
+
+		\separatorcolumn
+
+		\begin{column}{\colwidth}
+
+			column2
+		\end{column}
+
+		\separatorcolumn
+
+		\begin{column}{\colwidth}
+			column3
+		\end{column}
+
+		\separatorcolumn
+	\end{columns}
+\end{frame}
+\end{document}
