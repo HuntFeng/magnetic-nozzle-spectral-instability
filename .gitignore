@@ -5,6 +5,7 @@ __pycache__/
 
 # backup file
 **/*-bak
+**/*.bak
 
 # aux files
 **/*.nav
@@ -12,3 +13,6 @@ __pycache__/
 **/*.aux
 **/*.bbl
 **/*.synctex.gz
+
+# data
+data*/
