@@ -1,5 +1,5 @@
 # Spectral Instability of Plasma Flow In Magnetic Nozzle
-Please read my master thesis [master-thesis/thesis.pdf](master-thesis/thesis.pdf)
+Please read my [master thesis](https://github.com/HuntFeng/master-thesis/blob/49572189400b56a6f5bf1c155c6e367915912fdd/thesis.pdf)
 
 ## Install Dependencies
 1. Python3
