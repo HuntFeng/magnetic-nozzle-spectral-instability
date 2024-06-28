@@ -1,0 +1,3 @@
+[submodule "master-thesis"]
+	path = master-thesis
+	url = git@github.com:HuntFeng/master-thesis.git

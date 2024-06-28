@@ -1,3 +1,4 @@
+from typing import Literal
 import numpy as np
 from scipy.integrate import simpson
 import scipy.linalg as sl
@@ -8,19 +9,22 @@ from enum import Enum
 
 # set mpl settings at runtime
 import json
+
 with open("./mpl_config.json") as fp:
     config = json.load(fp)
-    for k,v in config.items():
+    for k, v in config.items():
         plt.rcParams[k] = v
 
 import os
+
 
 class Boundary(Enum):
     FIXED_FIXED = "fixed_fixed"
     FIXED_OPEN = "fixed_open"
 
+
 class Spectral:
-    def __init__(self, N:int, domain:str, method:str) -> None:
+    def __init__(self, N: int, domain: str, method: Literal["FD", "CH"]) -> None:
         """
         domain: either "symmetric" or "nonsymmetric"
         method: either "FD" (finite difference) or "CH" (chebyshev)
@@ -36,72 +40,87 @@ class Spectral:
         """
         Finite difference differentiation matrix d/dx
         Central difference method.
-        
-        input: 
+
+        input:
             N(int) number of grids
             domain(str): can be "symmetric" or "nonsymmetric"
         output:
             grid points array x
-            differential operators d/dx and d^2/dx^2 in matrix form 
+            differential operators d/dx and d^2/dx^2 in matrix form
         """
-        N = self.N 
+        N = self.N
         domain = self.domain
         if domain == "symmetric":
-            x = np.linspace(-1,1,N)
-            h = np.abs(x[1]-x[0])
+            x = np.linspace(-1, 1, N)
+            h = np.abs(x[1] - x[0])
         elif domain == "nonsymmetric":
-            h = 1/N
-            x = np.arange(h,1+h,h)
+            h = 1 / N
+            x = np.arange(h, 1 + h, h)
         else:
             raise NameError(f"Valid domain types are 'symmetric' and 'nonsymmetric'")
 
         # 2nd-order finite difference
         # mid point
         major = np.ones(N, dtype=complex)
-        minor = np.ones(N-1, dtype=complex)
-        D1 = np.diag(0.5/h*minor, k=1) + np.diag(-0.5/h*minor, k=-1)
-        D2 = np.diag(-2/h**2*major, k=0) + np.diag(1/h**2*minor, k=1) + np.diag(1/h**2*minor, k=-1)
-        
-        # end points
-        D1[0,:3] = np.array([-3, 4, -1])/(2*h)
-        D1[-1,-3:] = np.array([1, -4, 3])/(2*h)
+        minor = np.ones(N - 1, dtype=complex)
+        D1 = np.diag(0.5 / h * minor, k=1) + np.diag(-0.5 / h * minor, k=-1)
+        D2 = (
+            np.diag(-2 / h**2 * major, k=0)
+            + np.diag(1 / h**2 * minor, k=1)
+            + np.diag(1 / h**2 * minor, k=-1)
+        )
 
-        D2[0,:4] = np.array([2, -5, 4, -1])/(h**3)
-        D2[-1,-4:] = np.array([-1, 4, -5, 2])/(h**3)
+        # end points
+        D1[0, :3] = np.array([-3, 4, -1]) / (2 * h)
+        D1[-1, -3:] = np.array([1, -4, 3]) / (2 * h)
+
+        D2[0, :4] = np.array([2, -5, 4, -1]) / (h**3)
+        D2[-1, -4:] = np.array([-1, 4, -5, 2]) / (h**3)
 
         return x, D1, D2
 
     def matrix_CH(self):
         """
         Chebyshev differentiation matrix d/dx
-        
-        input: 
+
+        input:
             N(int) number of grids
             domain(str): can be "symmetric" or "nonsymmetric"
         output:
             grid points array x
-            differential operators d/dx and d^2/dx^2 in matrix form 
+            differential operators d/dx and d^2/dx^2 in matrix form
         """
-        N = self.N 
+        N = self.N
         domain = self.domain
         if domain == "symmetric":
-            x = np.cos(np.pi*np.arange(N+1)/N)
+            x = np.cos(np.pi * np.arange(N + 1) / N)
         elif domain == "nonsymmetric":
-            x = np.cos(np.pi*np.arange(N+1)/N)
-            x = (x+1)/2
+            x = np.cos(np.pi * np.arange(N + 1) / N)
+            x = (x + 1) / 2
         else:
             raise NameError(f"Valid domain types are 'symmetric' and 'nonsymmetric'")
-        x = x.reshape(-1,1) # to column vector
+        x = x.reshape(-1, 1)  # to column vector
 
-        c = np.pad(np.ones(N-1), 1, constant_values=[2]) * (-1)**np.arange(N+1)
-        c = c.reshape(-1,1)
-        X = np.repeat(x, N+1, axis=1) # make N+1 duplicated columns
+        c = np.pad(np.ones(N - 1), 1, constant_values=[2]) * (-1) ** np.arange(N + 1)
+        c = c.reshape(-1, 1)
+        X = np.repeat(x, N + 1, axis=1)  # make N+1 duplicated columns
         dX = X - X.T
-        D = (c@(1/c).T) / (dX+np.eye(N+1)) # off-diagonal entries
+        D = (c @ (1 / c).T) / (dX + np.eye(N + 1))  # off-diagonal entries
         D = D - np.diag(np.sum(D.T, axis=0))
-        D2 = D@D
-        
+        D2 = D @ D
+
         return x.flatten(), D, D2
+
+        # flip the orders
+        # x_sorted = np.sort(x.flatten())
+        # D_sorted = np.zeros_like(D)
+        # D2_sorted = np.zeros_like(D2)
+        # for i in range(D.shape[0]):
+        #     for j in range(D.shape[1]):
+        #         D_sorted[i, j] = D[-i, -j]
+        #         D2_sorted[i, j] = D2[-i, -j]
+
+        # return x_sorted, D_sorted, D2_sorted
 
 
 @dataclass
@@ -112,12 +131,13 @@ class Params:
     accelerating: is this accelerating case ?
     Mm: mid velocity
 
-    Magnetic field 
+    Magnetic field
     B0: amplitude of B
     R: mirror ratio
     Bm: mid point B
     Delta: width of B peak
     """
+
     Mm: float
     constant_v: bool = None
     accelerating: bool = None
@@ -125,28 +145,30 @@ class Params:
 
     B0: float = 1
     R: float = 1.5
-    Bm: float = 1+R
-    Delta: float = 0.1/0.3
+    Bm: float = 1 + R
+    Delta: float = 0.1 / 0.3
 
     def __post_init__(self):
         if (self.constant_v is None) and (self.accelerating is None):
-            raise RuntimeError("Must initialize at least one of `constant_v` and `accelerating` ")
-        
+            raise RuntimeError(
+                "Must initialize at least one of `constant_v` and `accelerating` "
+            )
+
 
 class Nozzle:
-    def __init__(self, params: Params, x: np.array, u: callable=None) -> None:
-        """ 
+    def __init__(self, params: Params, x: np.array, u: callable = None) -> None:
+        """
         Investigate the instability of magnetic nozzle
-        
+
         Input:
             params: physical parameters and experiment setup
             x: mesh of the magnetic nozzle
             u(x,n): if None, we are using finite difference; if provided, we are using finite element
         """
-        
-        self.params = params # params
-        self.x = x # mesh
-        self.u = u # trial functions for finite element
+
+        self.params = params  # params
+        self.x = x  # mesh
+        self.u = u  # trial functions for finite element
         self.v0 = self.velocity_profile(x)
         self.B = self.magnetic_induction_profile(x)
 
@@ -155,12 +177,12 @@ class Nozzle:
         R = self.params.R
         Bm = self.params.Bm
         Delta = self.params.Delta
-        B = lambda x: B0*(1+R*np.exp(-(x/Delta)**2))
+        B = lambda x: B0 * (1 + R * np.exp(-((x / Delta) ** 2)))
         return B(x)
 
     def velocity_profile(self, x):
-        """ 
-        For convience, make v0 a function of x 
+        """
+        For convience, make v0 a function of x
         input:
             x
         output:
@@ -178,30 +200,44 @@ class Nozzle:
         # velocity normalized to sound speed
         # k=-1: supersonic branch
         # k=0: subsonic branch
-        B = lambda x: B0*(1+R*np.exp(-(x/Delta)**2))
-        W = lambda x,k: np.real(lambertw(x,k=k)) # I only need the real parts
-        M = lambda x, Mm, k: np.sqrt( -W(-Mm**2 * (B(x)/Bm)**2 * np.exp(-Mm**2), k=k) )
+        B = lambda x: B0 * (1 + R * np.exp(-((x / Delta) ** 2)))
+        W = lambda x, k: np.real(lambertw(x, k=k))  # I only need the real parts
+        M = lambda x, Mm, k: np.sqrt(
+            -W(-(Mm**2) * (B(x) / Bm) ** 2 * np.exp(-(Mm**2)), k=k)
+        )
 
         if constant_v:
-            v0 = Mm*np.ones_like(x) # constant v=0.1
+            v0 = Mm * np.ones_like(x)  # constant v=0.1
         else:
             if Mm < 1:
-                v0 = M(x, Mm=Mm, k=0) # subsonic velocity profile, M_m < 1
+                v0 = M(x, Mm=Mm, k=0)  # subsonic velocity profile, M_m < 1
             elif Mm == 1:
                 # transonic profile, accelerating/decelerating
-                mid_point = [] if (x.size % 2 ==0) else [1.0]
+                mid_point = [] if (x.size % 2 == 0) else [1.0]
                 if accelerating:
-                    v0 = np.concatenate([M(x[(x<0)&(~np.isclose(x,0))], Mm=1, k=0), mid_point, M(x[(x>0)&(~np.isclose(x,0))], Mm=1, k=-1)]) # accelerating velocity profile
+                    v0 = np.concatenate(
+                        [
+                            M(x[(x < 0) & (~np.isclose(x, 0))], Mm=1, k=0),
+                            mid_point,
+                            M(x[(x > 0) & (~np.isclose(x, 0))], Mm=1, k=-1),
+                        ]
+                    )  # accelerating velocity profile
                 else:
-                    v0 = np.concatenate([M(x[(x<0)&(~np.isclose(x,0))], Mm=1, k=-1), mid_point, M(x[(x>0)&(~np.isclose(x,0))], Mm=1, k=0)]) # decelerating velocity profile
+                    v0 = np.concatenate(
+                        [
+                            M(x[(x < 0) & (~np.isclose(x, 0))], Mm=1, k=-1),
+                            mid_point,
+                            M(x[(x > 0) & (~np.isclose(x, 0))], Mm=1, k=0),
+                        ]
+                    )  # decelerating velocity profile
             else:
-                v0 = M(x, Mm=Mm, k=-1) # supersonic velocity profile, M_m > 1
+                v0 = M(x, Mm=Mm, k=-1)  # supersonic velocity profile, M_m > 1
         return v0
 
     def polyeig(self, *A: np.array):
         """
         Solve the polynomial eigenvalue problem:
-            (e^0 A0 + e^1 A1 +...+  e^p Ap)x=0 
+            (e^0 A0 + e^1 A1 +...+  e^p Ap)x=0
 
         Return the eigenvectors [x_i] and eigenvalues [e_i] that are solutions.
 
@@ -213,29 +249,33 @@ class Nozzle:
 
         """
         n = A[0].shape[0]
-        l = len(A)-1 
+        l = len(A) - 1
         # Assemble matrices for generalized problem
-        C = np.block([
-            [np.zeros((n*(l-1),n)), np.eye(n*(l-1))],
-            [-np.column_stack( A[0:-1])]
-            ])
-        D = np.block([
-            [np.eye(n*(l-1)), np.zeros((n*(l-1), n))],
-            [np.zeros((n, n*(l-1))), A[-1]]
-            ])
+        C = np.block(
+            [
+                [np.zeros((n * (l - 1), n)), np.eye(n * (l - 1))],
+                [-np.column_stack(A[0:-1])],
+            ]
+        )
+        D = np.block(
+            [
+                [np.eye(n * (l - 1)), np.zeros((n * (l - 1), n))],
+                [np.zeros((n, n * (l - 1))), A[-1]],
+            ]
+        )
         # Solve generalized eigenvalue problem
         e, X = sl.eig(C, D)
         if np.all(np.isreal(e)):
-            e=np.real(e)
-        X=X[:n,:]
+            e = np.real(e)
+        X = X[:n, :]
 
         # Scaling each mode by max
-        X /= np.tile(np.max(np.abs(X),axis=0), (n,1))
-        return X, e 
+        X /= np.tile(np.max(np.abs(X), axis=0), (n, 1))
+        return X, e
 
     def solve(self, *matrices: np.array):
-        """ 
-        If len(matrices)==1, then we are solving A@v = lambda*v 
+        """
+        If len(matrices)==1, then we are solving A@v = lambda*v
         If len(matrices)>1, then we are solving polynomial eigenvalue problem
         If self.u==None, using finite difference discretization
         If self.u!=None, using finite element discretization
@@ -245,7 +285,7 @@ class Nozzle:
             if len(matrices) == 1:
                 omega, V = np.linalg.eig(matrices[0])
                 # only need half of the eigenvector
-                V = V[:int(V.shape[0]/2)]
+                V = V[: int(V.shape[0] / 2)]
             else:
                 V, omega = self.polyeig(*matrices)
             return V, omega
@@ -254,44 +294,57 @@ class Nozzle:
             if len(matrices) == 1:
                 omega, C = np.linalg.eig(matrices[0])
                 # only need half of the eigenvector
-                C = C[:int(C.shape[0]/2)]
+                C = C[: int(C.shape[0] / 2)]
             else:
                 C, omega = self.polyeig(*matrices)
             return C, omega
-    
-    def sort_solutions(self, real_range: list=[0,50], imag_range: list=[]):
-        selection = (self.omega.real >= real_range[0]) & (self.omega.real <= real_range[1])
+
+    def sort_solutions(self, real_range: list = [0, 50], imag_range: list = []):
+        selection = (self.omega.real >= real_range[0]) & (
+            self.omega.real <= real_range[1]
+        )
         self.omega = self.omega[selection]
-        self.V = self.V[:,selection]
+        self.V = self.V[:, selection]
         if imag_range:
-            selection = (self.omega.imag >= imag_range[0]) & (self.omega.imag <= imag_range[1])
+            selection = (self.omega.imag >= imag_range[0]) & (
+                self.omega.imag <= imag_range[1]
+            )
             self.omega = self.omega[selection]
-            self.V = self.V[:,selection]
-        
+            self.V = self.V[:, selection]
+
         ind = np.argsort(self.omega.real)
         self.omega = self.omega[ind]
-        self.V = self.V[:,ind]
+        self.V = self.V[:, ind]
 
     def plot_eigenvalues(self, ax=None):
         if not ax:
             _, ax = plt.subplots()
-        ax.plot(self.omega.real, self.omega.imag, 'o')
-        ax.set_xlabel("$\Re(\omega)$")
-        ax.set_ylabel("$\Im(\omega)$")
+        ax.plot(self.omega.real, self.omega.imag, "o")
+        ax.set_xlabel("$\\Re(\\omega)$")
+        ax.set_ylabel("$\\Im(\\omega)$")
         return ax
 
-    def plot_eigenfunctions(self, num_funcs:int=3, ax=None):
+    def plot_eigenfunctions(self, num_funcs: int = 3, ax=None):
         if not ax:
             _, ax = plt.subplots()
         for i in range(num_funcs):
-            line = ax.plot(self.x, self.V[:,i].real/np.abs(self.V[:,i].real).max(), label=f"$\omega=${self.omega[i]:.3f}")
-            ax.plot(self.x, self.V[:,i].imag/np.abs(self.V[:,i].imag).max(), '--', color=line[-1].get_color())
+            line = ax.plot(
+                self.x,
+                self.V[:, i].real / np.abs(self.V[:, i].real).max(),
+                label=f"$\\omega=${self.omega[i]:.3f}",
+            )
+            ax.plot(
+                self.x,
+                self.V[:, i].imag / np.abs(self.V[:, i].imag).max(),
+                "--",
+                color=line[-1].get_color(),
+            )
             ax.set_xlabel("$z$")
             ax.set_ylabel("$\\tilde{v}$")
         ax.legend()
         return ax
 
-    def integral_form_eigenvalues(self, num: int=-1):
+    def integral_form_eigenvalues(self, num: int = -1):
         """
         solve first {num} of eigenvalues from integral form
         """
@@ -299,23 +352,27 @@ class Nozzle:
             num = self.omega.size
 
         v0 = self.v0
-        x = self.x 
+        x = self.x
         spectral = Spectral(x.size, "symmetric", "FD")
         D1, D2 = spectral.D1, spectral.D2
 
         # omega = np.array([])
         for i in range(num):
-            v = self.V[:,i]
+            v = self.V[:, i]
 
-            a = simpson(v.conj()*v,x)
-            b = 2j*simpson(v.conj()*(v0*(D1@v) + (D1@v0)*v),x)
+            a = simpson(v.conj() * v, x)
+            b = 2j * simpson(v.conj() * (v0 * (D1 @ v) + (D1 @ v0) * v), x)
             c = simpson(
-                v.conj()*((1-v0**2)*(D2@v) 
-                - ((3*v0 + 1/v0)*(D1@v0))*(D1@v) 
-                - ((1-1/v0**2)*(D1@v0)**2)*v 
-                - ((v0+1/v0)*(D2@v0))*v)
-                ,x)
-            roots = np.roots([a,b,c])
+                v.conj()
+                * (
+                    (1 - v0**2) * (D2 @ v)
+                    - ((3 * v0 + 1 / v0) * (D1 @ v0)) * (D1 @ v)
+                    - ((1 - 1 / v0**2) * (D1 @ v0) ** 2) * v
+                    - ((v0 + 1 / v0) * (D2 @ v0)) * v
+                ),
+                x,
+            )
+            roots = np.roots([a, b, c])
             # omega = np.append(omega, roots[roots.real>0])
             if i == 0:
                 omega = roots
@@ -331,31 +388,21 @@ class Nozzle:
         """
         if not os.path.exists("data"):
             os.mkdir("data")
-            for boundary in Boundary:
-                folder = boundary.value
-                os.mkdir(os.path.join("data", folder))
-                for subfolder in  ["constant_v","subsonic_v","supersonic_v","accelerating_v","decelerating_v"]:
-                    path = os.path.join("data",folder,subfolder)
-                    os.mkdir(path)
-        file_path = os.path.join("data",self.params.boundary.value)
-        if self.params.constant_v:
-            file_path = os.path.join(file_path, "constant_v")
-        elif (self.params.Mm < 1):
-            file_path = os.path.join(file_path, "subsonic_v")
-        elif (self.params.Mm > 1):
-            file_path = os.path.join(file_path, "supersonic_v")
-        elif (self.params.Mm == 1):
-            if self.params.accelerating:
-                file_path = os.path.join(file_path, "accelerating_v")
-            else:
-                file_path = os.path.join(file_path, "decelerating_v")
-        file_path = os.path.join(file_path, f"{method}_Mm={self.params.Mm}")
+        file_path = os.path.join("data", f"{method}")
+        if np.abs(self.params.Mm - 1) < 1e-3:
+            file_path += (
+                "_accelerating" if self.params.accelerating else "_decelerating"
+            )
+        else:
+            file_path += "_constant" if self.params.constant_v else ""
+            file_path += "_subsonic_" if self.params.Mm < 1 else "_supersonic_"
+            file_path += self.params.boundary.value
         if N:
             file_path += f"_N={N}"
         np.savez(file_path, omega=self.omega, V=self.V, x=self.x)
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     N = 101
     spectral = Spectral(N, "symmetric", "FD")
     params = Params(Mm=0.5, constant_v=True)
@@ -368,13 +415,17 @@ if __name__ == '__main__':
     I = np.eye(*D1.shape)
     A11 = np.zeros_like(D1)
     A12 = I
-    A21 = -np.diag(1-v0**2)@D2 \
-            + np.diag((3*v0 + 1/v0)*(D1@v0))@D1 \
-            + np.diag((1-1/v0**2)*(D1@v0)**2) \
-            + np.diag((v0+1/v0)*(D2@v0))
-    A22 = -2j*(np.diag(v0)@D1 + np.diag(D1@v0)) #- eta*np.diag(v0)@D2
+    A21 = (
+        -np.diag(1 - v0**2) @ D2
+        + np.diag((3 * v0 + 1 / v0) * (D1 @ v0)) @ D1
+        + np.diag((1 - 1 / v0**2) * (D1 @ v0) ** 2)
+        + np.diag((v0 + 1 / v0) * (D2 @ v0))
+    )
+    A22 = -2j * (np.diag(v0) @ D1 + np.diag(D1 @ v0))  # - eta*np.diag(v0)@D2
 
-    A = np.block([[A11[1:-1,1:-1], A12[1:-1,1:-1]],[A21[1:-1,1:-1], A22[1:-1,1:-1]]])
+    A = np.block(
+        [[A11[1:-1, 1:-1], A12[1:-1, 1:-1]], [A21[1:-1, 1:-1], A22[1:-1, 1:-1]]]
+    )
     nozzle.solve(A)
     nozzle.sort_solutions()
     nozzle.plot_eigenvalues()
